@@ -1,0 +1,52 @@
+/* div#hero-section {
+  height: 85vh;
+  width: 100%;
+  background-image: url("../src/images/hero1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-left: 17%;
+  padding-top: 10.5%;
+
+  animation-name: animate;
+  animation-duration: 60s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes animate {
+  0% {
+    background-image: url("../src/images/hero1.jpg");
+  }
+  12.5% {
+    background-image: url("../src/images/hero2.jpg");
+  }
+  25% {
+    background-image: url("../src/images/hero3.jpg");
+  }
+  37.5% {
+    background-image: url("../src/images/hero4.jpg");
+  }
+  50% {
+    background-image: url("../src/images/hero5.jpg");
+  }
+  62.5% {
+    background-image: url("../src/images/hero6.jpg");
+  }
+  75% {
+    background-image: url("../src/images/hero7.jpg");
+  }
+  87.5% {
+    background-image: url("../src/images/hero8.jpg");
+  }
+  100% {
+    background-image: url("../src/images/hero10.jpg");
+  }
+} */
+
+li#adminTableUsers {
+  list-style-type: none;
+} 

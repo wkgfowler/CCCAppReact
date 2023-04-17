@@ -1,0 +1,76 @@
+### setting up roles table
+POST http://localhost:3000/auth/roles
+Content-Type: application/json
+
+{
+    "basic": "basic",
+    "restaurant": "restaurant",
+    "admin": "admin"
+}
+
+
+### creating ADMIN account
+POST http://localhost:3000/auth/admin
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "test"
+}
+
+
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "test17",
+    "email": "test17@test.com",
+    "password": "password"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "test"
+}
+
+###
+GET http://localhost:3000/auth/is_verified
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiOTM0YzQwYjktNmZiMi00Mzk4LTgwYmQtN2VjNDMyYjFiYzQ1IiwiaWF0IjoxNjc1ODg4Njc4LCJleHAiOjE2NzU4ODk1Nzh9.wS2nj0OKjg8UhQVQA4YtMVsax6CrWc5C6JF_5OyUm4A
+
+###
+DELETE http://localhost:3000/auth/logout
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiOTM0YzQwYjktNmZiMi00Mzk4LTgwYmQtN2VjNDMyYjFiYzQ1IiwiaWF0IjoxNjc1ODg4Njc4LCJleHAiOjE2NzU4ODk1Nzh9.wS2nj0OKjg8UhQVQA4YtMVsax6CrWc5C6JF_5OyUm4A
+
+###
+POST http://localhost:3000/auth/register/restaurant_registration_email
+Content-Type: application/json
+
+{
+    "email": "crystalcoastdiningtest@gmail.com"
+}
+
+###
+POST http://localhost:3000/auth/register/valid_token
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNyeXN0YWxjb2FzdGRpbmluZ3Rlc3RAZ21haWwuY29tIiwiaWF0IjoxNjczNDcwODQwLCJleHAiOjE2NzM0NzE3NDB9.33QQ0RawJ6kepJ8JMpk_BwOHJ_YlUk4KMENtki6jSpA
+
+###
+GET http://localhost:3000/restaurant/da2299f7-a68e-437a-8d1e-c5d0dea4ac9e
+//da2299f7-a68e-437a-8d1e-c5d0dea4ac9e
+
+###
+GET http://localhost:3000/allrestaurants
+
+
+###
+POST http://localhost:3000/auth/restaurant/add_user
+Content-Type: application/json 
+
+{
+    "restaurant_name": "Full Moon Oyster Bar",
+    "email": "test2@test.com"
+}

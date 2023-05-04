@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { PermissionContext } from "../context/PermissionContext";
 import { UserContext } from "../context/UserContext";
 import Admin from "./admin_components/Admin";
-import AdditionalInfo from "./profile_components/AdditionalInfo";
 
 const Profile = () => {
     const [valid, isValid] = useState(true)
@@ -58,7 +57,8 @@ const Profile = () => {
                                 <tr key={x.id}>
                                     <td><p className="text-2xl">{x.restaurant_name}</p></td>
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/restaurants/${x.id}`}>View restaurant page</Link></button></td>
-                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit/${x.id}`}>Edit Restaurant</Link></button></td>
+                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_information/${x.id}`}>Edit Restaurant</Link></button></td>
+                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_specials/${x.id}`}>Edit Specials/Events</Link></button></td>
                                 </tr>
                             ))}
                         </tbody>

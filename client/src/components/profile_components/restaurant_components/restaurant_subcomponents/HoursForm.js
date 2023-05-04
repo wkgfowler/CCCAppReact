@@ -1,15 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
-import { CLOSEHOURS, OPENHOURS } from "../../lib/utils";
+import { UserContext } from "../../../../context/UserContext";
+import { CLOSEHOURS, OPENHOURS } from "../../../../lib/utils";
 
-const HoursForm = () => {
+const HoursForm = ({restaurant}) => {
     const date = new Date();
     const navigate = useNavigate();
 
     const [hours, setHours] = useState([]);
-    const [restaurant, setRestaurant] = useState();
     const [valid, isValid] = useState(false);
     const {user, setUser} = useContext(UserContext);
     const {restaurantId} = useParams();
@@ -50,7 +49,6 @@ const HoursForm = () => {
             isValid(response.data.valid)
             // console.log(response.data.hours)
             setHours(response.data.hours)
-            setRestaurant(response.data.restaurant)
         }, (error) => {
             console.log(error)
         })
@@ -168,6 +166,7 @@ const HoursForm = () => {
                     </div>
                     <div>
                         {restaurant.dinner === "true" ? <input type="checkbox" name="dinner" id="dinner" checked/> : <input type="checkbox" name="dinner" id="dinner" />}
+                        <label htmlFor="">Dinner</label>
                     </div>
                 </div>
                     <p className="text-2xl pt-4 pb-2 text-center underline">Your restaurant's hours</p>

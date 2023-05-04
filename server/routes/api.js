@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Restaurant, Hours} = require('../models');
+const {User, Restaurant, Hours, SpecialEvent} = require('../models');
 const authorization = require('../middleware/authorization');
 require("dotenv").config();
 
@@ -24,8 +24,8 @@ router.get("/:id", authorization, async (req, res) => {
 })
 
 
-// getting restaurant contact info
-router.get("/get_contact_info/:restaurantId/:userId", authorization, async (req, res) => {
+// validating user for restaurant info edit page
+router.get("/get_restaurant/:restaurantId/:userId", authorization, async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
             where: {
@@ -33,23 +33,26 @@ router.get("/get_contact_info/:restaurantId/:userId", authorization, async (req,
             }, include: {
                 model: User, where: { id: req.params.userId }
             }
+        });
+
+        const restaurant = await Restaurant.findOne({
+            where: {
+                id: req.params.restaurantId
+            }
         })
 
         if (validUser) {
-            const restaurantInfo = await Restaurant.findOne({
-                where: {
-                    id: req.params.restaurantId
-                }
-            })
-            
-            return res.json(restaurantInfo);
+            return res.json({valid: true, restaurant});
         }
+
+        return res.json({valid: false});
     } catch (err) {
-        console.error(err.message)
+        console.error(err.message);
     }
 })
 
-// adding restaurant contact info
+
+// updating restaurant contact info
 router.post("/contact_info", authorization, async (req, res) => {
     try {
         const restaurant = await Restaurant.findOne({
@@ -131,6 +134,7 @@ router.get("/get_hours/:restaurantId/:userId", authorization, async (req, res) =
     }
 })
 
+// updating restaurant hours
 router.post("/update_hours", authorization, async (req, res) =>{
     try {
         const restaurant = await Restaurant.findOne({
@@ -232,6 +236,53 @@ router.post("/update_hours", authorization, async (req, res) =>{
     }
 })
 
+// adding special/event
+router.post("/add_special_event", authorization, async (req, res) => {
+    try {
+        const newSpecialEvent = await SpecialEvent.create({
+            restaurantId: req.body.restaurantId,
+            specialOrEvent: req.body.specialOrEvent,
+            name: req.body.name,
+            description: req.body.description,
+            recurring: req.body.recurring,
+            weekdays: req.body.weekdays,
+            specialEventDate: req.body.specialEventDate,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime
+        });
+
+        return res.json("success")
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
+// getting all specials/events for a restaurant admins page
+router.get("/get_all_specials_events/:restaurantId/:userId", authorization, async (req, res) => {
+    try {
+        const validUser = await Restaurant.findOne({
+            where: {
+                id: req.params.restaurantId
+            }, include: {
+                model: User, where: { id: req.params.userId }
+            }
+        });
+
+        const allSpecialsEvents = await SpecialEvent.findAll({
+            where: {
+                restaurantId: req.params.restaurantId
+            }
+        })
+
+        if(validUser) {
+            return res.json(allSpecialsEvents)
+        }
+
+        return res.json("not authorized")
+    } catch (err) {
+        console.error(err.message);
+    }
+})
 
 
 // admin page ALL RESTAURANTS/USERS

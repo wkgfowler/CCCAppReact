@@ -48,8 +48,7 @@ const Nav = () => {
                   
                       {permission === 0 ? (<Link to="/" className="hover:text-2xl hover:text-slate-50">Home</Link>) : (<Link to={`/profile/${user.id}`}>Profile</Link>)}
                       <Link className="hover:text-2xl hover:text-slate-50">Restaurants/Bars</Link>
-                      <Link className="hover:text-2xl hover:text-slate-50">Food Specials</Link>
-                      <Link className="hover:text-2xl hover:text-slate-50">Events</Link>
+                      <Link to='/specials_and_events' className="hover:text-2xl hover:text-slate-50">Specials/Events</Link>
                       <Link className="hover:text-2xl hover:text-slate-50">Contact</Link>
                       {permission === 0 ? (<Link to="/about" className="hover:text-2xl hover:text-slate-50">About Us</Link>) : (<button type="button" onClick={logout}>Log Out</button>)}
                   

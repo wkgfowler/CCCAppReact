@@ -1,27 +1,16 @@
 import axios from "axios";
-import { useContext, useRef, useState } from "react";
-import { UserContext } from "../../context/UserContext";
-import Checkbox from "../subcomponents/Checkbox";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const AdditionalInfo = () => {
-    const {user, setUser} = useContext(UserContext);
+const AdditionalInfo = ({restaurant}) => {
     const [charCount, setCharCount] = useState(0);
     const {restaurantId} = useParams();
-    const userId = user.id;
     
     const websiteRef = useRef();
     const facebookRef = useRef();
     const instagramRef = useRef();
     const descriptionRef = useRef();
 
-    const config = {
-        headers: {"token": localStorage.getItem("token")},
-        params: {
-            restaurantId: restaurantId,
-            userId: userId
-        }
-    }
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -52,20 +41,20 @@ const AdditionalInfo = () => {
                 <div className="grid grid-cols-3 space-x-5">
                     <div className="grid grid-rows-2">
                         <label for="website_url">Restaurant's Website:</label>
-                        <input type="text" ref={websiteRef} id="website_url" name="website_url"/>
+                        <input type="text" ref={websiteRef} id="website_url" name="website_url" defaultValue={restaurant.website_url ? restaurant.website_url : ""}/>
                     </div>
                     <div className="grid grid-rows-2">
                         <label for="facebook_url">Restaurant's Facebook page:</label>
-                        <input type="text" ref={facebookRef} id="facebook_url" name="facebook_url"/>
+                        <input type="text" ref={facebookRef} id="facebook_url" name="facebook_url" defaultValue={restaurant.facebook_url ? restaurant.facebook_url : ""}/>
                     </div>
                     <div className="grid grid-rows-2">
                         <label for="instagram_url">Restaurant's Instagram page:</label>
-                        <input type="text" ref={instagramRef} id="instagram_url" name="instagram_url"/>
+                        <input type="text" ref={instagramRef} id="instagram_url" name="instagram_url" defaultValue={restaurant.instagram_url ? restaurant.instagram_url : ""}/>
                     </div>
                 </div>
                 <div className="grid grid-cols-1">
                     <label for="description">Enter a brief description of your restaurant:</label>
-                    <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-slate-200" maxLength="600"></textarea>
+                    <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-slate-200" maxLength="600" defaultValue={restaurant.description ? restaurant.description : ""}></textarea>
                     <p>{charCount} / 600 character limit</p>
                 </div>
                 <button>Submit</button>

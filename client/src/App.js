@@ -19,7 +19,10 @@ import Profile from "./components/Profile";
 import RegisterUserToRestaurant from "./components/auth_components/RegisterUserToRestaurant";
 import ResetPasswordRequest from "./components/auth_components/ResetPasswordRequest";
 import ResetPasswordLink from "./components/auth_components/ResetPasswordLink";
-import EditInfo from "./components/profile_components/EditInfo";
+import EditInfo from "./components/profile_components/restaurant_components/EditInfo";
+import Specials from "./components/profile_components/restaurant_components/Specials";
+import SpecialsForm from "./components/profile_components/restaurant_components/restaurant_subcomponents/SpecialsForm";
+import SpecialsEvents from "./components/SpecialsEvents";
 
 function App() {
   const [user, setUser] = useState("");
@@ -43,10 +46,13 @@ function App() {
             <Route path='/register_restaurant/:token' element={<RegisterRestaurant/>} />
             <Route path='/register/:restaurant/:token' element={<RegisterUserToRestaurant />} />
             <Route path='/profile/:id' element={<Profile/>} />
-            <Route path='/edit/:restaurantId' element={<EditInfo />}/>
+            <Route path='/edit_information/:restaurantId' element={<EditInfo />}/>
+            <Route path='/edit_specials/:restaurantId' element={<Specials />} />
+            <Route path='/add_specials/:restaurantId' element={<SpecialsForm />} />
             
             <Route path='/all_restaurants' element={<AllRestaurants/>} />
             <Route path='/restaurants/:id' element={<Restaurant/>} />
+            <Route path='/specials_and_events' element={<SpecialsEvents />} />
           </Routes>
         </PermissionContext.Provider>
         </UserContext.Provider>

@@ -1,14 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../../../context/UserContext";
 
-const ContactInfo = () => {
+const ContactInfo = ({restaurant}) => {
     const {user, setUser} = useContext(UserContext)
     const [number, setNumber] = useState("")
     const {restaurantId} = useParams();
-    const userId = user.id;
-    const [restaurantInfo, setRestaurantInfo] = useState({})
 
     const handleInput = e => {
         const formattedNumber = formatPhoneNumber(e.target.value);
@@ -32,27 +30,12 @@ const ContactInfo = () => {
     const streetAddressRef = useRef();
     const townRef = useRef();
 
-    const config = {
-        headers: {"token": localStorage.getItem("token")},
-        params: {
-            restaurantId: restaurantId,
-            userId: user.id
-        }
-    }
-
-    const getContactInfo = () => {
-        axios.get(`http://localhost:3000/api/get_contact_info/${restaurantId}/${userId}`, config)
-        .then((response) => {
-            console.log(response.data)
-            setRestaurantInfo(response.data)
-        }, (error) => {
-            console.log(error)
-        })
-    };
-
     useEffect(() => {
-        getContactInfo();
-    }, [])
+        if (restaurant.phone_number) {
+            setNumber(restaurant.phone_number)
+        }
+    } , [])
+
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -81,14 +64,14 @@ const ContactInfo = () => {
                     <label className="text-lg">Street Address:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="text" name="streetAddress" value={restaurantInfo.street_address ? restaurantInfo.street_address : ""} ref={streetAddressRef} className="my-2 bg-transparent border-b-2 outline-none" required/>
+                    <input type="text" name="streetAddress" defaultValue={restaurant.street_address ? restaurant.street_address : ""} ref={streetAddressRef} className="my-2 bg-transparent border-b-2 outline-none" required/>
                 </div>
                 <div className="flex justify-center pt-2">
                     <label className="text-lg">Select your town:</label>
                 </div>
                 <div className="flex justify-center">
                     <select name="town" ref={townRef} className="text-center my-2 bg-transparent border-1">
-                        {restaurantInfo.town ? <option value={restaurantInfo.town}>{restaurantInfo.town}</option> : <option value="default">--Your Town--</option>}
+                        {restaurant.town ? <option value={restaurant.town}>{restaurant.town}</option> : <option value="default">--Your Town--</option>}
                         <option value="Atlantic Beach">Atlantic Beach</option>
                         <option value="Morehead City">Morehead City</option>
                     </select>
@@ -97,7 +80,7 @@ const ContactInfo = () => {
                     <label className="text-lg">Phone Number:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="tel" name="phone_number" value={restaurantInfo.phone_number ? restaurantInfo.phone_number : number} onChange={e => handleInput(e)} className="text-center my-2 bg-transparent border-b-2" required/>
+                    <input type="tel" name="phone_number" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 bg-transparent border-b-2" required/>
                 </div>
                 <div className="flex justify-center">
                     <button className="">Submit</button>

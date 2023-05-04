@@ -65,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     Restaurant.associate = function (models) {
         Restaurant.belongsToMany(models.User, {through: 'Users_Restaurants'});
         Restaurant.belongsToMany(models.Hours, {through: "Restaurants_Hours"});
+        Restaurant.hasMany(models.SpecialEvent, { as: "SpecialEvent"});
     };
 
     return Restaurant;

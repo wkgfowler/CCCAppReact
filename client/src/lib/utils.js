@@ -167,3 +167,33 @@ export const formatSpecialEventDays = (arr) => {
         }
     }
 }
+
+export const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+export const formatMonth = (num) => {
+    let days = [];
+    for (let i = 1; i <= num; i++) {
+        days.push(i)
+    }
+    return days;
+}
+
+export const formatLastMonth = (day, date) => {
+    let days = [];
+    for (let i = day; i > 0; i--) {
+        days.push(date - i + 1)
+    }
+    return days
+}
+
+export const formatNextMonth = (day) => {
+    let days = [];
+    for (let i = day; i < 6; i++) {
+        days.push(i - day + 1)
+    }
+    return days
+}
+
+export function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+}

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Fragment, useRef } from "react";
 import AdminRestaurantsTable from "./admin_subcomponents/AdminRestaurantsTable";
 import RestaurantRegistrationEmailForm from "./admin_subcomponents/RestaurantRegistrationEmailForm";
+import CreateRestaurant from "./admin_subcomponents/CreateRestaurant";
 
 const Admin = () => {
 
@@ -10,6 +11,7 @@ const Admin = () => {
         <Fragment>
             <RestaurantRegistrationEmailForm />
             <AdminRestaurantsTable />
+            <CreateRestaurant />
         </Fragment>
     );
 }

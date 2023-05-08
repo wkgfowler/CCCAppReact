@@ -58,6 +58,34 @@ router.post("/admin", async (req, res) => {
 })
 
 
+// creating restaurant account as admin
+router.post("/admin/create_restaurant", async (req, res) => {
+    try {
+        const isAdmin = await User.findOne({
+            include: {
+                where: {
+                    id: req.body.id
+                }, include: {
+                    model: Roles, where: {role: "admin"}
+                }
+            }
+        })
+
+        console.log("kind of")
+
+        if (isAdmin) {
+            const restaurant = await Restaurant.create({
+                restaurant_name: req.body.restaurant_name
+            })
+
+            return res.json(restaurant)
+        }
+        return res.json("no good")
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
 
 // registering consumer user
 router.post("/register", validInfo, async (req, res) => {
@@ -93,7 +121,6 @@ router.post("/register", validInfo, async (req, res) => {
         res.status(500).json("Server Error");
     }
 });
-
 
 
 
@@ -150,8 +177,6 @@ router.post("/register/restaurant_registration_email", async (req, res) => {
 });
 
 
-
-
 // check for registration token
 router.post("/register/valid_token", async (req, res) => {
     try {
@@ -178,8 +203,6 @@ router.post("/register/valid_token", async (req, res) => {
         return res.json({valid: false});
     }
 });
-
-
 
 
 // page for restaurant registration
@@ -349,7 +372,6 @@ router.post("/register/user_to_restaurant", async (req, res) => {
 
 
 
-
 // login
 router.post("/login", login, async (req, res) => {
     try {
@@ -386,8 +408,6 @@ router.post("/login", login, async (req, res) => {
         res.status(500).json("Server Error");
     }
 })
-
-
 
 
 

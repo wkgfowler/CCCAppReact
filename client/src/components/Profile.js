@@ -23,9 +23,7 @@ const Profile = () => {
         axios.get(`http://localhost:3000/api/${user.id}`, config)
         .then((response) => {
             // console.log(response.data)
-            console.log(user.Restaurants)
             setUserRestaurants(user.Restaurants)
-            console.log(userRestaurants)
             localStorage.setItem("token", response.data.token.token)
             isValid(true)
         }, (error) => {

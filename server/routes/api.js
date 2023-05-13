@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const {User, Restaurant, Hours, SpecialEvent} = require('../models');
+const {User, Restaurant, Hours, SpecialEvent, Roles} = require('../models');
 const authorization = require('../middleware/authorization');
 require("dotenv").config();
+const { Op } = require("sequelize");
 
 
 
@@ -35,13 +36,21 @@ router.get("/get_restaurant/:restaurantId/:userId", authorization, async (req, r
             }
         });
 
+        const validAdmin = await User.findOne({
+            where: {
+                id: req.params.userId
+            }, include: {
+                model: Roles, where: { role: "admin"}
+            }
+        })
+
         const restaurant = await Restaurant.findOne({
             where: {
                 id: req.params.restaurantId
             }
         })
 
-        if (validUser) {
+        if (validUser || validAdmin) {
             return res.json({valid: true, restaurant});
         }
 
@@ -112,7 +121,15 @@ router.get("/get_hours/:restaurantId/:userId", authorization, async (req, res) =
             }
         })
 
-        if (validUser) {
+        const validAdmin = await User.findOne({
+            where: {
+                id: req.params.userId
+            }, include: {
+                model: Roles, where: { role: "admin"}
+            }
+        })
+
+        if (validUser || validAdmin) {
             const hours = await Hours.findAll({
                 where: {
                     restaurantId: req.params.restaurantId
@@ -257,6 +274,27 @@ router.post("/add_special_event", authorization, async (req, res) => {
     }
 })
 
+// getting specials/events for calendar page
+router.get("/get_specials/:currentYear-:currentMonth-:today/:day", async (req, res) => {
+    try {
+        console.log(req.params.currentMonth)
+        const specials = await SpecialEvent.findAll({
+            where: {
+                [Op.or] : [
+                    {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
+                    {weekdays: { [Op.contains]: [`${req.params.day}`]} }
+                ]
+            }, include: {
+                model: Restaurant, as: "restaurant"
+            }
+        })
+
+        return res.json(specials)
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
 // getting all specials/events for a restaurant admins page
 router.get("/get_all_specials_events/:restaurantId/:userId", authorization, async (req, res) => {
     try {
@@ -268,13 +306,21 @@ router.get("/get_all_specials_events/:restaurantId/:userId", authorization, asyn
             }
         });
 
+        const validAdmin = await User.findOne({
+            where: {
+                id: req.params.userId
+            }, include: {
+                model: Roles, where: { role: "admin"}
+            }
+        })
+
         const allSpecialsEvents = await SpecialEvent.findAll({
             where: {
                 restaurantId: req.params.restaurantId
             }
         })
 
-        if(validUser) {
+        if(validUser || validAdmin) {
             return res.json(allSpecialsEvents)
         }
 

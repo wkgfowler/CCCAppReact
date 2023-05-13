@@ -75,7 +75,7 @@ export const CLOSEHOURS = [
 ];
 
 export const STARTHOURS = [
-    { value: "open", display: "Open"},
+    { value: "Open", display: "Open"},
     { value: "0500", display: "5am" },
     { value: "0530", display: "530am" },
     { value: "0600", display: "6am" },
@@ -112,7 +112,7 @@ export const STARTHOURS = [
 ];
 
 export const ENDHOURS = [
-    { value: "close", display: "Close"},
+    { value: "Close", display: "Close"},
     { value: '0900', display: '9am' },
     { value: '0930', display: '930am' },
     { value: '1000', display: '10am' },
@@ -151,17 +151,18 @@ export const ENDHOURS = [
 ];
 
 export const formatSpecialEventDays = (arr) => {
+    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     if (arr.length === 1) {
-        return arr[0]
+        return weekdays[arr[0]]
     } else if (arr.length > 1 && arr.length <= 2) {
-        return `${arr[0]} and ${arr[1]}`
+        return `${weekdays[arr[0]]} and ${weekdays[arr[1]]}`
     } else if (arr.length >= 3) {
         let str = ""
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] !== arr[arr.length-1]) {
-                str += arr[i] + ", "
+                str += weekdays[arr[i]] + ", "
             } else {
-                str += "and " + arr[i]
+                str += "and " + weekdays[arr[i]]
                 return str
             }
         }
@@ -192,6 +193,30 @@ export const formatNextMonth = (day) => {
         days.push(i - day + 1)
     }
     return days
+}
+
+export const formatDateDay = (year, month, date) => {
+    let day = new Date(year, month, date).getDay();
+    return day
+}
+
+export const formatDateMonth = (month) => {
+    month += 1
+    if (month < 10) {
+        month = `0${month}`
+        return month
+    } else {
+        return month
+    }
+}
+
+export const formatDateDate = (date) => {
+    if (date < 10) {
+        date = `0${date}`
+        return date;
+    } else {
+        return date
+    }
 }
 
 export function classNames(...classes) {

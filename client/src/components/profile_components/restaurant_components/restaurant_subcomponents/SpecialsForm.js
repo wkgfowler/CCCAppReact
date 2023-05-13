@@ -93,31 +93,31 @@ const SpecialsForm = () => {
 
                 <div id="recurringSpecial" className={`grid grid-cols-4 ${recurringVisibility ? "" : "hidden"}`}>
                     <div>
-                        <input type="checkbox" name="sunday" id="sunday" value="Sunday" onClick={() => addWeekdays("sunday")}/>
+                        <input type="checkbox" name="sunday" id="sunday" value={0} onClick={() => addWeekdays("sunday")}/>
                         <label>Sunday</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="monday" id="monday" value="Monday" onClick={() => addWeekdays("monday")}/>
+                        <input type="checkbox" name="monday" id="monday" value={1} onClick={() => addWeekdays("monday")}/>
                         <label>Monday</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="tuesday" id="tuesday" value="Tuesday" onClick={() => addWeekdays("tuesday")}/>
+                        <input type="checkbox" name="tuesday" id="tuesday" value={2} onClick={() => addWeekdays("tuesday")}/>
                         <label>Tuesday</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="wednesday" id="wednesday" value="Wednesday" onClick={() => addWeekdays("wednesday")}/>
+                        <input type="checkbox" name="wednesday" id="wednesday" value={3} onClick={() => addWeekdays("wednesday")}/>
                         <label>Wednesday</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="thursday" id="thursday" value="Thursday" onClick={() => addWeekdays("thursday")}/>
+                        <input type="checkbox" name="thursday" id="thursday" value={4} onClick={() => addWeekdays("thursday")}/>
                         <label>Thursday</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="friday" id="friday" value="Friday" onClick={() => addWeekdays("friday")}/>
+                        <input type="checkbox" name="friday" id="friday" value={5} onClick={() => addWeekdays("friday")}/>
                         <label>Friday</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="saturday" id="saturday" value="Saturday" onClick={() => addWeekdays("saturday")}/>
+                        <input type="checkbox" name="saturday" id="saturday" value={6} onClick={() => addWeekdays("saturday")}/>
                         <label>Saturday</label>
                     </div>
                 </div>

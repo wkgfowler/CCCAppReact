@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         weekdays: {
-            type: DataTypes.ARRAY(DataTypes.STRING)
+            type: DataTypes.ARRAY(DataTypes.INTEGER)
         },
         startTime: {
             type: DataTypes.STRING,

@@ -52,7 +52,7 @@ function App() {
             
             <Route path='/all_restaurants' element={<AllRestaurants/>} />
             <Route path='/restaurants/:id' element={<Restaurant/>} />
-            <Route path='/specials_and_events/:thisMonth-:thisDate-:thisYear' element={<SpecialsEvents />} />
+            <Route path='/specials_and_events' element={<SpecialsEvents />} />
           </Routes>
         </PermissionContext.Provider>
         </UserContext.Provider>

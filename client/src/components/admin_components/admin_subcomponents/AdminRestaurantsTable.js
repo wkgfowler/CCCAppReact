@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import UserRestaurantModal from "./UserRestaurantModal";
+import { Link } from "react-router-dom";
 
 const AdminRestaurantsTable = () => {
     const [restaurants, setRestaurants] = useState([]); 
@@ -46,16 +47,22 @@ const AdminRestaurantsTable = () => {
                         <th>Restaurant Name</th>
                         <th>Users</th>
                         <th>Add User</th>
+                        <th>Options</th>
                     </thead>
                     <tbody>
                     {restaurants.map(restaurant => (
-                        restaurant.Users.map((x, i) => (
+                        restaurant.Users.length ? restaurant.Users.map((x, i) => (
                             <tr key={restaurant.id + i}>
                                 <td>{i === 0 ? restaurant.restaurant_name : ""}</td>
                                 <td>{x.email} &nbsp; <button className="btn btn-danger" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></td>
                                 <td>{i === 0 ? <UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/> : ""}</td>
+                                <td><button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button><button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button></td>
                             </tr>
-                        ))
+                        )) : <tr key={restaurant.id}>
+                                <td>{restaurant.restaurant_name}</td>
+                                <td><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
+                                <td><button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button><button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button></td>
+                        </tr>
                     ))}
                     </tbody>
                 </table>

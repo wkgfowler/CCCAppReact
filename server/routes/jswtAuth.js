@@ -62,23 +62,19 @@ router.post("/admin", async (req, res) => {
 router.post("/admin/create_restaurant", async (req, res) => {
     try {
         const isAdmin = await User.findOne({
-            include: {
-                where: {
-                    id: req.body.id
-                }, include: {
-                    model: Roles, where: {role: "admin"}
-                }
+            where: {
+                id: req.body.id
+            }, include: {
+                model: Roles, where: {role: "admin"}
             }
         })
-
-        console.log("kind of")
 
         if (isAdmin) {
             const restaurant = await Restaurant.create({
                 restaurant_name: req.body.restaurant_name
             })
 
-            return res.json(restaurant)
+            return res.json("nice")
         }
         return res.json("no good")
     } catch (err) {

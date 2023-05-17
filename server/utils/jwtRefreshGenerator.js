@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-function jwtRefreshGenerator(user_id) {
+function jwtRefreshGenerator(userId) {
     const payload = {
-        user: user_id
+        user: userId
     };
 
     return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);

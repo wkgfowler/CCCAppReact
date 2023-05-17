@@ -25,7 +25,7 @@ const AllRestaurants = () => {
             <div>
                 {restaurants.map(restaurant => (
                     <div key={restaurant.id}>
-                        <Link to={`/restaurants/${restaurant.id}`}>{restaurant.restaurant_name}</Link>
+                        <Link to={`/restaurants/${restaurant.id}`}>{restaurant.restaurantName}</Link>
                     </div>
                 ))}
             </div>

@@ -17,6 +17,9 @@ app.use("/api", require("./routes/api"))
 // basic routes
 app.use("/", require("./routes/basic"))
 
+// static Images Folder
+app.use('/Images', express.static('./Images'))
+
 db.sequelize.sync().then((req) => {
     app.listen(3000, () => {
         console.log("server running");

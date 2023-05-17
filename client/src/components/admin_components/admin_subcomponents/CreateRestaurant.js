@@ -9,7 +9,7 @@ const CreateRestaurant = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault()
         axios.post("http://localhost:3000/auth/admin/create_restaurant", {
-            restaurant_name: restaurantNameRef.current.value,
+            restaurantName: restaurantNameRef.current.value,
             id: user.id
         })
         .then((response) => {

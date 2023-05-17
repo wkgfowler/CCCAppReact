@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
 
         const refreshToken = await Token.findOne({
             where: {
-                user_id: load.user
+                userId: load.user
             }
         });
 

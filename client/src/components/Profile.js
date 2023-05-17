@@ -53,7 +53,7 @@ const Profile = () => {
                         <tbody>
                             {user.Restaurants.map(x => (
                                 <tr key={x.id}>
-                                    <td><p className="text-2xl">{x.restaurant_name}</p></td>
+                                    <td><p className="text-2xl">{x.restaurantName}</p></td>
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/restaurants/${x.id}`}>View restaurant page</Link></button></td>
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_information/${x.id}`}>Edit Restaurant</Link></button></td>
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_specials/${x.id}`}>Edit Specials/Events</Link></button></td>

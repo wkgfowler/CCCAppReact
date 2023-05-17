@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        restaurant_name: {
+        restaurantName: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
         },
-        street_address: {
+        streetAddress: {
             type: DataTypes.STRING,
             allowNull: true
         },
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        phone_number: {
+        phoneNumber: {
             type: DataTypes.STRING,
             allowNull: true,
             unique: true
@@ -48,18 +48,22 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        website_url: {
+        websiteURL: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        facebook_url: {
+        facebookURL: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        instagram_url: {
+        instagramURL: {
             type: DataTypes.STRING,
             allowNull: true
         },
+        profileImage: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     });
 
     Restaurant.associate = function (models) {

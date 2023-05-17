@@ -71,6 +71,6 @@ POST http://localhost:3000/auth/restaurant/add_user
 Content-Type: application/json 
 
 {
-    "restaurant_name": "Full Moon Oyster Bar",
+    "restaurantName": "Full Moon Oyster Bar",
     "email": "test2@test.com"
 }

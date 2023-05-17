@@ -31,8 +31,8 @@ const ContactInfo = ({restaurant}) => {
     const townRef = useRef();
 
     useEffect(() => {
-        if (restaurant.phone_number) {
-            setNumber(restaurant.phone_number)
+        if (restaurant.phoneNumber) {
+            setNumber(restaurant.phoneNumber)
         }
     } , [])
 
@@ -41,9 +41,9 @@ const ContactInfo = ({restaurant}) => {
         e.preventDefault();
         axios.post('http://localhost:3000/api/contact_info', {
             id: restaurantId,
-            street_address: streetAddressRef.current.value,
+            streetAddress: streetAddressRef.current.value,
             town: townRef.current.value,
-            phone_number: number
+            phoneNumber: number
         }, {
             headers: {
                 "token": localStorage.getItem("token")
@@ -64,7 +64,7 @@ const ContactInfo = ({restaurant}) => {
                     <label className="text-lg">Street Address:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="text" name="streetAddress" defaultValue={restaurant.street_address ? restaurant.street_address : ""} ref={streetAddressRef} className="my-2 bg-transparent border-b-2 outline-none" required/>
+                    <input type="text" name="streetAddress" defaultValue={restaurant.streetAddress ? restaurant.streetAddress : ""} ref={streetAddressRef} className="my-2 bg-transparent border-b-2 outline-none" required/>
                 </div>
                 <div className="flex justify-center pt-2">
                     <label className="text-lg">Select your town:</label>
@@ -80,7 +80,7 @@ const ContactInfo = ({restaurant}) => {
                     <label className="text-lg">Phone Number:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="tel" name="phone_number" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 bg-transparent border-b-2" required/>
+                    <input type="tel" name="phoneNumber" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 bg-transparent border-b-2" required/>
                 </div>
                 <div className="flex justify-center">
                     <button className="">Submit</button>

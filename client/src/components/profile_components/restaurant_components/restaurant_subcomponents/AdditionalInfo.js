@@ -10,17 +10,21 @@ const AdditionalInfo = ({restaurant}) => {
     const facebookRef = useRef();
     const instagramRef = useRef();
     const descriptionRef = useRef();
-
+    const [profileImage, setProfileImage] = useState("");
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/api/additional_info',  {
-            id: restaurantId,
-            website_url: websiteRef.current.value,
-            facebook_url: facebookRef.current.value,
-            instagram_url: instagramRef.current.value,
-            description: descriptionRef.current.value
-        }, {
+
+        const formData = new FormData();
+
+        formData.append('id', restaurantId);
+        formData.append('websiteURL', websiteRef.current.value);
+        formData.append('facebookURL', facebookRef.current.value);
+        formData.append('instagramURL', instagramRef.current.value);
+        formData.append('description', descriptionRef.current.value);
+        formData.append('profileImage', profileImage)
+
+        axios.post('http://localhost:3000/api/additional_info',  formData, {
             headers: {
                 "token" : localStorage.getItem('token')
             }
@@ -40,16 +44,21 @@ const AdditionalInfo = ({restaurant}) => {
                 <p className="text-2xl pt-4 pb-2 text-center underline">Additional Information</p>
                 <div className="grid grid-cols-3 space-x-5">
                     <div className="grid grid-rows-2">
-                        <label for="website_url">Restaurant's Website:</label>
-                        <input type="text" ref={websiteRef} id="website_url" name="website_url" defaultValue={restaurant.website_url ? restaurant.website_url : ""}/>
+                        {restaurant.profileImage !== "null" ? <img src={`http://localhost:3000/${restaurant.profileImage}`} alt="hello" /> : <p>bye</p>}
+                        <label for="profileImage">Upload a profile image for your restaurant</label>
+                        <input type="file" id="profileImage" name="profileImage" size="lg" onChange={(e) => setProfileImage(e.target.files[0])}/>
                     </div>
                     <div className="grid grid-rows-2">
-                        <label for="facebook_url">Restaurant's Facebook page:</label>
-                        <input type="text" ref={facebookRef} id="facebook_url" name="facebook_url" defaultValue={restaurant.facebook_url ? restaurant.facebook_url : ""}/>
+                        <label for="websiteURL">Restaurant's Website:</label>
+                        <input type="text" ref={websiteRef} id="websiteURL" name="websiteURL" defaultValue={restaurant.websiteURL ? restaurant.websiteURL : ""}/>
                     </div>
                     <div className="grid grid-rows-2">
-                        <label for="instagram_url">Restaurant's Instagram page:</label>
-                        <input type="text" ref={instagramRef} id="instagram_url" name="instagram_url" defaultValue={restaurant.instagram_url ? restaurant.instagram_url : ""}/>
+                        <label for="facebookURL">Restaurant's Facebook page:</label>
+                        <input type="text" ref={facebookRef} id="facebookURL" name="facebookURL" defaultValue={restaurant.facebookURL ? restaurant.facebookURL : ""}/>
+                    </div>
+                    <div className="grid grid-rows-2">
+                        <label for="instagramURL">Restaurant's Instagram page:</label>
+                        <input type="text" ref={instagramRef} id="instagramURL" name="instagramURL" defaultValue={restaurant.instagramURL ? restaurant.instagramURL : ""}/>
                     </div>
                 </div>
                 <div className="grid grid-cols-1">

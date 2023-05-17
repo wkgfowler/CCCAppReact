@@ -1,40 +1,14 @@
 require("dotenv").config();
 const router = require('express').Router();
 const {User, Restaurant} = require('../models');
+const restaurantController = require('../controllers/restaurantController')
 
 
 // calling ALL RESTAURANTS
-router.get('/allrestaurants', async (req, res) => {
-    try {
-        const restaurants = await Restaurant.findAll();
-        return res.json(restaurants)
-    } catch (err) {
-        console.log('try again')
-    }
-})
+router.get('/allrestaurants', restaurantController.getAllRestaurants)
 
 // calling restaurant page
-router.get("/restaurants/:id", async (req, res) => {
-    try {
-        const restaurant = await Restaurant.findOne({
-            where: {
-                id: req.params.id
-            }
-        });
-        console.log('hi')
-        if (restaurant) {
-            console.log(restaurant)
-            return res.json({valid: true, restaurant});
-        };
-        if (!restaurant) {
-            console.log('almost')
-        }
-    
-    } catch (err) {
-        console.log('try again')
-        return res.json(false)
-    }
-})
+router.get("/restaurants/:id", restaurantController.getRestaurantPage)
 
 
 module.exports = router;

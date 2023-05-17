@@ -117,7 +117,7 @@ const SpecialsEvents = () => {
                             
                                 <div className="flex flex-row justify-evenly">
                                     <div>
-                                        <p>{special.restaurant.restaurant_name}</p>
+                                        <p>{special.restaurant.restaurantName}</p>
                                     </div>
                                     <div>
                                         {special.specialOrEvent === "special" ? <p>Special - {special.name}</p> : <p>Event - {special.name}</p>}

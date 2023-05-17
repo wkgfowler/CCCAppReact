@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
 
         const token = await Token.findOne({
             where: {
-                user_id: user.id
+                userId: user.id
             }
         })
 
@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
 
         const refreshToken = Token.build({
             token: jwtRefreshGenerator(user.id),
-            user_id: user.id
+            userId: user.id
         });
         
         await refreshToken.save();

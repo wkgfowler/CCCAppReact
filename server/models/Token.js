@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Token = sequelize.define("Token", {
-        token_id: {
+        tokenId: {
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        user_id: {
+        userId: {
             type: DataTypes.UUID,
             allowNull: false,
             unique: true,

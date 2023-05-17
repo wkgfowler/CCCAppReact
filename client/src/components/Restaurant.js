@@ -28,7 +28,7 @@ const Restaurant = () => {
     return (
         <Fragment>
             {valid ? (
-                <h1>{restaurant.restaurant_name}</h1>
+                <h1>{restaurant.restaurantName}</h1>
             ) : (
                 <h1>Try again</h1>
             )}

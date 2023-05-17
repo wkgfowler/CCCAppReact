@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
 
         const storedToken = await Token.findOne({
             where: {
-                user_id: load.user
+                userId: load.user
             }
         });
 

@@ -53,13 +53,13 @@ const AdminRestaurantsTable = () => {
                     {restaurants.map(restaurant => (
                         restaurant.Users.length ? restaurant.Users.map((x, i) => (
                             <tr key={restaurant.id + i}>
-                                <td>{i === 0 ? restaurant.restaurant_name : ""}</td>
+                                <td>{i === 0 ? restaurant.restaurantName : ""}</td>
                                 <td>{x.email} &nbsp; <button className="btn btn-danger" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></td>
                                 <td>{i === 0 ? <UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/> : ""}</td>
                                 <td><button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button><button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button></td>
                             </tr>
                         )) : <tr key={restaurant.id}>
-                                <td>{restaurant.restaurant_name}</td>
+                                <td>{restaurant.restaurantName}</td>
                                 <td><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
                                 <td><button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button><button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button></td>
                         </tr>

@@ -32,7 +32,7 @@ const RegisterRestaurant = () => {
     const onSubmitForm = async(e) => {
         e.preventDefault();
         axios.post('http://localhost:3000/auth/register/restaurant_registration', {
-            restaurant_name: restaurantNameRef.current.value,
+            restaurantName: restaurantNameRef.current.value,
             password: passwordRef.current.value
         }, {
             headers: {
@@ -52,7 +52,7 @@ const RegisterRestaurant = () => {
             <Fragment>
                 <h1 className="text-center my-5">Register Your Restaurant</h1>
                 <form onSubmit={onSubmitForm}>
-                    <input type="text" name="restaurant_name" placeholder="Restaurant Name" className="form-control my-3" ref={restaurantNameRef} />
+                    <input type="text" name="restaurantName" placeholder="Restaurant Name" className="form-control my-3" ref={restaurantNameRef} />
                     <input type="password" name="password" placeholder="password" className="form-control my-3" ref={passwordRef} />
                     <button className="btn btn-success btn-block">Submit</button>
                 </form>

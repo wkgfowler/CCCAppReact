@@ -174,7 +174,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Monday's opening time:</label>
                             <select name="mondayOpen" className="ml-2" id="mondayOpen" ref={mondayOpenRef} onClick={() => dayClose("monday")}>
-                                {hours ? <option value={`${hours.find(item => item.weekday === 1).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 1).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                                {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 1).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 1).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -185,7 +185,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Monday's closing time:</label>
                             <select name="mondayClose" className="ml-2" id="mondayClose" ref={mondayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 1).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 1).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 1).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 1).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -198,7 +198,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Tuesday's opening time:</label>
                             <select name="tuesdayOpen" className="ml-2" id="tuesdayOpen" ref={tuesdayOpenRef} onClick={() => dayClose("tuesday")}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 2).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 2).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 2).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 2).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -209,7 +209,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Tuesday's closing time:</label>
                             <select name="tuesdayClose" className="ml-2" id="tuesdayClose" ref={tuesdayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 2).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 2).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 2).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 2).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -222,7 +222,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Wednesday's opening time:</label>
                             <select name="wednesdayOpen" className="ml-2" id="wednesdayOpen" ref={wednesdayOpenRef} onClick={() => dayClose("wednesday")}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 3).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 3).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 3).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 3).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -233,7 +233,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Wednesday's closing time:</label>
                             <select name="wednesdayClose" className="ml-2" id="wednesdayClose" ref={wednesdayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 3).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 3).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 3).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 3).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -246,7 +246,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Thursday's opening time:</label>
                             <select name="thursdayOpen" className="ml-2" id="thursdayOpen" ref={thursdayOpenRef} onClick={() => dayClose("thursday")}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 4).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 4).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 4).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 4).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -257,7 +257,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Thursday's closing time:</label>
                             <select name="thursdayClose" className="ml-2" id="thursdayClose" ref={thursdayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 4).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 4).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 4).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 4).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -270,7 +270,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Friday's opening time:</label>
                             <select name="fridayOpen" className="ml-2" id="fridayOpen" ref={fridayOpenRef} onClick={() => dayClose("friday")}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 5).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 5).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 5).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 5).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -281,7 +281,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Friday's closing time:</label>
                             <select name="fridayClose" className="ml-2" id="fridayClose" ref={fridayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 5).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 5).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 5).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 5).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -294,7 +294,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Saturday's opening time:</label>
                             <select name="saturdayOpen" className="ml-2" id="saturdayOpen" ref={saturdayOpenRef} onClick={() => dayClose("saturday")}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 6).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 6).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 6).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 6).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -305,7 +305,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Saturday's closing time:</label>
                             <select name="saturdayClose" className="ml-2" id="saturdayClose" ref={saturdayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 6).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 6).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 6).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 6).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -318,7 +318,7 @@ const HoursForm = ({restaurant}) => {
                         <div>
                             <label htmlFor="">Sunday's opening time:</label>
                             <select name="sundayOpen" className="ml-2" id="sundayOpen" ref={sundayOpenRef} onClick={() => dayClose("sunday")}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 0).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 0).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 0).openHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 0).openHour}`)}</option> : <option value="">--Select an opening time--</option>}
                                 {OPENHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>
@@ -329,7 +329,7 @@ const HoursForm = ({restaurant}) => {
                         <div className="pl-4">
                             <label htmlFor="">Sunday's closing time:</label>
                             <select name="sundayClose" className="ml-2" id="sundayClose" ref={sundayCloseRef}>
-                            {hours ? <option value={`${hours.find(item => item.weekday === 0).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 0).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
+                            {hours.length >= 1 ? <option value={`${hours.find(item => item.weekday === 0).closeHour}`}>{convertToNormalHours(`${hours.find(item => item.weekday === 0).closeHour}`)}</option> : <option value="">--Select a closing time--</option>}
                                 {CLOSEHOURS.map(x => {
                                     return ( 
                                         <option value={x.value}>{x.display}</option>

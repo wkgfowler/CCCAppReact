@@ -52,7 +52,7 @@ const Nav = () => {
           <nav className="hidden mx-auto w-5/6 border-2 border-slate-50 rounded-full md:flex items-center justify-around py-3 text-slate-50 font-semibold">
                   
                       {permission === 0 ? (<Link to="/" className="hover:text-2xl hover:text-slate-50">Home</Link>) : (<Link to={`/profile/${user.id}`}>Profile</Link>)}
-                      <Link className="hover:text-2xl hover:text-slate-50">Restaurants/Bars</Link>
+                      <Link to={'/restaurants+bars'} className="hover:text-2xl hover:text-slate-50">Restaurants/Bars</Link>
                       <Link to={`/specials_and_events`} className="hover:text-2xl hover:text-slate-50">Specials/Events</Link>
                       <Link className="hover:text-2xl hover:text-slate-50">Contact</Link>
                       {permission === 0 ? (<Link to="/about" className="hover:text-2xl hover:text-slate-50">About Us</Link>) : (<button type="button" onClick={logout}>Log Out</button>)}
@@ -68,9 +68,8 @@ const Nav = () => {
             
             <div className={`bg-slate-900 text-slate-50 p-4 absolute ml-12 w-1/2 ${menu ? "hidden" : "grid"}`}>
               {permission === 0 ? (<Link to="/" className="hover:text-2xl hover:text-slate-50">Home</Link>) : (<Link to={`/profile/${user.id}`}>Profile</Link>)}
-              <Link className="hover:text-2xl hover:text-slate-50">Restaurants/Bars</Link>
-              <Link className="hover:text-2xl hover:text-slate-50">Food Specials</Link>
-              <Link className="hover:text-2xl hover:text-slate-50">Events</Link>
+              <Link to={'/restaurants+bars'} className="hover:text-2xl hover:text-slate-50">Restaurants/Bars</Link>
+              <Link to={`/specials_and_events`} className="hover:text-2xl hover:text-slate-50">Specials/Events</Link>
               <Link className="hover:text-2xl hover:text-slate-50">Contact Us</Link>
               {permission === 0 ? (<Link className="hover:text-2xl hover:text-slate-50">About Us</Link>) : (<button type="button" onClick={logout}>Log Out</button>)}
             </div>

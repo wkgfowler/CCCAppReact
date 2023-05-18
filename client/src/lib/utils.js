@@ -222,3 +222,19 @@ export const formatDateDate = (date) => {
 export function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
+
+export const formatAddressGeocode = (str) => {
+    let splitString = str.split(" ");
+    if (splitString.length > 1) {
+        let formattedAddress = ""
+        for (let i = 0; i < splitString.length; i++) {
+            if (i !== splitString.length - 1) {
+                formattedAddress += `${splitString[i]}+`
+            } else {
+                formattedAddress += splitString[i]
+            }
+        return formattedAddress
+        }
+    }
+    return str
+}

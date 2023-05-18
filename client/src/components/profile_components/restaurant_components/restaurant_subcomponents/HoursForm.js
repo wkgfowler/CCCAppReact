@@ -55,6 +55,7 @@ const HoursForm = ({restaurant}) => {
     };
 
     useEffect(() => {
+        console.log(restaurant)
         getHours();
     }, [])
 

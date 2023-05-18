@@ -5,7 +5,10 @@ const restaurantController = require('../controllers/restaurantController')
 
 
 // calling ALL RESTAURANTS
-router.get('/allrestaurants', restaurantController.getAllRestaurants)
+router.get('/getRestaurants/:town', restaurantController.getRestaurants)
+
+// calling specific town restarautns
+router.get('/:townName/restaurants', restaurantController.getTownRestaurants)
 
 // calling restaurant page
 router.get("/restaurants/:id", restaurantController.getRestaurantPage)

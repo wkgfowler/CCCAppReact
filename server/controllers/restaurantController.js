@@ -39,12 +39,31 @@ const upload = multer({
 }).single('profileImage')
 
 // getting all restaurants for display
-const getAllRestaurants = async (req, res) => {
+const getRestaurants = async (req, res) => {
     try {
-        const restaurants = await Restaurant.findAll();
-        return res.json(restaurants)
+        if (req.params.town === "all") {
+            const restaurants = await Restaurant.findAll();
+            return res.json(restaurants)
+        } else {
+            const restaurants = await Restaurant.findAll({
+                where: {
+                    town: req.params.town
+                }
+            })
+            return res.json(restaurants)
+        }
+        
     } catch (err) {
         console.log('try again')
+    }
+}
+
+// getting restaurants by town
+const getTownRestaurants = async (req, res) => {
+    try {
+        
+    } catch (err) {
+        console.error(err.message)
     }
 }
 
@@ -403,8 +422,11 @@ const adminAllRestaurantsAndUsers = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
-    getAllRestaurants,
+    getRestaurants,
+    getTownRestaurants,
     getRestaurantPage,
     getUserRestaurantPage,
     updatingRestaurantContactInfo,

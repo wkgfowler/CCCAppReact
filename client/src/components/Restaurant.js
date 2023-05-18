@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Map from "./profile_components/restaurant_components/restaurant_subcomponents/Map";
 
 const Restaurant = () => {
     const [valid, setValid] = useState(true);
@@ -28,7 +29,11 @@ const Restaurant = () => {
     return (
         <Fragment>
             {valid ? (
-                <h1>{restaurant.restaurantName}</h1>
+                <div>
+                    <h1>{restaurant.restaurantName}</h1>
+                    <Map restaurant={restaurant}/>
+                </div>
+                
             ) : (
                 <h1>Try again</h1>
             )}

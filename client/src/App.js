@@ -50,7 +50,7 @@ function App() {
             <Route path='/edit_specials/:restaurantId' element={<Specials />} />
             <Route path='/add_specials/:restaurantId' element={<SpecialsForm />} />
             
-            <Route path='/all_restaurants' element={<AllRestaurants/>} />
+            <Route path='/restaurants+bars' element={<AllRestaurants/>} />
             <Route path='/restaurants/:id' element={<Restaurant/>} />
             <Route path='/specials_and_events' element={<SpecialsEvents />} />
           </Routes>

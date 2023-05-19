@@ -31,7 +31,11 @@ const Restaurant = () => {
             {valid ? (
                 <div>
                     <h1>{restaurant.restaurantName}</h1>
-                    <Map restaurant={restaurant}/>
+                    <div>
+                        <p>Map area</p>
+                        <Map restaurant={restaurant}/>
+                    </div>
+                    
                 </div>
                 
             ) : (

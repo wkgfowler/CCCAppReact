@@ -20,7 +20,7 @@ const loadProfile = async (req, res) => {
         })
 
         if (user) {
-            return res.json({valid: true, token: req.user})
+            return res.json({valid: true})
         }
     } catch (err) {
         console.error(err.message)
@@ -173,7 +173,21 @@ const login = async (req, res) => {
 
         const token = jwtGenerator(user.id);
 
-        return res.json({token, user});
+        const userInfo = await User.findOne({
+            attributes: {
+                exclude: ["password", "createdAt", "updatedAt"]
+            },
+            where: {
+                email: email
+            },
+            include: [{
+                model: Roles
+            }, {
+                model: Restaurant
+            }]
+        });
+
+        return res.json({token, userInfo});
 
     } catch (err) {
         console.error(err.message);

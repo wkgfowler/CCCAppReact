@@ -20,6 +20,7 @@ const AllRestaurants = () => {
     
     useEffect(() => {
         getRestaurants()
+        console.log(sessionStorage.getItem('user'))
     }, [town])
 
     return (

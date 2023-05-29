@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const Restaurant = sequelize.define("Restaurant", {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4
+            autoIncrement: true
         },
         restaurantName: {
             type: DataTypes.STRING,
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
             unique: true
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(600),
             allowNull: true
         },
         websiteURL: {
@@ -70,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
         Restaurant.belongsToMany(models.User, {through: 'Users_Restaurants'});
         Restaurant.belongsToMany(models.Hours, {through: "Restaurants_Hours"});
         Restaurant.hasMany(models.SpecialEvent, { as: "SpecialEvent"});
+        Restaurant.hasMany(models.Menu, {as: "Menu"});
     };
 
     return Restaurant;

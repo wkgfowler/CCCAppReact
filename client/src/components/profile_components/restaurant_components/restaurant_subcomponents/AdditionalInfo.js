@@ -37,6 +37,12 @@ const AdditionalInfo = ({restaurant}) => {
             console.log(error)
         })
     };
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        console.log(file)
+        setProfileImage(file);
+    }
     
     return (
         <div className="flex justify-center">
@@ -44,9 +50,9 @@ const AdditionalInfo = ({restaurant}) => {
                 <p className="text-2xl pt-4 pb-2 text-center underline">Additional Information</p>
                 <div className="grid grid-cols-3 space-x-5">
                     <div className="grid grid-rows-2">
-                        {restaurant.profileImage !== "null" ? <img src={`http://localhost:3000/${restaurant.profileImage}`} alt="hello" /> : <p>bye</p>}
+                        {restaurant.profileImage !== "null" && profileImage === "" ? <img src={`http://localhost:3000/${restaurant.profileImage}`} alt="" /> : <div> {profileImage ? <img src={URL.createObjectURL(profileImage)} alt=""/> : <img src={require('../../../../images/add-image-80.png')} alt=""/>} </div>}
                         <label for="profileImage">Upload a profile image for your restaurant</label>
-                        <input type="file" id="profileImage" name="profileImage" size="lg" onChange={(e) => setProfileImage(e.target.files[0])}/>
+                        <input type="file" id="profileImage" name="profileImage" size="lg" onChange={handleImageChange}/>
                     </div>
                     <div className="grid grid-rows-2">
                         <label for="websiteURL">Restaurant's Website:</label>

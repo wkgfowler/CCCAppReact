@@ -30,11 +30,9 @@ const Map = ({restaurant}) => {
 
     return (
         <div>
-            <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                 <GoogleMap zoom={13} center={{lat: latitude, lng: longitude}} mapContainerStyle={containerStyle}>
                     <MarkerF position={{lat: latitude, lng: longitude}}/>
                 </GoogleMap>
-            </LoadScript>
         </div>
     );
 }

@@ -20,11 +20,12 @@ const Profile = () => {
     };
     
     const loadUser = () => {
+        console.log(user.id)
+        console.log(permission)
         axios.get(`http://localhost:3000/api/${user.id}`, config)
         .then((response) => {
-            // console.log(response.data)
+            console.log(response.data)
             setUserRestaurants(user.Restaurants)
-            localStorage.setItem("token", response.data.token.token)
             isValid(true)
         }, (error) => {
             console.log(error)
@@ -32,7 +33,11 @@ const Profile = () => {
 
     useEffect(() => {
         loadUser();
-    }, [])
+    }, [user, permission])
+
+    console.log(valid)
+    console.log(user)
+    console.log(permission)
 
     if (valid) {
         if (user && permission === 1) {
@@ -57,6 +62,7 @@ const Profile = () => {
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/restaurants/${x.id}`}>View restaurant page</Link></button></td>
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_information/${x.id}`}>Edit Restaurant</Link></button></td>
                                     <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_specials/${x.id}`}>Edit Specials/Events</Link></button></td>
+                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_menus/${x.id}`}>Edit Menus</Link></button></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -74,7 +80,7 @@ const Profile = () => {
         } else {
             return (
                 <div>
-                    <h1>Not Authorized</h1>
+                    <h1>Not Authorized error</h1>
                 </div>
             )
         }

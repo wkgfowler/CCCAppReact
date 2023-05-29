@@ -1,15 +1,11 @@
-import React, {Fragment} from "react";
-import Specials from "./profile_components/restaurant_components/Specials";
-
-
+import React from "react";
+import AddMenu from "./profile_components/restaurant_components/restaurant_subcomponents/AddMenu";
 
 const About = () => {
-    
+
     return (
         <div className="flex justify-center">
-            
-            <Specials />
-        
+            <AddMenu />
             
             {/* <h1>About Us</h1>
                 <h4>Crystal Coast Cuisine is geared towards providing both customers and restaurant managers with a <br/>centralized service for dining experiences on the Crystal Coast. The area is blessed with many <br/>privately owned establishments that customers may never hear of. Here, every <br/>restaurant is visible and separated by their respective town.</h4><br/>

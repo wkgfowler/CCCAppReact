@@ -1,17 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
     const Token = sequelize.define("Token", {
         tokenId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4
+            autoIncrement: true
         },
         token: {
             type: DataTypes.STRING,
             allowNull: false
         },
         userId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
             unique: true,
             references: {

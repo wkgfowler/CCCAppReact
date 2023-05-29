@@ -238,3 +238,132 @@ export const formatAddressGeocode = (str) => {
     }
     return str
 }
+
+export const MENUTYPES = [
+    "Menu", "Breakfast Menu", "Lunch Menu", "Dinner Menu", "Brunch Menu", "Bar Menu"
+]
+
+export const MENUSTARTHOURS = [
+    {value: "1", display: "1"},
+    {value: "2", display: "2"},
+    {value: "3", display: "3"},
+    {value: "4", display: "4"},
+    {value: "5", display: "5"},
+    {value: "6", display: "6"},
+    {value: "7", display: "7"},
+    {value: "8", display: "8"},
+    {value: "9", display: "9"},
+    {value: "10", display: "10"},
+    {value: "11", display: "11"},
+    {value: "12", display: "12"},
+    {value: "Open", display: "Open"}
+]
+
+export const MENUENDHOURS = [
+    {value: "1", display: "1"},
+    {value: "2", display: "2"},
+    {value: "3", display: "3"},
+    {value: "4", display: "4"},
+    {value: "5", display: "5"},
+    {value: "6", display: "6"},
+    {value: "7", display: "7"},
+    {value: "8", display: "8"},
+    {value: "9", display: "9"},
+    {value: "10", display: "10"},
+    {value: "11", display: "11"},
+    {value: "12", display: "12"},
+    {value: "Close", display: "Close"}
+]
+
+export const MENUMINUTES = [
+    {value: "00", display: "00"},
+    {value: "15", display: "15"},
+    {value: "30", display: "30"},
+    {value: "45", display: "45"}
+]
+
+export const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+export const formatMenuTime = (startTime, endTime, AMPM) => {
+    if (endTime === "" && AMPM === "") {
+        return startTime
+    } else {
+        return `${startTime}:${endTime}${AMPM}`
+    }
+}
+
+export const determineSundayAvailability = (day) => {
+    if (day) {
+        return "Sunday"
+    } else {
+        return ""
+    }
+}
+
+export const determineMondayAvailability = (day) => {
+    if (day) {
+        return "Monday"
+    } else {
+        return ""
+    }
+}
+
+export const determineTuesdayAvailability = (day) => {
+    if (day) {
+        return "Tuesday"
+    } else {
+        return ""
+    }
+}
+
+export const determineWednesdayAvailability = (day) => {
+    if (day) {
+        return "Wednesday"
+    } else {
+        return ""
+    }
+}
+
+export const determineThursdayAvailability = (day) => {
+    if (day) {
+        return "Thursday"
+    } else {
+        return ""
+    }
+}
+
+export const determineFridayAvailability = (day) => {
+    if (day) {
+        return "Friday"
+    } else {
+        return ""
+    }
+}
+
+export const determineSaturdayAvailability = (day) => {
+    if (day) {
+        return "Saturday"
+    } else {
+        return ""
+    }
+}
+
+export const formatMenuDayAvailability = (array) => {
+    const arr = array.filter(x => x);
+    console.log(arr)
+    if (arr.length === 1) {
+        return arr
+    } else if (arr.length > 1 && arr.length <= 2) {
+        return `${arr[0]} and ${arr[1]}`
+    } else if (arr.length >= 3) {
+        let str = ""
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] !== arr[arr.length-1]) {
+                str += arr[i] + ", "
+            } else {
+                str += "and " + arr[i]
+                return str
+            }
+        }
+    }
+}

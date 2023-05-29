@@ -56,12 +56,20 @@ const AdminRestaurantsTable = () => {
                                 <td>{i === 0 ? restaurant.restaurantName : ""}</td>
                                 <td>{x.email} &nbsp; <button className="btn btn-danger" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></td>
                                 <td>{i === 0 ? <UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/> : ""}</td>
-                                <td><button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button><button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button></td>
+                                <td>
+                                    <button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
+                                    <button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
+                                    <button><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
+                                </td>
                             </tr>
                         )) : <tr key={restaurant.id}>
                                 <td>{restaurant.restaurantName}</td>
                                 <td><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
-                                <td><button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button><button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button></td>
+                                <td>
+                                    <button><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
+                                    <button><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
+                                    <button><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
+                                </td>
                         </tr>
                     ))}
                     </tbody>

@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const hoursController = require('../controllers/hoursController');
 const restaurantController = require('../controllers/restaurantController');
 const specialEventController = require('../controllers/specialEventController');
+const menuController = require('../controllers/menuController')
 const authorization = require('../middleware/authorization');
 require("dotenv").config();
 const { Op } = require("sequelize");
@@ -40,6 +41,14 @@ router.get("/get_specials/:currentYear-:currentMonth-:today/:day", specialEventC
 // getting all specials/events for a restaurant admins page
 router.get("/get_all_specials_events/:restaurantId/:userId", authorization, specialEventController.getSpecialsEventsRestaurantAdmin)
 
+// adding menus
+router.post("/add_menu", authorization, menuController.upload, menuController.menuUpload)
+
+// getting menus for edit page
+router.get("/get_menus/:restaurantId/:userId", authorization, menuController.getMenusForEdit)
+
+// loading specific menu for edit page
+router.get("/get_menus/:restaurantId/:userId/:typeOfMenu", authorization, menuController.getSpecificMenuForEdit)
 
 // admin page ALL RESTAURANTS/USERS
 router.get("/admin/all_restaurants", restaurantController.adminAllRestaurantsAndUsers)

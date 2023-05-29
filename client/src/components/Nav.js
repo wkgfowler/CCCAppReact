@@ -37,6 +37,8 @@ const Nav = () => {
     })
     .then(() => {
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      localStorage.removeItem('permission')
       setUser("")
       setPermission(0)
       navigate('/')
@@ -47,7 +49,6 @@ const Nav = () => {
     
     return ( 
         <div>
-          <div><h5>{user.email}</h5><h4>{permission}</h4></div>
 
           <nav className="hidden mx-auto w-5/6 border-2 border-slate-50 rounded-full md:flex items-center justify-around py-3 text-slate-50 font-semibold">
                   

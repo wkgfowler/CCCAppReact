@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const SpecialEvent = sequelize.define("SpecialEvent", {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4
+            autoIncrement: true
         },
         specialOrEvent: {
             type: DataTypes.STRING,

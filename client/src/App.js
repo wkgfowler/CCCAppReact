@@ -1,4 +1,4 @@
-import React, {Fragment, useMemo, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import './App.css';
 
 // routes
@@ -23,16 +23,52 @@ import EditInfo from "./components/profile_components/restaurant_components/Edit
 import Specials from "./components/profile_components/restaurant_components/Specials";
 import SpecialsForm from "./components/profile_components/restaurant_components/restaurant_subcomponents/SpecialsForm";
 import SpecialsEvents from "./components/SpecialsEvents";
+import { LoadScript } from "@react-google-maps/api";
+import Menu from "./components/profile_components/restaurant_components/Menu";
+import AddMenu from "./components/profile_components/restaurant_components/restaurant_subcomponents/AddMenu";
 
 function App() {
-  const [user, setUser] = useState("");
-  const [permission, setPermission] = useState(0)
-  const userProvider = useMemo(() => ({user, setUser}), [user, setUser]);
+  const [user, setUser] = useState(() => {
+    const userData = localStorage.getItem('user');
+    return JSON.parse(userData) || null
+  });
+  const [permission, setPermission] = useState(() => {
+    const permissionData = localStorage.getItem('permission');
+    return Number(permissionData) || 0
+  })
+  // const userProvider = useMemo(() => ({user, setUser}), [user, setUser]);
+
+  // useEffect(() => {
+  //   // sessionStorage.removeItem('user')
+  //   // sessionStorage.removeItem('permission')
+  //   // if (user === null) {
+  //   //   let userInfo = sessionStorage.getItem('user')
+  //   //   setUser(JSON.parse(userInfo))
+  //   // }
+  //   // if (permission === 0) {
+  //   //   let permissionInfo = sessionStorage.getItem('permission')
+  //   //   setPermission(permissionInfo)
+  //   // }
+  //   console.log(permission)
+  //   console.log(user)
+    
+  //   // const userData = sessionStorage.getItem('user');
+  //   // console.log(JSON.parse(userData))
+  //   // if (userData) {
+  //   //   setUser(JSON.parse(userData));
+  //   // };
+  //   // console.log(user)
+  //   // const permissionData = sessionStorage.getItem('permission');
+  //   // if (permissionData > 0) {
+  //   //   setPermission(permissionData);
+  //   // };
+  // }, [user, permission])
 
   return (
     <div className={permission === 0 ? "bg-hero bg-bottom bg-no-repeat h-screen" : "bg-gradient-to-b from-sky-500 to-blue-400 h-screen"}>
       <Router>
-        <UserContext.Provider value={userProvider}>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+        <UserContext.Provider value={{user, setUser}}>
         <PermissionContext.Provider value={{permission, setPermission}}>
         <Nav/>
         
@@ -49,6 +85,8 @@ function App() {
             <Route path='/edit_information/:restaurantId' element={<EditInfo />}/>
             <Route path='/edit_specials/:restaurantId' element={<Specials />} />
             <Route path='/add_specials/:restaurantId' element={<SpecialsForm />} />
+            <Route path='/edit_menus/:restaurantId' element={<Menu />} />
+            <Route path='/add_menus/:restaurantId' element={<AddMenu />} />
             
             <Route path='/restaurants+bars' element={<AllRestaurants/>} />
             <Route path='/restaurants/:id' element={<Restaurant/>} />
@@ -56,6 +94,7 @@ function App() {
           </Routes>
         </PermissionContext.Provider>
         </UserContext.Provider>
+        </LoadScript>
       </Router>
     </div>
   );

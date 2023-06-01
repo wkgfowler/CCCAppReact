@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import axios from "axios";
 import { UserContext } from "../../../context/UserContext";
 
-const CreateRestaurant = () => {
+const CreateRestaurant = ({getRestaurants}) => {
     const {user, setUser} = useContext(UserContext)
     const restaurantNameRef = useRef();
     
@@ -14,20 +14,23 @@ const CreateRestaurant = () => {
         })
         .then((response) => {
             console.log(response)
+            restaurantNameRef.current.value = "";
+            getRestaurants();
         }, (error) => {
             console.log(error)
         })
     }
 
     return (
-        <div className="flex justify-center">
-            <p className="text-4xl text-center">Create Restaurant</p>
-            <div className="grid grid-cols-1">
-                <form onSubmit={onSubmitForm}>
+        <div className="flex flex-col justify-center">
+            <div className="flex justify-center">
+                <p className="text-2xl font-medium">Create Restaurant</p>
+            </div>
+            <div className="flex justify-center">
+                <form onSubmit={onSubmitForm} className="basis-1/5">
                     <label>Restaurant Name:</label>
-                    <br/>
-                    <input type="text" ref={restaurantNameRef}></input>
-                    <button className="pt-2">Submit</button>
+                    <input type="text" className="form-control my-3" ref={restaurantNameRef}></input>
+                    <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
                 </form>
             </div>
             

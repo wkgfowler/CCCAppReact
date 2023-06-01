@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
 
-const ContactInfo = ({restaurant}) => {
+const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
     const {user, setUser} = useContext(UserContext)
     const [number, setNumber] = useState("")
     const {restaurantId} = useParams();
@@ -50,7 +50,9 @@ const ContactInfo = ({restaurant}) => {
             }
         })
         .then((response) => {
-            console.log(response.data)
+            console.log(response.data);
+            setInfoVisible(!infoVisible);
+            alert.success('Information updated successfully.')
         }, (error) => {
             console.log(error)
         })
@@ -83,7 +85,7 @@ const ContactInfo = ({restaurant}) => {
                     <input type="tel" name="phoneNumber" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 bg-transparent border-b-2" required/>
                 </div>
                 <div className="flex justify-center">
-                    <button className="">Submit</button>
+                    <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
                 </div>
             </form>
         </div>

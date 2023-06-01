@@ -11,7 +11,7 @@ const { Op } = require("sequelize");
 const addSpecialEvent = async (req, res) => {
     try {
         const newSpecialEvent = await SpecialEvent.create({
-            restaurantId: req.body.restaurantId,
+            RestaurantId: req.body.restaurantId,
             specialOrEvent: req.body.specialOrEvent,
             name: req.body.name,
             description: req.body.description,
@@ -32,17 +32,30 @@ const addSpecialEvent = async (req, res) => {
 const getSpecialsEventsCalendar = async (req, res) => {
     try {
         console.log(req.params.currentMonth)
-        const specials = await SpecialEvent.findAll({
-            where: {
+        // const specials = await SpecialEvent.findAll({
+        //     where: {
+        //         [Op.or] : [
+        //             {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
+        //             {weekdays: { [Op.contains]: [`${req.params.day}`]} }
+        //         ]
+        //     }, include: {
+        //         model: Restaurant, as: "restaurant"
+        //     }
+        // })
+
+        const specials = await Restaurant.findAll({
+            attributes: ["restaurantName"],
+            include: {
+                model: SpecialEvent, as: "SpecialEvent",
+                where: {
                 [Op.or] : [
                     {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
                     {weekdays: { [Op.contains]: [`${req.params.day}`]} }
                 ]
-            }, include: {
-                model: Restaurant, as: "restaurant"
             }
+            } 
         })
-
+        console.log(specials)
         return res.json(specials)
     } catch (err) {
         console.error(err.message)

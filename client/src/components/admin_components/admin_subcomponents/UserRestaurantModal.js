@@ -21,14 +21,14 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
   };
 
     return (
-        <Fragment>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target={`#id${restaurant.id}`}>
+        <div>
+            <button type="button" className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1" data-toggle="modal" data-target={`#id${restaurant.id}`}>
               Add User
             </button>
 
             <div className="modal" id={`id${restaurant.id}`}>
               <div className="modal-dialog">
-                <div className="modal-content">
+                <div className="modal-content bg-slate-400 rounded-lg">
 
 
                   <div className="modal-header">
@@ -38,18 +38,18 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
 
 
                   <div className="modal-body">
-                    <input type="email" name="email" ref={emailRef} placeholder=""/>
+                    <input type="email" name="email" ref={emailRef} placeholder="Enter email address" className="rounded pl-2 py-1"/>
                   </div>
 
 
                   <div className="modal-footer">
-                    <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={addUser}>Add User</button>
+                    <button type="button" className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1" data-dismiss="modal" onClick={addUser}>Add User</button>
                   </div>
 
                 </div>
               </div>
             </div>
-        </Fragment>
+        </div>
     );
 }
  

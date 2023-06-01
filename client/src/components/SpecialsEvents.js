@@ -109,65 +109,64 @@ const SpecialsEvents = () => {
     }
 
     return (
-        <div className="flex flex-wrap justify-center justify-items-center items-center min-h-screen">
+        <div className="container max-w-max mx-4 pt-2">
             <p className="text-center text-4xl">{months[currentMonth]} {today}, {currentYear} Specials & Events</p>
-            <div className="flex flex-wrap w-screen justify-center">
-                {specials.map(special => (
-                        <div className="flex flex-col w-full" key={special.id}>
-                            
-                                <div className="flex flex-row justify-evenly">
-                                    <div>
-                                        <p>{special.restaurant.restaurantName}</p>
-                                    </div>
-                                    <div>
-                                        {special.specialOrEvent === "special" ? <p>Special - {special.name}</p> : <p>Event - {special.name}</p>}
-                                    </div>
-                                    
-                                </div>
-                        
-                                <div className="flex flex-row justify-evenly">
-                                    <div>
-                                        <p>{special.description}</p>
-                                    </div>
-                                    <div>
-                                        <p>From {special.startTime} - {special.endTime}</p>
-                                    </div>
-                                </div>
+            <div className="flex flex-row pt-2">
+                
+                {/* calendar section */}
+                <div className="w-1/4 bg-slate-200 rounded-xl">
+                    <header className="flex items-center justify-between pt-6 px-8 pb-3">
+                        <p className="text-2xl font-medium">{months[currentMonth]} {currentYear}</p>
+                        <div className="grid grid-cols-2">
+                            <span className="hover:bg-slate-400 rounded-full" onClick={prevMonth}><IoIosArrowBack className="h-8 w-8 my-0 mx-1 text-center leading-8 cursor-pointer"/></span>
+                            <span className="hover:bg-slate-400 rounded-full" onClick={nextMonth}><IoIosArrowForward className="h-8 w-8 my-0 mx-1 text-center leading-8 cursor-pointer"/></span>
                         </div>
-                ))}
-            </div>
+                    </header>
 
-            <div className="w-1/3 bg-slate-200 rounded-xl">
-                <header className="flex items-center justify-between pt-6 px-8 pb-3">
-                    <p className="text-2xl font-medium">{months[currentMonth]} {currentYear}</p>
-                    <div className="grid grid-cols-2">
-                        <span className="hover:bg-slate-400 rounded-full" onClick={prevMonth}><IoIosArrowBack className="h-8 w-8 my-0 mx-1 text-center leading-8 cursor-pointer"/></span>
-                        <span className="hover:bg-slate-400 rounded-full" onClick={nextMonth}><IoIosArrowForward className="h-8 w-8 my-0 mx-1 text-center leading-8 cursor-pointer"/></span>
+                    <div className="p-5">
+                        <ul className="flex flex-wrap text-center font-medium">
+                            <li className="w-[calc(100%/7)] relative">Sun</li>
+                            <li className="w-[calc(100%/7)] relative">Mon</li>
+                            <li className="w-[calc(100%/7)] relative">Tue</li>
+                            <li className="w-[calc(100%/7)] relative">Wed</li>
+                            <li className="w-[calc(100%/7)] relative">Thu</li>
+                            <li className="w-[calc(100%/7)] relative">Fri</li>
+                            <li className="w-[calc(100%/7)] relative">Sat</li>
+                        </ul>
+                        <ul className="flex flex-wrap text-center mb-4">
+                            {prevMonthDays.map(day => (
+                                <li className="w-[calc(100%/7)] text-slate-400 relative mt-7 cursor-pointer before:absolute before:h-10 before:w-10 before:rounded-full 
+                                before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-7 hover:before:bg-slate-400">{day}</li>
+                            ))}
+                            {days.map(day => (
+                                <li onClick={() => setToday(day)} className={classNames(isToday(day) ? "bg-slate-400 rounded-full" : "", "w-[calc(100%/7)] relative mt-7 cursor-pointer before:absolute before:h-10 before:w-10 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-7 hover:before:bg-slate-400")}>{day}</li>
+                            ))}
+                            {nextMonthDays.map(day => (
+                                <li className="w-[calc(100%/7)] text-slate-400 relative mt-7 cursor-pointer before:absolute before:h-10 before:w-10 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-7 hover:before:bg-slate-400">{day}</li>
+                            ))}
+                        </ul>
                     </div>
-                </header>
-
-                <div className="p-5">
-                    <ul className="flex flex-wrap text-center font-medium">
-                        <li className="w-[calc(100%/7)] relative">Sun</li>
-                        <li className="w-[calc(100%/7)] relative">Mon</li>
-                        <li className="w-[calc(100%/7)] relative">Tue</li>
-                        <li className="w-[calc(100%/7)] relative">Wed</li>
-                        <li className="w-[calc(100%/7)] relative">Thu</li>
-                        <li className="w-[calc(100%/7)] relative">Fri</li>
-                        <li className="w-[calc(100%/7)] relative">Sat</li>
-                    </ul>
-                    <ul className="flex flex-wrap text-center mb-4">
-                        {prevMonthDays.map(day => (
-                            <li className="w-[calc(100%/7)] text-slate-400 relative mt-7 cursor-pointer before:absolute before:h-10 before:w-10 before:rounded-full 
-                            before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-7 hover:before:bg-slate-400">{day}</li>
-                        ))}
-                        {days.map(day => (
-                            <li onClick={() => setToday(day)} className={classNames(isToday(day) ? "bg-slate-400 rounded-full" : "", "w-[calc(100%/7)] relative mt-7 cursor-pointer before:absolute before:h-10 before:w-10 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-7 hover:before:bg-slate-400")}>{day}</li>
-                        ))}
-                        {nextMonthDays.map(day => (
-                            <li className="w-[calc(100%/7)] text-slate-400 relative mt-7 cursor-pointer before:absolute before:h-10 before:w-10 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-7 hover:before:bg-slate-400">{day}</li>
-                        ))}
-                    </ul>
+                </div>
+                
+                <div className="flex flex-col w-screen justify-center">
+                    {specials.map((special, i) => (
+                        <div className="flex flex-col w-full" key={special.id}>
+                            <div className="flex flex-col pl-10">
+                                <div>
+                                    {i === 0 ? <p className="text-3xl">{special.restaurant.restaurantName}</p> : ""}
+                                </div>
+                                <div>
+                                    {special.specialOrEvent === "special" ? <p className="text-lg font-medium underline">Special:</p> : <p className="text-lg font-medium underline">Event:</p>}
+                                </div>
+                                <div className="flex flex-row">
+                                    {special.name} - {special.description}
+                                </div>
+                                <div>
+                                    <p>Available from {special.startTime} - {special.endTime}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

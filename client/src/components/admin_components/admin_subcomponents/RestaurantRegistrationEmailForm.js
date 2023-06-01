@@ -17,13 +17,17 @@ const RestaurantRegistrationEmailForm = () => {
     }
     
     return (
-        <Fragment>
-            <h3>Restaurant Registration Email</h3>
-            <form onSubmit={onSubmitForm}>
-                <input type="email" name="email" placeholder="email" className="form-control my-3" ref={emailRef} />
-                <button>Submit</button>
-            </form>
-        </Fragment>
+        <div className="flex flex-col justify-center border-t-2">
+            <div className="flex justify-center">
+                <p className="text-2xl font-medium">Restaurant Registration Email</p>
+            </div>
+            <div className="flex justify-center">
+                <form onSubmit={onSubmitForm} className="basis-1/5">
+                    <input type="email" name="email" placeholder="email" className="form-control my-3" ref={emailRef} />
+                    <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
+                </form>
+            </div>
+        </div>
     );
 }
  

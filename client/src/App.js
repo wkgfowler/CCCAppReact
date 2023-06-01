@@ -39,33 +39,12 @@ function App() {
   // const userProvider = useMemo(() => ({user, setUser}), [user, setUser]);
 
   // useEffect(() => {
-  //   // sessionStorage.removeItem('user')
-  //   // sessionStorage.removeItem('permission')
-  //   // if (user === null) {
-  //   //   let userInfo = sessionStorage.getItem('user')
-  //   //   setUser(JSON.parse(userInfo))
-  //   // }
-  //   // if (permission === 0) {
-  //   //   let permissionInfo = sessionStorage.getItem('permission')
-  //   //   setPermission(permissionInfo)
-  //   // }
-  //   console.log(permission)
-  //   console.log(user)
-    
-  //   // const userData = sessionStorage.getItem('user');
-  //   // console.log(JSON.parse(userData))
-  //   // if (userData) {
-  //   //   setUser(JSON.parse(userData));
-  //   // };
-  //   // console.log(user)
-  //   // const permissionData = sessionStorage.getItem('permission');
-  //   // if (permissionData > 0) {
-  //   //   setPermission(permissionData);
-  //   // };
-  // }, [user, permission])
+  //   localStorage.removeItem('user')
+  //   localStorage.removeItem('permission')
+  // }, [])
 
   return (
-    <div className={permission === 0 ? "bg-hero bg-bottom bg-no-repeat h-screen" : "bg-gradient-to-b from-sky-500 to-blue-400 h-screen"}>
+    <div className={permission === 0 ? "bg-hero bg-bottom bg-no-repeat h-screen" : "bg-gradient-to-b from-sky-500 to-blue-400 min-h-screen"}>
       <Router>
         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <UserContext.Provider value={{user, setUser}}>

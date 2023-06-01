@@ -46,6 +46,7 @@ const getHours = async (req, res) => {
 
 // Update Restaurant Hours
 const updateHours = async (req, res) => {
+    console.log(req.body)
     try {
         const restaurant = await Restaurant.findOne({
             where: {

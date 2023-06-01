@@ -42,13 +42,16 @@ const upload = multer({
 const getRestaurants = async (req, res) => {
     try {
         if (req.params.town === "all") {
-            const restaurants = await Restaurant.findAll();
+            const restaurants = await Restaurant.findAll({
+                order: [ ['restaurantName', 'ASC'] ]
+            });
             return res.json(restaurants)
         } else {
             const restaurants = await Restaurant.findAll({
                 where: {
                     town: req.params.town
-                }
+                },
+                order: [ ['restaurantName', 'ASC'] ]
             })
             return res.json(restaurants)
         }
@@ -399,6 +402,14 @@ const adminCreateRestaurant = async (req, res) => {
                 restaurantName: req.body.restaurantName
             })
 
+            for (let i = 0; i < 7; i++) {
+                let newRestaurantHours = await Hours.create({
+                    weekday: i,
+                    restaurantId: restaurant.id
+                })
+            }
+
+            await newRestaurantHours.save();
             return res.json("nice")
         }
         return res.json("no good")
@@ -413,7 +424,8 @@ const adminAllRestaurantsAndUsers = async (req, res) => {
         const restaurants = await Restaurant.findAll({
             include: {
                 model: User
-            }
+            },
+            order: [ ['restaurantName', 'ASC'] ]
         })
         console.log(1);
         return res.json(restaurants);

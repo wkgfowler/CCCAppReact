@@ -4,7 +4,7 @@ import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
 import { CLOSEHOURS, OPENHOURS } from "../../../../lib/utils";
 
-const HoursForm = ({restaurant}) => {
+const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     const date = new Date();
     const navigate = useNavigate();
 
@@ -88,7 +88,9 @@ const HoursForm = ({restaurant}) => {
         })
         .then((response) => {
             console.log(response)
-            navigate(`/profile/${user.id}`)
+            setHoursVisible(!hoursVisible)
+            alert.success('Information updated successfully.')
+            // navigate(`/profile/${user.id}`)
         }, (error) => {
             console.log("not quite")
             console.log(error)
@@ -340,7 +342,7 @@ const HoursForm = ({restaurant}) => {
                         </div>
                     </div>
                     <div className="flex justify-center">
-                        <button className="pt-2">Submit</button>
+                        <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
                     </div>
                     
                 </form>

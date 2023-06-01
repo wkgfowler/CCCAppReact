@@ -15,6 +15,7 @@ const Map = ({restaurant}) => {
     const getCoordinates = () => {
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${restaurant.streetAddress},+${restaurant.town},+NC&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
         .then((response) => {
+            console.log(response.data)
             console.log(response.data.results[0].geometry.location)
             setLatitude(response.data.results[0].geometry.location.lat)
             setLongitude(response.data.results[0].geometry.location.lng)

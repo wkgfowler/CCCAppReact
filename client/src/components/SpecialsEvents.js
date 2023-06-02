@@ -149,24 +149,25 @@ const SpecialsEvents = () => {
                 </div>
                 
                 <div className="flex flex-col w-screen justify-center">
-                    {specials.map((special, i) => (
-                        <div className="flex flex-col w-full" key={special.id}>
+                    {specials.map(special => (
+                        special.SpecialEvents.map((x, i) => (
+                        <div className="flex flex-col w-full py-2" key={x.id}>
                             <div className="flex flex-col pl-10">
                                 <div>
-                                    {i === 0 ? <p className="text-3xl">{special.restaurant.restaurantName}</p> : ""}
+                                    {i === 0 ? <p className="text-3xl text-white">{special.restaurantName}</p> : ""}
                                 </div>
                                 <div>
-                                    {special.specialOrEvent === "special" ? <p className="text-lg font-medium underline">Special:</p> : <p className="text-lg font-medium underline">Event:</p>}
+                                    {x.specialOrEvent === "special" ? <p className="text-lg font-medium underline">Special:</p> : <p className="text-lg font-medium underline">Event:</p>}
                                 </div>
                                 <div className="flex flex-row">
-                                    {special.name} - {special.description}
+                                    {x.name} - {x.description}
                                 </div>
                                 <div>
-                                    <p>Available from {special.startTime} - {special.endTime}</p>
+                                    <p>Available from {x.startTime} - {x.endTime}</p>
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    ))))}
                 </div>
             </div>
         </div>

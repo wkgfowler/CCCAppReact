@@ -6,7 +6,7 @@ import { UserContext } from "../../../../context/UserContext";
 const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
     const {user, setUser} = useContext(UserContext)
     const [number, setNumber] = useState("")
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
 
     const handleInput = e => {
         const formattedNumber = formatPhoneNumber(e.target.value);
@@ -40,7 +40,7 @@ const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         axios.post('http://localhost:3000/api/contact_info', {
-            id: restaurantId,
+            id: RestaurantId,
             streetAddress: streetAddressRef.current.value,
             town: townRef.current.value,
             phoneNumber: number

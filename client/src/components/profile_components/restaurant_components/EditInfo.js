@@ -15,7 +15,7 @@ const EditInfo = () => {
     const [hoursVisible, setHoursVisible] = useState(false);
     const [infoVisible, setInfoVisible] = useState(false);
     const [additionalInfoVisible, setAdditionalInfoVisible] = useState(false);
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     const {user, setUser} = useContext(UserContext);
     const userId = user.id
     const alert = useAlert();
@@ -23,13 +23,13 @@ const EditInfo = () => {
     const config = {
         headers: {"token": localStorage.getItem("token")},
         params: {
-            restaurantId: restaurantId,
+            RestaurantId: RestaurantId,
             userId: userId
         }
     }
 
     const getRestaurant = () => {
-        axios.get(`http://localhost:3000/api/get_restaurant/${restaurantId}/${userId}`, config)
+        axios.get(`http://localhost:3000/api/get_restaurant/${RestaurantId}/${userId}`, config)
         .then((response) => {
             setValid(response.data.valid)
             setRestaurant(response.data.restaurant)

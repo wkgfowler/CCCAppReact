@@ -41,7 +41,7 @@ const menuUpload = async (req, res) => {
         const files = req.files
         for (let i = 0; i < files.length; i++) {
             const menu = await Menu.create({
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 menuType: req.body.menuType,
                 startTime: req.body.startTime,
                 endTime: req.body.endTime,
@@ -66,7 +66,7 @@ const getMenusForEdit = async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
             where: {
-                id: req.params.restaurantId
+                id: req.params.RestaurantId
             }, include: {
                 model: User, where: { id: req.params.userId }
             }
@@ -82,7 +82,7 @@ const getMenusForEdit = async (req, res) => {
 
         const menus = await Menu.findAll({
             where: {
-                restaurantId: req.params.restaurantId
+                RestaurantId: req.params.RestaurantId
             }
         })
 
@@ -101,7 +101,7 @@ const getSpecificMenuForEdit = async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
             where: {
-                id: req.params.restaurantId
+                id: req.params.RestaurantId
             }, include: {
                 model: User, where: { id: req.params.userId }
             }
@@ -117,7 +117,7 @@ const getSpecificMenuForEdit = async (req, res) => {
 
         const menus = await Menu.findAll({
             where: {
-                restaurantId: req.params.restaurantId,
+                RestaurantId: req.params.RestaurantId,
                 menuType: req.params.typeOfMenu
             }
         })

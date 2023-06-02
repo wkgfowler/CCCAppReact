@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
 
     SpecialEvent.associate = function (models) {
         SpecialEvent.belongsTo(models.Restaurant, {
-            as: "Restaurant"
+            foreignKey: "RestaurantId"
         })
     };
 

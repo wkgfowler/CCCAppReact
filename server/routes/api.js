@@ -16,7 +16,7 @@ router.get("/:id", authorization, userController.loadProfile)
 
 
 // validating user for restaurant info edit page
-router.get("/get_restaurant/:restaurantId/:userId", authorization, restaurantController.getUserRestaurantPage)
+router.get("/get_restaurant/:RestaurantId/:userId", authorization, restaurantController.getUserRestaurantPage)
 
 
 // updating restaurant contact info
@@ -27,7 +27,7 @@ router.post("/contact_info", authorization, restaurantController.updatingRestaur
 router.post("/additional_info", authorization, restaurantController.upload, restaurantController.updatingRestaurantAdditionalInfo)
 
 // RESTAURANT HOURS
-router.get("/get_hours/:restaurantId/:userId", authorization, hoursController.getHours)
+router.get("/get_hours/:RestaurantId/:userId", authorization, hoursController.getHours)
 
 // updating restaurant hours
 router.post("/update_hours", authorization, hoursController.updateHours)
@@ -39,16 +39,16 @@ router.post("/add_special_event", authorization, specialEventController.addSpeci
 router.get("/get_specials/:currentYear-:currentMonth-:today/:day", specialEventController.getSpecialsEventsCalendar)
 
 // getting all specials/events for a restaurant admins page
-router.get("/get_all_specials_events/:restaurantId/:userId", authorization, specialEventController.getSpecialsEventsRestaurantAdmin)
+router.get("/get_all_specials_events/:RestaurantId/:userId", authorization, specialEventController.getSpecialsEventsRestaurantAdmin)
 
 // adding menus
 router.post("/add_menu", authorization, menuController.upload, menuController.menuUpload)
 
 // getting menus for edit page
-router.get("/get_menus/:restaurantId/:userId", authorization, menuController.getMenusForEdit)
+router.get("/get_menus/:RestaurantId/:userId", authorization, menuController.getMenusForEdit)
 
 // loading specific menu for edit page
-router.get("/get_menus/:restaurantId/:userId/:typeOfMenu", authorization, menuController.getSpecificMenuForEdit)
+router.get("/get_menus/:RestaurantId/:userId/:typeOfMenu", authorization, menuController.getSpecificMenuForEdit)
 
 // admin page ALL RESTAURANTS/USERS
 router.get("/admin/all_restaurants", restaurantController.adminAllRestaurantsAndUsers)

@@ -8,7 +8,7 @@ import { MENUTYPES, WEEKDAYS, determineFridayAvailability, determineMondayAvaila
 const Menu = () => {
     const [menus, setMenus] = useState([]);
     const [valid, setValid] = useState(false);
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     const {user, setUser} = useContext(UserContext);
     const userId = user.id
     const [menuTypes, setMenuTypes] = useState([])
@@ -17,13 +17,13 @@ const Menu = () => {
     const config = {
         headers: {"token": localStorage.getItem("token")},
         params: {
-            restaurantId: restaurantId,
+            RestaurantId: RestaurantId,
             userId: userId
         }
     }
 
     const getMenus = () => {
-        axios.get(`http://localhost:3000/api/get_menus/${restaurantId}/${userId}`, config)
+        axios.get(`http://localhost:3000/api/get_menus/${RestaurantId}/${userId}`, config)
         .then((response) => {
             const eachMenu = response.data.menus
             const eachMenuType = []
@@ -37,7 +37,7 @@ const Menu = () => {
     };
 
     const getSpecificMenu = () => {
-        axios.get(`http://localhost:3000/api/get_menus/${restaurantId}/${userId}/${typeOfMenu}`, config)
+        axios.get(`http://localhost:3000/api/get_menus/${RestaurantId}/${userId}/${typeOfMenu}`, config)
         .then((response) => {
             console.log(response.data)
             setMenus(response.data)
@@ -57,7 +57,7 @@ const Menu = () => {
             <div className="flex flex-col">
 
                 <div className="flex justify-center">
-                    <button><Link to={`/add_menus/${restaurantId}`}>Add Menu</Link></button>
+                    <button><Link to={`/add_menus/${RestaurantId}`}>Add Menu</Link></button>
                 </div>
 
                 <div className="flex justify-center">

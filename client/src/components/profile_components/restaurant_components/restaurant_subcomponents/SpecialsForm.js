@@ -7,7 +7,7 @@ import { UserContext } from "../../../../context/UserContext";
 const SpecialsForm = () => {
     const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     const [dateVisibility, setDateVisibility] = useState(false);
     const [recurringVisibility, setRecurringVisibility] = useState(false)
     const [specialEventDate, setSpecialEventDate] = useState(""); 
@@ -47,7 +47,7 @@ const SpecialsForm = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         axios.post('http://localhost:3000/api/add_special_event', {
-            restaurantId: restaurantId,
+            RestaurantId: RestaurantId,
             specialOrEvent: specialOrEventRef.current.value,
             name: specialEventNameRef.current.value,
             description: specialEventDescriptionRef.current.value,

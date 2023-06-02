@@ -6,7 +6,7 @@ import { UserContext } from "../../../context/UserContext";
 import { formatSpecialEventDays } from "../../../lib/utils";
 
 const Specials = () => {
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     const {user, setUser} = useContext(UserContext);
     const userId = user.id
 
@@ -19,13 +19,13 @@ const Specials = () => {
     const config = {
         headers: {"token": localStorage.getItem("token")},
         params: {
-            restaurantId: restaurantId,
+            RestaurantId: RestaurantId,
             userId: user.id
         }
     };
 
     const getAllSpecialsEvents = () => {
-        axios.get(`http://localhost:3000/api/get_all_specials_events/${restaurantId}/${userId}`, config)
+        axios.get(`http://localhost:3000/api/get_all_specials_events/${RestaurantId}/${userId}`, config)
         .then((response) => {
             console.log(response.data)
             setAllSpecialsEvents(response.data)
@@ -52,7 +52,7 @@ const Specials = () => {
                     <button className="border border-white p-2 rounded-lg w-1/2">Recurring Specials</button>
                 </div>
                 <div className="flex justify-center">
-                    <button className="border border-white p-2 rounded-lg w-1/2"><Link to={`/add_specials/${restaurantId}`}>Add Specials/Events</Link></button>
+                    <button className="border border-white p-2 rounded-lg w-1/2"><Link to={`/add_specials/${RestaurantId}`}>Add Specials/Events</Link></button>
                 </div>
             </div>
 

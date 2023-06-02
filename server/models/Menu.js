@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Menu.associate = function (models) {
         Menu.belongsTo(models.Restaurant, {
-            as: "Restaurant"
+            foreignKey: "RestaurantId"
         });
     };
 

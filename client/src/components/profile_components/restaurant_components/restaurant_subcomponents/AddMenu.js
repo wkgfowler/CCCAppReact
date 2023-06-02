@@ -6,7 +6,7 @@ import { UserContext } from '../../../../context/UserContext';
 
 const AddMenu = () => {
     const {user, setUser} = useContext(UserContext)
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     const inputRef = useRef(null);
     const [menu, setMenu] = useState([]);
     const menuTypeRef = useRef();
@@ -85,7 +85,7 @@ const AddMenu = () => {
 
         const formData = new FormData();
 
-        formData.append('restaurantId', restaurantId);
+        formData.append('RestaurantId', RestaurantId);
         formData.append('menuType', menuTypeRef.current.value);
         formData.append('startTime', formatMenuTime(startHourRef.current.value, startMinuteRef.current.value, startAMPMRef.current.value));
         formData.append('endTime', formatMenuTime(endHourRef.current.value, endMinuteRef.current.value, endAMPMRef.current.value));

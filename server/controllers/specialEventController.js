@@ -11,7 +11,7 @@ const { Op } = require("sequelize");
 const addSpecialEvent = async (req, res) => {
     try {
         const newSpecialEvent = await SpecialEvent.create({
-            RestaurantId: req.body.restaurantId,
+            RestaurantId: req.body.RestaurantId,
             specialOrEvent: req.body.specialOrEvent,
             name: req.body.name,
             description: req.body.description,
@@ -46,16 +46,17 @@ const getSpecialsEventsCalendar = async (req, res) => {
         const specials = await Restaurant.findAll({
             attributes: ["restaurantName"],
             include: {
-                model: SpecialEvent, as: "SpecialEvent",
+                model: SpecialEvent, as: "SpecialEvents",
                 where: {
-                [Op.or] : [
-                    {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
-                    {weekdays: { [Op.contains]: [`${req.params.day}`]} }
-                ]
-            }
-            } 
+                    [Op.or] : [
+                        {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
+                        {weekdays: { [Op.contains]: [`${req.params.day}`]} }
+                    ]
+                }
+            },
+            order: [ ['restaurantName', 'ASC'] ]
         })
-        console.log(specials)
+        
         return res.json(specials)
     } catch (err) {
         console.error(err.message)
@@ -67,7 +68,7 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
             where: {
-                id: req.params.restaurantId
+                id: req.params.RestaurantId
             }, include: {
                 model: User, where: { id: req.params.userId }
             }
@@ -83,7 +84,7 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
 
         const allSpecialsEvents = await SpecialEvent.findAll({
             where: {
-                restaurantId: req.params.restaurantId
+                RestaurantId: req.params.RestaurantId
             }
         })
 

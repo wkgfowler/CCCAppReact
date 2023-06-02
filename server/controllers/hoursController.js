@@ -10,7 +10,7 @@ const getHours = async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
             where: {
-                id: req.params.restaurantId
+                id: req.params.RestaurantId
             }, include: {
                 model: User, where: { id: req.params.userId }
             }
@@ -27,12 +27,12 @@ const getHours = async (req, res) => {
         if (validUser || validAdmin) {
             const hours = await Hours.findAll({
                 where: {
-                    restaurantId: req.params.restaurantId
+                    RestaurantId: req.params.RestaurantId
                 }
             })
             const restaurant = await Restaurant.findOne({
                 where: {
-                    id: req.params.restaurantId
+                    id: req.params.RestaurantId
                 }
             })
             return res.json({valid: true, hours, restaurant})
@@ -50,7 +50,7 @@ const updateHours = async (req, res) => {
     try {
         const restaurant = await Restaurant.findOne({
             where: {
-                id: req.body.restaurantId
+                id: req.body.RestaurantId
             }
         });
         const restaurantMealtimes = await restaurant.set({
@@ -62,43 +62,43 @@ const updateHours = async (req, res) => {
         await restaurantMealtimes.save();
         const sundayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 0
             }
         });
         const mondayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 1
             }
         });
         const tuesdayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 2
             }
         });
         const wednesdayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 3
             }
         });
         const thursdayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 4
             }
         });
         const fridayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 5
             }
         });
         const saturdayHours = await Hours.findOne({
             where: {
-                restaurantId: req.body.restaurantId,
+                RestaurantId: req.body.RestaurantId,
                 weekday: 6
             }
         });

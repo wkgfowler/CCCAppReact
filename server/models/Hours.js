@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        restaurantId: {
+        RestaurantId: {
             type: DataTypes.STRING,
             allowNull: false
         },

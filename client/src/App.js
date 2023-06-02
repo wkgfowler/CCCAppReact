@@ -61,11 +61,11 @@ function App() {
             <Route path='/register_restaurant/:token' element={<RegisterRestaurant/>} />
             <Route path='/register/:restaurant/:token' element={<RegisterUserToRestaurant />} />
             <Route path='/profile/:id' element={<Profile/>} />
-            <Route path='/edit_information/:restaurantId' element={<EditInfo />}/>
-            <Route path='/edit_specials/:restaurantId' element={<Specials />} />
-            <Route path='/add_specials/:restaurantId' element={<SpecialsForm />} />
-            <Route path='/edit_menus/:restaurantId' element={<Menu />} />
-            <Route path='/add_menus/:restaurantId' element={<AddMenu />} />
+            <Route path='/edit_information/:RestaurantId' element={<EditInfo />}/>
+            <Route path='/edit_specials/:RestaurantId' element={<Specials />} />
+            <Route path='/add_specials/:RestaurantId' element={<SpecialsForm />} />
+            <Route path='/edit_menus/:RestaurantId' element={<Menu />} />
+            <Route path='/add_menus/:RestaurantId' element={<AddMenu />} />
             
             <Route path='/restaurants+bars' element={<AllRestaurants/>} />
             <Route path='/restaurants/:id' element={<Restaurant/>} />

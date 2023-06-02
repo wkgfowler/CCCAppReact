@@ -11,7 +11,7 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     const [hours, setHours] = useState([]);
     const [valid, isValid] = useState(false);
     const {user, setUser} = useContext(UserContext);
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     const userId = user.id;
 
     const breakfast = document.getElementById("breakfast");
@@ -37,13 +37,13 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     const config = {
         headers: {"token": localStorage.getItem("token")},
         params: {
-            restaurantId: restaurantId,
+            RestaurantId: RestaurantId,
             userId: user.id
         }
     };
 
     const getHours = () => {
-        axios.get(`http://localhost:3000/api/get_hours/${restaurantId}/${userId}`, config)
+        axios.get(`http://localhost:3000/api/get_hours/${RestaurantId}/${userId}`, config)
         .then((response) => {
             console.log(response.data)
             isValid(response.data.valid)
@@ -62,7 +62,7 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         axios.post('http://localhost:3000/api/update_hours', {
-            restaurantId: restaurantId,
+            RestaurantId: RestaurantId,
             breakfast: breakfast.checked,
             brunch: brunch.checked,
             lunch: lunch.checked,

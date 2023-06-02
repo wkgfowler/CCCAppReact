@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVisible, alert}) => {
     const [charCount, setCharCount] = useState(0);
-    const {restaurantId} = useParams();
+    const {RestaurantId} = useParams();
     
     const websiteRef = useRef();
     const facebookRef = useRef();
@@ -17,7 +17,7 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
 
         const formData = new FormData();
 
-        formData.append('id', restaurantId);
+        formData.append('id', RestaurantId);
         formData.append('websiteURL', websiteRef.current.value);
         formData.append('facebookURL', facebookRef.current.value);
         formData.append('instagramURL', instagramRef.current.value);

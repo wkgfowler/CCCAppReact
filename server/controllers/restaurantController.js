@@ -129,14 +129,10 @@ const registerRestaurant = async (req, res) => {
         for (let i = 0; i < 7; i++) {
             let newRestaurantHours = await Hours.create({
                 weekday: i,
-                restaurantId: newRestaurant.id
+                RestaurantId: newRestaurant.id
             })
             await newRestaurantHours.save();
         }
-        // const newRestaurantHours = await Hours.create({
-        // })
-
-        // await newRestaurantHours.save();
         
         return res.status(200).json("Success")
     } catch (err) {
@@ -307,7 +303,7 @@ const getUserRestaurantPage = async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
             where: {
-                id: req.params.restaurantId
+                id: req.params.RestaurantId
             }, include: {
                 model: User, where: { id: req.params.userId }
             }
@@ -323,7 +319,7 @@ const getUserRestaurantPage = async (req, res) => {
 
         const restaurant = await Restaurant.findOne({
             where: {
-                id: req.params.restaurantId
+                id: req.params.RestaurantId
             }
         })
 
@@ -405,11 +401,12 @@ const adminCreateRestaurant = async (req, res) => {
             for (let i = 0; i < 7; i++) {
                 let newRestaurantHours = await Hours.create({
                     weekday: i,
-                    restaurantId: restaurant.id
+                    RestaurantId: restaurant.id
                 })
+                await newRestaurantHours.save();
             }
 
-            await newRestaurantHours.save();
+            
             return res.json("nice")
         }
         return res.json("no good")

@@ -106,6 +106,7 @@ const AddMenu = () => {
             }
         })
         .then(() => {
+            console.log("there is no error")
             navigate(`/profile/${user.id}`)
         }, (error) => {
             console.log("not quite")

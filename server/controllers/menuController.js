@@ -56,6 +56,8 @@ const menuUpload = async (req, res) => {
                 menuImage: files[i].path
             })
         }
+
+        return res.json("great success")
     } catch (err) {
         console.error(err.message)
     }

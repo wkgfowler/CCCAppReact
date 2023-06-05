@@ -4,6 +4,8 @@ const Restaurant = db.Restaurant;
 const User = db.User;
 const Roles = db.Roles;
 const Hours = db.Hours;
+const SpecialEvent = db.SpecialEvent;
+const Menu = db.Menu;
 
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
@@ -76,11 +78,14 @@ const getRestaurantPage = async (req, res) => {
         const restaurant = await Restaurant.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [{
+                model: Menu}, {
+                model: SpecialEvent
+            }]
         });
         console.log('hi')
         if (restaurant) {
-            console.log(restaurant)
             return res.json({valid: true, restaurant});
         };
         if (!restaurant) {

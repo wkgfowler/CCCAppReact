@@ -44,7 +44,7 @@ function App() {
   // }, [])
 
   return (
-    <div className={permission === 0 ? "bg-hero bg-bottom bg-no-repeat h-screen" : "bg-gradient-to-b from-sky-500 to-blue-400 min-h-screen"}>
+    <div className={permission === 0 ? "bg-slate-500 bg-bottom bg-no-repeat h-screen" : "bg-gradient-to-b from-sky-500 to-blue-400 min-h-screen"}>
       <Router>
         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <UserContext.Provider value={{user, setUser}}>

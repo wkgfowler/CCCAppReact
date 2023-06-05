@@ -56,7 +56,7 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
                     <div><input type="file" id="profileImage" name="profileImage" size="lg" onChange={handleImageChange}/></div>
                 </div>
                 
-                <div className="flex flex-row justify-around">
+                <div className="flex flex-row justify-around gap-3">
                     
                     <div className="flex flex-col">
                         <label for="websiteURL">Restaurant's Website:</label>

@@ -10,6 +10,7 @@ const RestaurantRegistrationEmailForm = () => {
             email: emailRef.current.value
         })
         .then((response) => {
+            emailRef.current.value = "";
             console.log(response.data)
         }, (error) => {
             console.log(error)
@@ -21,10 +22,10 @@ const RestaurantRegistrationEmailForm = () => {
             <div className="flex justify-center">
                 <p className="text-2xl font-medium">Restaurant Registration Email</p>
             </div>
-            <div className="flex justify-center">
-                <form onSubmit={onSubmitForm} className="basis-1/5">
+            <div className="flex justify-start">
+                <form onSubmit={onSubmitForm}>
                     <input type="email" name="email" placeholder="email" className="form-control my-3" ref={emailRef} />
-                    <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
+                    <button className="text-white bg-slate-900 rounded px-2 py-1">Submit</button>
                 </form>
             </div>
         </div>

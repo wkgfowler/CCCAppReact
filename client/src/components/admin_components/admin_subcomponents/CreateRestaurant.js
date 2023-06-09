@@ -23,14 +23,14 @@ const CreateRestaurant = ({getRestaurants}) => {
 
     return (
         <div className="flex flex-col justify-center">
-            <div className="flex justify-center">
+            <div className="flex justify-start">
                 <p className="text-2xl font-medium">Create Restaurant</p>
             </div>
-            <div className="flex justify-center">
-                <form onSubmit={onSubmitForm} className="basis-1/5">
+            <div className="flex justify-center pt-2">
+                <form onSubmit={onSubmitForm}>
                     <label>Restaurant Name:</label>
                     <input type="text" className="form-control my-3" ref={restaurantNameRef}></input>
-                    <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
+                    <button className="text-white bg-slate-900 rounded px-2 py-1">Submit</button>
                 </form>
             </div>
             

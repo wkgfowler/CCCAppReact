@@ -14,6 +14,7 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
       })
       .then((response) => {
           console.log(response)
+          emailRef.current.value = ""
           getRestaurants();
       }, (error) => {
           console.log(error)
@@ -22,13 +23,13 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
 
     return (
         <div>
-            <button type="button" className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1" data-toggle="modal" data-target={`#id${restaurant.id}`}>
+            <button type="button" className="text-white bg-green-900 rounded px-2 py-1" data-toggle="modal" data-target={`#id${restaurant.id}`}>
               Add User
             </button>
 
             <div className="modal" id={`id${restaurant.id}`}>
               <div className="modal-dialog">
-                <div className="modal-content bg-slate-400 rounded-lg">
+                <div className="modal-content bg-slate-900 text-white rounded-lg">
 
 
                   <div className="modal-header">
@@ -43,7 +44,7 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
 
 
                   <div className="modal-footer">
-                    <button type="button" className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1" data-dismiss="modal" onClick={addUser}>Add User</button>
+                    <button type="button" className="bg-slate-200 text-black rounded px-2 py-1" data-dismiss="modal" onClick={addUser}>Add User</button>
                   </div>
 
                 </div>

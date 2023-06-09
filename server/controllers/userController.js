@@ -127,6 +127,7 @@ const validRegistrationToken = async (req, res) => {
             email: valid.email
         });
 
+        console.log(user)
         const role = await Roles.findOne({
             where: {
                 role: "restaurant"
@@ -134,7 +135,7 @@ const validRegistrationToken = async (req, res) => {
         });
 
         await user.addRoles(role);
-
+        console.log(user)
         if (valid) {
             return res.json({valid: true, user});
         }

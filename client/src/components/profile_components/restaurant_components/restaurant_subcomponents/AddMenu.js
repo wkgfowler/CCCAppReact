@@ -120,7 +120,7 @@ const AddMenu = () => {
                 <p className="text-2xl pt-2">Add a menu for your restaurant:</p>
 
                 {/* menu type */}
-                <div className="flex justify-evenly pt-2">
+                <div className="flex justify-start pt-2 gap-2">
                     <label>Select a menu type:</label>
                     <select name="menuType" id="menuType" ref={menuTypeRef}>
                         <option value="">--Menu type--</option>
@@ -133,10 +133,10 @@ const AddMenu = () => {
                 </div>
 
                 {/* menu time availability */}
-                <div className="flex justify-evenly pt-2 gap-1">
+                <div className="flex justify-start pt-2 gap-2">
                     <div className="flex">
                         <label>Menu availability: </label>
-                        <select ref={startHourRef} name="startHour" className="pl-1" id="startHour" onClick={() => handleStartTime("start")}>
+                        <select ref={startHourRef} name="startHour" className="ml-2" id="startHour" onClick={() => handleStartTime("start")}>
                             {MENUSTARTHOURS.map(x => {
                                 return (
                                     <option value={x.value}>{x.display}</option>
@@ -203,7 +203,7 @@ const AddMenu = () => {
                     })}
                 </div>
 
-                <div className="flex justify-center" onClick={handleMenuClick}>
+                <div className="flex justify-start" onClick={handleMenuClick}>
                     {menu.length >= 1 ? menu.map(x => {
                         return (
                             <img src={URL.createObjectURL(x)} alt="" className="w-1/2 h-1/2"/>
@@ -212,8 +212,8 @@ const AddMenu = () => {
                     <input type="file" size="lg" id="menuImage" name="menuImage" multiple ref={inputRef} style={{display: "none"}} onChange={handleMenuChange}/>
                 </div>
 
-                <div className="flex justify-center">
-                    <button className="pt-2">Submit</button>
+                <div className="flex justify-start">
+                    <button className="outline outline-2 bg-slate-900 text-white rounded px-2 py-1 mt-2">Submit</button>
                 </div>
             </form>
         </div>

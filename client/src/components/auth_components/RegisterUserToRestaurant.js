@@ -1,6 +1,7 @@
 import {Fragment, useRef, useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { BiLockAlt } from 'react-icons/bi';
 
 const RegisterUserToRestaurant = () => {
     const [valid, setValid] = useState(true);
@@ -50,19 +51,23 @@ const RegisterUserToRestaurant = () => {
     
     if (valid) {
         return (
-            <Fragment>
-                <h1 className="text-center my-5">Set A Password</h1>
-                <form onSubmit={onSubmitForm}>
-                    <input type="password" name="password" placeholder="password" className="form-control my-3" ref={passwordRef} />
-                    <button className="btn btn-success btn-block">Submit</button>
+            <div className="flex justify-center">
+                <form onSubmit={onSubmitForm} className="w-2/3">
+                    <p className="text-4xl text-center pb-3 pt-3">Set A Password</p>
+                    <div className="flex relative my-7 border-b-2 group border-slate-900">
+                        <BiLockAlt className="absolute right-2 top-5 text-xl"/>
+                        <input type="password" name="password" ref={passwordRef} className="w-full h-12 bg-transparent border-none outline-none pr-9 pl-1.5 peer placeholder-transparent" placeholder="hi" required/>
+                        <label htmlFor="" className="transform transition-all absolute left-0 -top-3.5 peer-focus:left-0 peer-focus:-top-3.5 peer-placeholder-shown:left-1 peer-placeholder-shown:top-3">Password</label>
+                    </div>
+                    <button className="border w-full py-1 my-1 bg-slate-900 text-white rounded">Submit</button>
                 </form>
-            </Fragment>
+            </div>
         );
     } else {
         return (
-            <Fragment>
-                <h4>Link Expired</h4>
-            </Fragment>
+            <div className="flex justify-center">
+                <p className="text-4xl text-center pb-3 pt-3">Link Expired</p>
+            </div>
         )
     }
 }

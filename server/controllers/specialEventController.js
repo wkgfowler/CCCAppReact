@@ -88,8 +88,15 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
             }
         })
 
+        const recurringSpecialsEvents = await SpecialEvent.findAll({
+            where: {
+                RestaurantId: req.params.RestaurantId,
+                recurring: true
+            }
+        })
+
         if(validUser || validAdmin) {
-            return res.json(allSpecialsEvents)
+            return res.json({allSpecialsEvents, recurringSpecialsEvents})
         }
 
         return res.json("not authorized")

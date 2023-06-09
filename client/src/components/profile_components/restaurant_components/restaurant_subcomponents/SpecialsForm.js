@@ -166,7 +166,7 @@ const SpecialsForm = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                        <button className="pt-2">Submit</button>
+                        <button className="text-white bg-slate-900 rounded px-2 py-1">Submit</button>
                 </div>
             </form>
         </div>

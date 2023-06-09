@@ -56,27 +56,27 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
                     <div><input type="file" id="profileImage" name="profileImage" size="lg" onChange={handleImageChange}/></div>
                 </div>
                 
-                <div className="flex flex-row justify-around gap-3">
+                <div className="flex flex-row justify-around gap-3 py-2">
                     
                     <div className="flex flex-col">
                         <label for="websiteURL">Restaurant's Website:</label>
-                        <input type="text" ref={websiteRef} id="websiteURL" name="websiteURL" defaultValue={restaurant.websiteURL ? restaurant.websiteURL : ""}/>
+                        <input type="text" ref={websiteRef} id="websiteURL" name="websiteURL" defaultValue={restaurant.websiteURL ? restaurant.websiteURL : ""} className="rounded"/>
                     </div>
                     <div className="flex flex-col">
                         <label for="facebookURL">Restaurant's Facebook page:</label>
-                        <input type="text" ref={facebookRef} id="facebookURL" name="facebookURL" defaultValue={restaurant.facebookURL ? restaurant.facebookURL : ""}/>
+                        <input type="text" ref={facebookRef} id="facebookURL" name="facebookURL" defaultValue={restaurant.facebookURL ? restaurant.facebookURL : ""} className="rounded"/>
                     </div>
                     <div className="flex flex-col">
                         <label for="instagramURL">Restaurant's Instagram page:</label>
-                        <input type="text" ref={instagramRef} id="instagramURL" name="instagramURL" defaultValue={restaurant.instagramURL ? restaurant.instagramURL : ""}/>
+                        <input type="text" ref={instagramRef} id="instagramURL" name="instagramURL" defaultValue={restaurant.instagramURL ? restaurant.instagramURL : ""} className="rounded"/>
                     </div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col py-2">
                     <label for="description">Enter a brief description of your restaurant:</label>
-                    <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-slate-200" maxLength="600" defaultValue={restaurant.description ? restaurant.description : ""}></textarea>
+                    <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-slate-200 text-black" maxLength="600" defaultValue={restaurant.description ? restaurant.description : ""}></textarea>
                     <p>{charCount} / 600 character limit</p>
                 </div>
-                <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
+                <button className="outline outline-2 bg-slate-900 rounded px-2 py-1">Submit</button>
             </form>
         </div>
     );

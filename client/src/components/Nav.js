@@ -49,8 +49,22 @@ const Nav = () => {
     
     return ( 
         <div>
+          <nav className="flex flex-row justify-between">
+            <div className="flex justify-start w-1/6 bg-slate-900" onClick={() => navigate("/")}>
+              <img src={require("../images/TCCE_Logo.jpg")} alt="" className="w-40 h-32 cursor-pointer rounded-r-full"/>
+            </div>
+            
+            <div className="flex justify-end justify-around items-center w-5/6 bg-slate-900 text-white">
+              {permission === 0 ? (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">Home</Link>) : (<Link to={`/profile/${user.id}`}>Profile</Link>)}
+              <Link to={'/restaurants+bars'} className="text-xl hover:text-3xl hover:text-slate-50">Restaurants/Bars</Link>
+              <Link to={`/specials_and_events`} className="text-xl hover:text-3xl hover:text-slate-50">Specials/Events</Link>
+              <Link className="text-xl hover:text-3xl hover:text-slate-50">Contact</Link>
+              {permission === 0 ? (<Link to="/about" className="text-xl hover:text-3xl hover:text-slate-50">About Us</Link>) : (<button type="button" onClick={logout}>Log Out</button>)}
+            </div>
+              
+          </nav>
 
-          <nav className="hidden mx-auto w-5/6 border-2 border-slate-50 rounded-full md:flex items-center justify-around py-3 text-slate-50 font-semibold">
+          {/* <nav className="hidden mx-auto w-5/6 border-2 border-slate-50 rounded-full md:flex items-center justify-around py-3 text-slate-50 font-semibold">
                   
                       {permission === 0 ? (<Link to="/" className="hover:text-2xl hover:text-slate-50">Home</Link>) : (<Link to={`/profile/${user.id}`}>Profile</Link>)}
                       <Link to={'/restaurants+bars'} className="hover:text-2xl hover:text-slate-50">Restaurants/Bars</Link>
@@ -58,7 +72,7 @@ const Nav = () => {
                       <Link className="hover:text-2xl hover:text-slate-50">Contact</Link>
                       {permission === 0 ? (<Link to="/about" className="hover:text-2xl hover:text-slate-50">About Us</Link>) : (<button type="button" onClick={logout}>Log Out</button>)}
                   
-          </nav>
+          </nav> */}
 
           <nav className="flex md:hidden items-start">
             <div className="flex justify-between">

@@ -42,32 +42,32 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
         <div className="flex justify-center">
             <table>
                 <thead>
-                    <th>Restaurant Name</th>
-                    <th className="pl-3">Users</th>
-                    <th className="pl-3">Add User</th>
-                    <th className="pl-3">Options</th>
+                    <th className="text-xl">Restaurant Name</th>
+                    <th className="pl-8 text-xl">Users</th>
+                    <th className="pl-8 text-xl">Add User</th>
+                    <th className="pl-8 text-xl">Options</th>
                 </thead>
                 <tbody>
                 {restaurants.map(restaurant => (
                     restaurant.Users.length ? restaurant.Users.map((x, i) => (
-                        <tr className="border-y-" key={restaurant.id + i}>
+                        <tr className="border-y" key={restaurant.id + i}>
                             <td className="pt-2 py-2 font-medium">{i === 0 ? <Link to={`/restaurants/${restaurant.restaurantName}`}>{restaurant.restaurantName}</Link> : ""}</td>
-                            <td className="pl-3 py-2">{x.email} &nbsp; <button className="outline outline-2 outline-red-600 bg-red-500 rounded px-2 py-1 text-white" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></td>
-                            <td className="pl-3 py-2">{i === 0 ? <UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/> : ""}</td>
-                            <td className="pl-3 py-2">
-                                <button className="outline outline-2 outline-cyan-600 bg-cyan-500 rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
-                                <button className="ml-3 outline outline-2 outline-cyan-600 bg-cyan-500 rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
-                                <button className="ml-3 outline outline-2 outline-cyan-600 bg-cyan-500 rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
+                            <td className="pl-8 py-2">{x.email} &nbsp; <button className="bg-red-900 rounded px-2 py-1 text-white" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></td>
+                            <td className="pl-8 py-2">{i === 0 ? <UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/> : ""}</td>
+                            <td className="pl-8 py-2">
+                                <button className=" bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
+                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
+                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
                             </td>
                         </tr>
                     )) : <tr className="border-y border-slate-500" key={restaurant.id}>
                             <td className="pt-2 py-2 font-medium"><Link to={`/restaurants/${restaurant.restaurantName}`}>{restaurant.restaurantName}</Link></td>
-                            <td className="pl-3 py-2"></td>
-                            <td className="pl-3 py-2"><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
-                            <td className="pl-3 py-2">
-                                <button className="outline outline-2 outline-cyan-600 bg-cyan-500 rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
-                                <button className="ml-3 outline outline-2 outline-cyan-600 bg-cyan-500 rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
-                                <button className="ml-3 outline outline-2 outline-cyan-600 bg-cyan-500 rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
+                            <td className="pl-8 py-2"></td>
+                            <td className="pl-8 py-2"><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
+                            <td className="pl-8 py-2">
+                                <button className=" bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
+                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
+                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
                             </td>
                     </tr>
                 ))}

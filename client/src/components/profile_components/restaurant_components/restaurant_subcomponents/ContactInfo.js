@@ -66,7 +66,7 @@ const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
                     <label className="text-lg">Street Address:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="text" name="streetAddress" defaultValue={restaurant.streetAddress ? restaurant.streetAddress : ""} ref={streetAddressRef} className="my-2 bg-transparent border-b-2 outline-none" required/>
+                    <input type="text" name="streetAddress" defaultValue={restaurant.streetAddress ? restaurant.streetAddress : ""} ref={streetAddressRef} className="my-2 outline-none rounded text-black" required/>
                 </div>
                 <div className="flex justify-center pt-2">
                     <label className="text-lg">Select your town:</label>
@@ -82,10 +82,10 @@ const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
                     <label className="text-lg">Phone Number:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="tel" name="phoneNumber" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 bg-transparent border-b-2" required/>
+                    <input type="tel" name="phoneNumber" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 rounded text-black" required/>
                 </div>
-                <div className="flex justify-center">
-                    <button className="outline outline-2 outline-blue-600 bg-blue-500 rounded px-2 py-1">Submit</button>
+                <div className="flex justify-center pt-2">
+                    <button className="outline outline-2 bg-slate-900 rounded px-2 py-1">Submit</button>
                 </div>
             </form>
         </div>

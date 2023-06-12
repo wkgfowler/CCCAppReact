@@ -2,16 +2,26 @@ import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Map from "./profile_components/restaurant_components/restaurant_subcomponents/Map";
+import { WEEKDAYS, formatMenuDayAvailability } from "../lib/utils";
 
 const Restaurant = () => {
     const [menuTypes, setMenuTypes] = useState([]);
     const [specialTypes, setSpecialTypes] = useState([]);
     const [valid, setValid] = useState(true);
     const [restaurant, setRestaurant] = useState("");
+    const [specialsEvents, setSpecialsEvents] = useState([]);
+    const [menus, setMenus] = useState([]);
     const [mainPageVisible, setMainPageVisible] = useState(true);
+    const [menuVisible, setMenuVisible] = useState(false);
 
     const toggleMainPageVisible = () => {
         setMainPageVisible(!mainPageVisible);
+        setMenuVisible(false);
+    }
+
+    const toggleMenuVisible = () => {
+        setMenuVisible(true);
+        setMainPageVisible(false);
     }
 
     const {id} = useParams()
@@ -46,11 +56,20 @@ const Restaurant = () => {
             setSpecialTypes(eachSpecialTypeNoRepeats)
             setMenuTypes(eachMenuTypeNoRepeats)
             setValid(response.data)
+            setMenus(response.data.restaurant.Menus)
+            setSpecialsEvents(response.data.restaurant.SpecialEvents);
             setRestaurant(response.data.restaurant)
         }, (error) => {
             console.log(error)
         })
     };
+
+    const getMenuTypes = () => {
+        axios.get(`http://localhost:3000/restaurants/${id}/${typeOfMenu}`, { params: {
+            id: id
+        }})
+    }
+
     if (valid) {
         return (
             <div className="container">
@@ -76,7 +95,19 @@ const Restaurant = () => {
                             <img className="w-full h-1/2 px-1 pt-1" src={`http://localhost:3000/${restaurant.profileImage}`} alt="not working"/>
                         </div>
                         <div></div>
-                        <div></div>
+                        <div className={`${menuVisible ? "flex" : "hidden"}`}>
+                            {menus ? menus.map((x, i) => {
+                                return (
+                                    <div>
+                                        <p>{i === 0 ? x.menuType : ""}</p>
+                                        <br />
+                                        <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
+                                        {/* <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability([determineSundayAvailability(x.sunday), determineMondayAvailability(x.monday), determineTuesdayAvailability(x.tuesday), determineWednesdayAvailability(x.wednesday), determineThursdayAvailability(x.thursday), determineFridayAvailability(x.friday), determineSaturdayAvailability(x.saturday)])} from ${x.startTime} - ${x.endTime}` : ""}</p> */}
+                                        <img src={`http://localhost:3000/${x.menuImage}`} alt="error" />
+                                    </div>
+                                )
+                            }) : ""}
+                        </div>
                     </div>
                 </div>
             </div>

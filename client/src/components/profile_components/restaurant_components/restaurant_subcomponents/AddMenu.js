@@ -107,7 +107,7 @@ const AddMenu = () => {
         })
         .then(() => {
             console.log("there is no error")
-            navigate(`/profile/${user.id}`)
+            navigate("/")
         }, (error) => {
             console.log("not quite")
             console.log(error)
@@ -213,7 +213,7 @@ const AddMenu = () => {
                 </div>
 
                 <div className="flex justify-start">
-                    <button className="outline outline-2 bg-slate-900 text-white rounded px-2 py-1 mt-2">Submit</button>
+                    <button className="outline outline-2 bg-[#56707E] text-white rounded px-2 py-1 mt-2">Submit</button>
                 </div>
             </form>
         </div>

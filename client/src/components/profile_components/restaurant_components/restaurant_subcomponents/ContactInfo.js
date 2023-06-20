@@ -85,7 +85,7 @@ const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
                     <input type="tel" name="phoneNumber" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 rounded text-black" required/>
                 </div>
                 <div className="flex justify-center pt-2">
-                    <button className="outline outline-2 bg-slate-900 rounded px-2 py-1">Submit</button>
+                    <button className="outline outline-2 bg-[#56707E] rounded px-2 py-1">Submit</button>
                 </div>
             </form>
         </div>

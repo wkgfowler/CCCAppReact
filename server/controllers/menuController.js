@@ -23,7 +23,7 @@ const upload = multer({
     storage: storage,
     limits: { fileSize: '1000000'},
     fileFilter: (req, file, cb) => {
-        const fileTypes = /jpeg|jpg|png|<pdf/
+        const fileTypes = /jpeg|jpg|png|pdf/
         const mimeType = fileTypes.test(file.mimetype)
         const extname = fileTypes.test(path.extname(file.originalname))
 
@@ -138,5 +138,5 @@ module.exports = {
     upload,
     menuUpload,
     getMenusForEdit,
-    getSpecificMenuForEdit
+    getSpecificMenuForEdit,
 }

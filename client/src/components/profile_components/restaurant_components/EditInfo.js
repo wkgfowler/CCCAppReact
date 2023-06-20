@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../../context/UserContext";
 import { useAlert } from "react-alert";
+import AddRestaurantImages from "./restaurant_subcomponents/AddRestaurantImages";
 
 
 const EditInfo = () => {
@@ -15,6 +16,7 @@ const EditInfo = () => {
     const [hoursVisible, setHoursVisible] = useState(false);
     const [infoVisible, setInfoVisible] = useState(false);
     const [additionalInfoVisible, setAdditionalInfoVisible] = useState(false);
+    const [restaurantImagesVisible, setRestaurantImagesVisible] = useState(false);
     const {RestaurantId} = useParams();
     const {user, setUser} = useContext(UserContext);
     const userId = user.id
@@ -44,18 +46,28 @@ const EditInfo = () => {
         setHoursVisible(!hoursVisible);
         setInfoVisible(false);
         setAdditionalInfoVisible(false);
+        setRestaurantImagesVisible(false);
     }
 
     const infoVisibility = () => {
         setInfoVisible(!infoVisible);
         setHoursVisible(false);
         setAdditionalInfoVisible(false);
+        setRestaurantImagesVisible(false);
     }
 
     const additionalInfoVisibility = () => {
         setAdditionalInfoVisible(!additionalInfoVisible);
         setHoursVisible(false);
         setInfoVisible(false);
+        setRestaurantImagesVisible(false);
+    }
+
+    const restaurantImagesVisiblity = () => {
+        setRestaurantImagesVisible(!restaurantImagesVisible);
+        setHoursVisible(false);
+        setInfoVisible(false);
+        setAdditionalInfoVisible(false);
     }
 
 
@@ -66,9 +78,9 @@ const EditInfo = () => {
 
                 <div className="flex justify-center pt-3">
                     <div className="w-1/12"></div>
-                    <div className="w-5/6 border-2 group bg-slate-900 rounded flex flex-row text-white">
+                    <div className="w-5/6 border-2 group bg-[#56707E] rounded flex flex-row text-white">
                         <div className="w-1/4">
-                            <img src={require("../../../images/_edit.jpg")} alt="" className="min-h-full"/>
+                            <img src={require("../../../images/_edit.jpg")} alt="" className="max-h-fit"/>
                         </div>
                         <div className="w-3/4">
                             <div className="flex justify-center">
@@ -78,6 +90,7 @@ const EditInfo = () => {
                                 <p className={`${hoursVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={hoursVisibility}>Hours</p>
                                 <p className={`${infoVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={infoVisibility}>Contact Info</p>
                                 <p className={`${additionalInfoVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={additionalInfoVisibility}>Additional Info</p>
+                                <p className={`${restaurantImagesVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={restaurantImagesVisiblity}>Add Images</p>
                             </div>
 
                             <div className={`${hoursVisible ? "flex justify-center" : "hidden"}`}>
@@ -90,6 +103,10 @@ const EditInfo = () => {
 
                             <div className={`${additionalInfoVisible ? "flex justify-center" : "hidden"}`}>
                                 <AdditionalInfo restaurant={restaurant} setAdditionalInfoVisible={setAdditionalInfoVisible} additionalInfoVisible={additionalInfoVisible} alert={alert}/>
+                            </div>
+
+                            <div className={`${restaurantImagesVisible ? "flex justify-center" : "hidden"}`}>
+                                <AddRestaurantImages restaurant={restaurant} setRestaurantImagesVisible={setRestaurantImagesVisible} restaurantImagesVisible={restaurantImagesVisible} alert={alert}/>
                             </div>
 
                         </div>

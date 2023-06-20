@@ -71,6 +71,7 @@ module.exports = (sequelize, DataTypes) => {
         Restaurant.belongsToMany(models.Hours, {through: "Restaurants_Hours"});
         Restaurant.hasMany(models.SpecialEvent, { foreignKey: "RestaurantId"});
         Restaurant.hasMany(models.Menu, { foreignKey: "RestaurantId"});
+        Restaurant.hasMany(models.RestaurantImages, { foreignKey: "RestaurantId"});
     };
 
     return Restaurant;

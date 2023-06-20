@@ -87,7 +87,6 @@ const Menu = () => {
                                         <p>{i === 0 ? x.menuType : ""}</p>
                                         <br />
                                         <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
-                                        {/* <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability([determineSundayAvailability(x.sunday), determineMondayAvailability(x.monday), determineTuesdayAvailability(x.tuesday), determineWednesdayAvailability(x.wednesday), determineThursdayAvailability(x.thursday), determineFridayAvailability(x.friday), determineSaturdayAvailability(x.saturday)])} from ${x.startTime} - ${x.endTime}` : ""}</p> */}
                                         <img src={`http://localhost:3000/${x.menuImage}`} alt="error" />
                                     </div>
                                 )

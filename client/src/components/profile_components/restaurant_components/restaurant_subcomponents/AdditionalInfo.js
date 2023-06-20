@@ -51,7 +51,7 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
             <form onSubmit={onSubmitForm}>
                 <p className="text-2xl pt-4 pb-2 text-center underline">Additional Information</p>
                 <div className="flex flex-col">
-                    <div>{restaurant.profileImage !== "null" && profileImage === "" ? <img src={`http://localhost:3000/${restaurant.profileImage}`} alt="" /> : <div> {profileImage ? <img src={URL.createObjectURL(profileImage)} alt=""/> : <img src={require('../../../../images/add-image-80.png')} alt=""/>} </div>}</div>
+                    <div>{restaurant.profileImage !== "null" && profileImage === "" ? <img src={`http://localhost:3000/${restaurant.profileImage}`} alt="" className="max-w-sm"/> : <div> {profileImage ? <img src={URL.createObjectURL(profileImage)} alt="" className="max-w-sm"/> : <img src={require('../../../../images/add-image-80.png')} alt=""/>} </div>}</div>
                     <div><label for="profileImage">Upload a profile image for your restaurant</label></div>
                     <div><input type="file" id="profileImage" name="profileImage" size="lg" onChange={handleImageChange}/></div>
                 </div>
@@ -73,10 +73,10 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
                 </div>
                 <div className="flex flex-col py-2">
                     <label for="description">Enter a brief description of your restaurant:</label>
-                    <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-slate-200 text-black" maxLength="600" defaultValue={restaurant.description ? restaurant.description : ""}></textarea>
+                    <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-white text-black" maxLength="600" defaultValue={restaurant.description ? restaurant.description : ""}></textarea>
                     <p>{charCount} / 600 character limit</p>
                 </div>
-                <button className="outline outline-2 bg-slate-900 rounded px-2 py-1">Submit</button>
+                <button className="outline outline-2 bg-[#56707E] rounded px-2 py-1 mb-4">Submit</button>
             </form>
         </div>
     );

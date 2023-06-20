@@ -59,7 +59,7 @@ const RegisterUserToRestaurant = () => {
                         <input type="password" name="password" ref={passwordRef} className="w-full h-12 bg-transparent border-none outline-none pr-9 pl-1.5 peer placeholder-transparent" placeholder="hi" required/>
                         <label htmlFor="" className="transform transition-all absolute left-0 -top-3.5 peer-focus:left-0 peer-focus:-top-3.5 peer-placeholder-shown:left-1 peer-placeholder-shown:top-3">Password</label>
                     </div>
-                    <button className="border w-full py-1 my-1 bg-slate-900 text-white rounded">Submit</button>
+                    <button className="border w-full py-1 my-1 bg-[#56707E] text-white rounded">Submit</button>
                 </form>
             </div>
         );

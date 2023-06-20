@@ -31,20 +31,85 @@ const addSpecialEvent = async (req, res) => {
 // getting specials/events for calendar page
 const getSpecialsEventsCalendar = async (req, res) => {
     try {
+        console.log(req.query.towns)
         console.log(req.params.currentMonth)
-        // const specials = await SpecialEvent.findAll({
-        //     where: {
-        //         [Op.or] : [
-        //             {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
-        //             {weekdays: { [Op.contains]: [`${req.params.day}`]} }
-        //         ]
-        //     }, include: {
-        //         model: Restaurant, as: "restaurant"
-        //     }
-        // })
+        console.log(req.query.eventsOrSpecials)
+
+        if (req.query.towns !== undefined && req.query.eventsOrSpecials !== undefined) {
+            const specials = await Restaurant.findAll({
+                attributes: ["restaurantName", "town"],
+                where: {
+                    town: {
+                        [Op.in] : req.query.towns
+                    }
+                },
+                include: {
+                    model: SpecialEvent, as: "SpecialEvents",
+                    where: {
+                        [Op.or] : [
+                            {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
+                            {weekdays: { [Op.contains]: [`${req.params.day}`]} }
+                        ],
+                        specialOrEvent: {
+                            [Op.in]: req.query.eventsOrSpecials
+                        }
+                    }
+                },
+                order: [ 
+                    // ['town', 'ASC'], 
+                    ['restaurantName', 'ASC'] 
+                ]
+            })
+            return res.json(specials)
+        } else if (req.query.eventsOrSpecials !== undefined) {
+            const specials = await Restaurant.findAll({
+                attributes: ["restaurantName", "town"],
+                include: {
+                    model: SpecialEvent, as: "SpecialEvents",
+                    where: {
+                        [Op.or] : [
+                            {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
+                            {weekdays: { [Op.contains]: [`${req.params.day}`]} }
+                        ],
+                        specialOrEvent: {
+                            [Op.in]: req.query.eventsOrSpecials
+                        }
+                    }
+                },
+                order: [ 
+                    // ['town', 'ASC'], 
+                    ['restaurantName', 'ASC'] 
+                ]
+            })
+            return res.json(specials)
+        } else if (req.query.towns !== undefined) {
+            const specials = await Restaurant.findAll({
+                attributes: ["restaurantName", "town"],
+                where: {
+                    town: {
+                        [Op.in] : req.query.towns
+                    }
+                },
+                include: {
+                    model: SpecialEvent, as: "SpecialEvents",
+                    where: {
+                        [Op.or] : [
+                            {specialEventDate: `${req.params.currentYear}-${req.params.currentMonth}-${req.params.today}`},
+                            {weekdays: { [Op.contains]: [`${req.params.day}`]} }
+                        ]
+                    }
+                },
+                order: [ 
+                    // ['town', 'ASC'], 
+                    ['restaurantName', 'ASC'] 
+                ]
+            })
+
+            return res.json(specials)
+        }
 
         const specials = await Restaurant.findAll({
-            attributes: ["restaurantName"],
+            attributes: ["restaurantName", "town"],
             include: {
                 model: SpecialEvent, as: "SpecialEvents",
                 where: {
@@ -54,7 +119,10 @@ const getSpecialsEventsCalendar = async (req, res) => {
                     ]
                 }
             },
-            order: [ ['restaurantName', 'ASC'] ]
+            order: [ 
+                // ['town', 'ASC'], 
+                ['restaurantName', 'ASC'] 
+            ]
         })
         
         return res.json(specials)
@@ -63,7 +131,7 @@ const getSpecialsEventsCalendar = async (req, res) => {
     }
 }
 
-// getting specialsk/events for restaurant admin page
+// getting specials/events for restaurant admin page
 const getSpecialsEventsRestaurantAdmin = async (req, res) => {
     try {
         const validUser = await Restaurant.findOne({
@@ -108,5 +176,5 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
 module.exports = {
     getSpecialsEventsCalendar,
     getSpecialsEventsRestaurantAdmin,
-    addSpecialEvent
+    addSpecialEvent,
 }

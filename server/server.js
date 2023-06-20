@@ -15,7 +15,7 @@ app.use("/auth", require("./routes/jswtAuth"));
 app.use("/api", require("./routes/api"))
 
 // basic routes
-app.use("/", require("./routes/basic"))
+// app.use("/", require("./routes/basic"))
 
 // static Images Folder
 app.use('/Images', express.static('./Images'))

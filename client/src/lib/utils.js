@@ -292,62 +292,6 @@ export const formatMenuTime = (startTime, endTime, AMPM) => {
     }
 }
 
-export const determineSundayAvailability = (day) => {
-    if (day) {
-        return "Sunday"
-    } else {
-        return ""
-    }
-}
-
-export const determineMondayAvailability = (day) => {
-    if (day) {
-        return "Monday"
-    } else {
-        return ""
-    }
-}
-
-export const determineTuesdayAvailability = (day) => {
-    if (day) {
-        return "Tuesday"
-    } else {
-        return ""
-    }
-}
-
-export const determineWednesdayAvailability = (day) => {
-    if (day) {
-        return "Wednesday"
-    } else {
-        return ""
-    }
-}
-
-export const determineThursdayAvailability = (day) => {
-    if (day) {
-        return "Thursday"
-    } else {
-        return ""
-    }
-}
-
-export const determineFridayAvailability = (day) => {
-    if (day) {
-        return "Friday"
-    } else {
-        return ""
-    }
-}
-
-export const determineSaturdayAvailability = (day) => {
-    if (day) {
-        return "Saturday"
-    } else {
-        return ""
-    }
-}
-
 export const formatMenuDayAvailability = (array) => {
     const arr = array.filter(x => x);
     console.log(arr)
@@ -367,3 +311,13 @@ export const formatMenuDayAvailability = (array) => {
         }
     }
 }
+
+export const determineIsRecurring = (x) => {
+    if (x === "Upcoming Specials") {
+        return false
+    } else {
+        return true
+    }
+}
+
+export const TOWNS = ["Atlantic Beach", "Beaufort", "Morehead City", "Emerald Isle", "Swansboro"];

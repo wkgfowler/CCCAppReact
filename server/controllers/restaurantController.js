@@ -6,6 +6,7 @@ const Roles = db.Roles;
 const Hours = db.Hours;
 const SpecialEvent = db.SpecialEvent;
 const Menu = db.Menu;
+const RestaurantImages = db.RestaurantImages;
 
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
@@ -43,32 +44,27 @@ const upload = multer({
 // getting all restaurants for display
 const getRestaurants = async (req, res) => {
     try {
-        if (req.params.town === "all") {
+        console.log(req.query.towns)
+        if (req.query.towns !== undefined) {
+            console.log("test2")
             const restaurants = await Restaurant.findAll({
-                order: [ ['restaurantName', 'ASC'] ]
+                where: {
+                    town: {
+                        [Op.in]: req.query.towns
+                    }
+                },
+                // order: [ ['restaurantName', 'ASC'] ]
             });
             return res.json(restaurants)
         } else {
             const restaurants = await Restaurant.findAll({
-                where: {
-                    town: req.params.town
-                },
                 order: [ ['restaurantName', 'ASC'] ]
-            })
+            });
             return res.json(restaurants)
         }
         
     } catch (err) {
         console.log('try again')
-    }
-}
-
-// getting restaurants by town
-const getTownRestaurants = async (req, res) => {
-    try {
-        
-    } catch (err) {
-        console.error(err.message)
     }
 }
 
@@ -84,9 +80,22 @@ const getRestaurantPage = async (req, res) => {
                 model: SpecialEvent
             }]
         });
+
+        const hours = await Hours.findAll({
+            where: {
+                RestaurantId: req.params.id
+            }
+        })
+
+        const images = await RestaurantImages.findAll({
+            where: {
+                RestaurantId: req.params.id
+            }
+        })
+
         console.log('hi')
         if (restaurant) {
-            return res.json({valid: true, restaurant});
+            return res.json({valid: true, restaurant, hours, images});
         };
         if (!restaurant) {
             console.log('almost')
@@ -98,7 +107,7 @@ const getRestaurantPage = async (req, res) => {
     }
 }
 
-// registering restaruant account
+// registering restaurant account
 const registerRestaurant = async (req, res) => {
     try {
         const restaurant = await Restaurant.findOne({
@@ -440,7 +449,6 @@ const adminAllRestaurantsAndUsers = async (req, res) => {
 
 module.exports = {
     getRestaurants,
-    getTownRestaurants,
     getRestaurantPage,
     getUserRestaurantPage,
     updatingRestaurantContactInfo,

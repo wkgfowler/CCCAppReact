@@ -29,7 +29,7 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
 
             <div className="modal" id={`id${restaurant.id}`}>
               <div className="modal-dialog">
-                <div className="modal-content bg-slate-900 text-white rounded-lg">
+                <div className="modal-content bg-[#56707E] text-white rounded-lg">
 
 
                   <div className="modal-header">
@@ -44,7 +44,7 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
 
 
                   <div className="modal-footer">
-                    <button type="button" className="bg-slate-200 text-black rounded px-2 py-1" data-dismiss="modal" onClick={addUser}>Add User</button>
+                    <button type="button" className="bg-white text-black rounded px-2 py-1" data-dismiss="modal" onClick={addUser}>Add User</button>
                   </div>
 
                 </div>

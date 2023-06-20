@@ -290,6 +290,40 @@ const resetPassword = async (req, res) => {
     }
 }
 
+// sending a message from Contact Us page
+const contactUsMessage = async (req, res) => {
+    try {
+        var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "crystalcoastdining@gmail.com",
+                pass: "mfevkjqtruweikfa"
+            }
+        });
+
+        var mailOptions = {
+            from: "crystalcoastdining@gmail.com",
+            to: "crystalcoastdining@gmail.com",
+            subject: "Contact Us Message",
+            text: `${req.body.name} - ${req.body.typeOfCustomer}\n${req.body.email}\n\n${req.body.message}`
+            
+                    
+            
+        };
+        console.log("hi")
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error.message)
+            } else {
+                console.log(success)
+            }
+        })
+        return res.json("success")
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
 module.exports = {
     loadProfile,
     createBasicUser,
@@ -298,5 +332,6 @@ module.exports = {
     login,
     passwordResetEmail,
     validPasswordResetToken,
-    resetPassword
+    resetPassword,
+    contactUsMessage
 }

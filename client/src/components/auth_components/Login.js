@@ -29,7 +29,8 @@ const Login = () => {
             localStorage.setItem('permission', response.data.userInfo.Roles[0].id)
             setUser(response.data.userInfo)
             setPermission(response.data.userInfo.Roles[0].id)
-            navigate(`/profile/${response.data.userInfo.id}`)
+            navigate("/")
+            // navigate(`/profile/${response.data.userInfo.id}`)
         }, (error) => {
             console.log(error)
         })
@@ -53,7 +54,7 @@ const Login = () => {
                 <div className="text-center">
                     <Link to="/reset_password_request" className="underline">Forgot Password</Link>
                 </div>
-                <button className="border w-full py-1 my-1 bg-slate-900 text-white rounded">Log in</button>
+                <button className="border w-full py-1 my-1 bg-[#56707E] text-white rounded">Log in</button>
                 <div className="text-center">
                     <p>Don't have an account? <Link to="/register" className="underline">Register</Link></p>
                 </div>             

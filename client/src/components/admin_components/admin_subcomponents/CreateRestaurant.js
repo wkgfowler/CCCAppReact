@@ -30,7 +30,7 @@ const CreateRestaurant = ({getRestaurants}) => {
                 <form onSubmit={onSubmitForm}>
                     <label>Restaurant Name:</label>
                     <input type="text" className="form-control my-3" ref={restaurantNameRef}></input>
-                    <button className="text-white bg-slate-900 rounded px-2 py-1">Submit</button>
+                    <button className="text-white bg-[#56707E] rounded px-2 py-1">Submit</button>
                 </form>
             </div>
             

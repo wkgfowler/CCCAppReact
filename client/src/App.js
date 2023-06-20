@@ -26,6 +26,7 @@ import SpecialsEvents from "./components/SpecialsEvents";
 import { LoadScript } from "@react-google-maps/api";
 import Menu from "./components/profile_components/restaurant_components/Menu";
 import AddMenu from "./components/profile_components/restaurant_components/restaurant_subcomponents/AddMenu";
+import Contact from "./components/Contact";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -44,7 +45,7 @@ function App() {
   // }, [])
 
   return (
-    <div className={permission === 0 ? "bg-slate-200 bg-bottom bg-no-repeat h-screen" : "bg-slate-200 min-h-screen"}>
+    <div className={permission === 0 ? "bg-white bg-bottom bg-no-repeat min-h-screen" : "bg-white min-h-screen"}>
       <Router>
         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <UserContext.Provider value={{user, setUser}}>
@@ -56,11 +57,12 @@ function App() {
             <Route path='/about' element={<About/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
+            <Route path='/contact' element={<Contact/>} />
             <Route path='/reset_password_request' element={<ResetPasswordRequest/>} />
             <Route path='/reset_password/:token' element={<ResetPasswordLink/>} />
             <Route path='/register_restaurant/:token' element={<RegisterRestaurant/>} />
             <Route path='/register/:restaurant/:token' element={<RegisterUserToRestaurant />} />
-            <Route path='/profile/:id' element={<Profile/>} />
+            {/* <Route path='/profile/:id' element={<Profile/>} /> */}
             <Route path='/edit_information/:RestaurantId' element={<EditInfo />}/>
             <Route path='/edit_specials/:RestaurantId' element={<Specials />} />
             <Route path='/add_specials/:RestaurantId' element={<SpecialsForm />} />

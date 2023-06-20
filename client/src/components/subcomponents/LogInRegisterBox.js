@@ -29,7 +29,8 @@ const LogInRegisterBox = () => {
             localStorage.setItem('permission', response.data.userInfo.Roles[0].id)
             setUser(response.data.userInfo)
             setPermission(response.data.userInfo.Roles[0].id)
-            navigate(`/profile/${response.data.userInfo.id}`)
+            navigate("/")
+            // navigate(`/profile/${response.data.userInfo.id}`)
         }, (error) => {
             console.log(error)
         })
@@ -53,7 +54,7 @@ const LogInRegisterBox = () => {
                     <Link to="/reset_password_request" className="underline">Forgot Password</Link>
                 </div>
                 <div className="flex flex-row justify-center py-3">
-                    <button className="border rounded w-1/2 py-1 my-1 bg-slate-900 text-white">Log in</button>
+                    <button className="border rounded w-1/2 py-1 my-1 bg-[#56707E] text-white">Log in</button>
                 </div>
                 
                 <div className="text-center">

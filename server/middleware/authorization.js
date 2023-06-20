@@ -7,6 +7,7 @@ const app = require('../server')
 module.exports = async (req, res, next) => {
 
     try {
+        console.log("why")
         console.log(req.header("token"))
 
         const jwtToken = req.header("token");
@@ -60,6 +61,7 @@ module.exports = async (req, res, next) => {
         // next();
 
     } catch (err) {
+        console.log("here")
         console.error(err.message);
 
         return res.status(401).json("Token is not valid");

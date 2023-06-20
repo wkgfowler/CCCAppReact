@@ -86,7 +86,7 @@ const Specials = () => {
                                             <p>{specialEvent.name} - {specialEvent.description}</p>
                                         </div>
                                         <div className="flex flex-row">
-                                            <p>Available &nbsp;</p>
+                                            {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}
                                             {specialEvent.specialEventDate ? <p>{specialEvent.specialEventDate}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
                                             <p>&nbsp; from {specialEvent.startTime} - {specialEvent.endTime}</p>
                                         </div>

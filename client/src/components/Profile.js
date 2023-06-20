@@ -59,10 +59,10 @@ const Profile = () => {
                             {user.Restaurants.map(x => (
                                 <tr key={x.id}>
                                     <td><p className="text-2xl">{x.restaurantName}</p></td>
-                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/restaurants/${x.id}`}>View restaurant page</Link></button></td>
-                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_information/${x.id}`}>Edit Restaurant</Link></button></td>
-                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_specials/${x.id}`}>Edit Specials/Events</Link></button></td>
-                                    <td><button className="border border-white p-2 rounded-lg"><Link to={`/edit_menus/${x.id}`}>Edit Menus</Link></button></td>
+                                    <td><button className="bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/restaurants/${x.id}`}>View restaurant page</Link></button></td>
+                                    <td><button className="bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_information/${x.id}`}>Edit Restaurant</Link></button></td>
+                                    <td><button className="bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_specials/${x.id}`}>Edit Specials/Events</Link></button></td>
+                                    <td><button className="bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_menus/${x.id}`}>Edit Menus</Link></button></td>
                                 </tr>
                             ))}
                         </tbody>

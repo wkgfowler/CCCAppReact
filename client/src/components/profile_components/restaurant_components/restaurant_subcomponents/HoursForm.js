@@ -370,7 +370,7 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
                         </div>
                     </div>
                     <div className="flex justify-center py-2">
-                        <button className="outline outline-2 bg-slate-900 rounded px-2 py-1">Submit</button>
+                        <button className="outline outline-2 bg-[#56707E] rounded px-2 py-1">Submit</button>
                     </div>
                     
                 </form>

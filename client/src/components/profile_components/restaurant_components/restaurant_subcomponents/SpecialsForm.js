@@ -63,7 +63,7 @@ const SpecialsForm = () => {
         })
         .then((response) => {
             console.log(response)
-            navigate(`/profile/${user.id}`)
+            navigate("/")
         }, (error) => {
             console.log("not quite")
             console.log(error)
@@ -166,7 +166,7 @@ const SpecialsForm = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                        <button className="text-white bg-slate-900 rounded px-2 py-1">Submit</button>
+                        <button className="text-white bg-[#56707E] rounded px-2 py-1">Submit</button>
                 </div>
             </form>
         </div>

@@ -25,7 +25,7 @@ const RestaurantRegistrationEmailForm = () => {
             <div className="flex justify-start">
                 <form onSubmit={onSubmitForm}>
                     <input type="email" name="email" placeholder="email" className="form-control my-3" ref={emailRef} />
-                    <button className="text-white bg-slate-900 rounded px-2 py-1">Submit</button>
+                    <button className="text-white bg-[#56707E] rounded px-2 py-1">Submit</button>
                 </form>
             </div>
         </div>

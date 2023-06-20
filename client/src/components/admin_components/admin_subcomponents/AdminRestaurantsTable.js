@@ -55,9 +55,9 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
                             <td className="pl-8 py-2">{x.email} &nbsp; <button className="bg-red-900 rounded px-2 py-1 text-white" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></td>
                             <td className="pl-8 py-2">{i === 0 ? <UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/> : ""}</td>
                             <td className="pl-8 py-2">
-                                <button className=" bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
-                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
-                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
+                                <button className=" bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
+                                <button className="ml-5  bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
+                                <button className="ml-5  bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
                             </td>
                         </tr>
                     )) : <tr className="border-y border-slate-500" key={restaurant.id}>
@@ -65,9 +65,9 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
                             <td className="pl-8 py-2"></td>
                             <td className="pl-8 py-2"><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
                             <td className="pl-8 py-2">
-                                <button className=" bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
-                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
-                                <button className="ml-5  bg-slate-900 rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
+                                <button className=" bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_information/${restaurant.id}`}>Edit Information</Link></button>
+                                <button className="ml-5  bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_specials/${restaurant.id}`}>Edit Specials</Link></button>
+                                <button className="ml-5  bg-[#56707E] rounded px-2 py-1 text-white"><Link to={`/edit_menus/${restaurant.id}`}>Edit Menus</Link></button>
                             </td>
                     </tr>
                 ))}

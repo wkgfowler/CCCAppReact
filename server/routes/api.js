@@ -6,6 +6,7 @@ const restaurantController = require('../controllers/restaurantController');
 const specialEventController = require('../controllers/specialEventController');
 const menuController = require('../controllers/menuController')
 const authorization = require('../middleware/authorization');
+const restaurantImagesController = require('../controllers/restaurantImagesController');
 require("dotenv").config();
 const { Op } = require("sequelize");
 
@@ -52,5 +53,17 @@ router.get("/get_menus/:RestaurantId/:userId/:typeOfMenu", authorization, menuCo
 
 // admin page ALL RESTAURANTS/USERS
 router.get("/admin/all_restaurants", restaurantController.adminAllRestaurantsAndUsers)
+
+// calling ALL RESTAURANTS
+router.get('/getRestaurants/:town', restaurantController.getRestaurants)
+
+// calling restaurant page
+router.get("/restaurants/:id", restaurantController.getRestaurantPage)
+
+// upload restaurant images
+router.post("/add_restaurant_image", authorization, restaurantImagesController.upload, restaurantImagesController.restaurantImagesUpload)
+
+// contact us message
+router.post("/contact_us_message", userController.contactUsMessage)
 
 module.exports = router;

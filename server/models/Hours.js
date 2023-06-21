@@ -4,10 +4,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        RestaurantId: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         openHour: {
             type: DataTypes.STRING
         },
@@ -21,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Hours.associate = function (models) {
-        Hours.belongsToMany(models.Restaurant, {through: "Restaurants_Hours"})
+        Hours.belongsTo(models.Restaurant, {foreignKey: "RestaurantId"})
     };
 
     return Hours;

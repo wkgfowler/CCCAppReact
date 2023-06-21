@@ -44,17 +44,60 @@ const upload = multer({
 // getting all restaurants for display
 const getRestaurants = async (req, res) => {
     try {
-        console.log(req.query.towns)
-        if (req.query.towns !== undefined) {
+        console.log(req.query.weekday)
+        if (req.query.towns !== undefined && req.query.time !== "") {
+            const potentialRestaurants = await Hours.findAll({
+                where: {
+                    weekday: req.query.weekday
+                }
+            })
+            let ids = []
+            for (let i = 0; i < potentialRestaurants.length; i++) {
+                if (potentialRestaurants[i].openHour === "Closed" || potentialRestaurants[i] === null) {
+
+                } else if (Number(potentialRestaurants[i].openHour) < Number(req.query.time) && Number(potentialRestaurants[i].closeHour) > Number(req.query.time)) {
+                    potentialRestaurants[i].openStatus = true
+                    ids.push(potentialRestaurants[i].RestaurantId)
+                }
+            }
+            const restaurants = await Restaurant.findAll({
+                where: {
+                    id: ids,
+                    town: req.query.towns
+                },
+                order: [ ['restaurantName', 'ASC'] ]
+            })
+            return res.json(restaurants)
+        } else if (req.query.towns !== undefined) {
             console.log("test2")
             const restaurants = await Restaurant.findAll({
                 where: {
-                    town: {
-                        [Op.in]: req.query.towns
-                    }
+                    town: req.query.towns
                 },
-                // order: [ ['restaurantName', 'ASC'] ]
+                order: [ ['restaurantName', 'ASC'] ]
             });
+            return res.json(restaurants)
+        } else if (req.query.time !== "") {
+            const potentialRestaurants = await Hours.findAll({
+                where: {
+                    weekday: req.query.weekday
+                }
+            })
+            let ids = []
+            for (let i = 0; i < potentialRestaurants.length; i++) {
+                if (potentialRestaurants[i].openHour === "Closed" || potentialRestaurants[i] === null) {
+
+                } else if (Number(potentialRestaurants[i].openHour) < Number(req.query.time) && Number(potentialRestaurants[i].closeHour) > Number(req.query.time)) {
+                    potentialRestaurants[i].openStatus = true
+                    ids.push(potentialRestaurants[i].RestaurantId)
+                }
+            }
+            const restaurants = await Restaurant.findAll({
+                where: {
+                    id: ids
+                },
+                order: [ ['restaurantName', 'ASC'] ]
+            })
             return res.json(restaurants)
         } else {
             const restaurants = await Restaurant.findAll({

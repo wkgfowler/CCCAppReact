@@ -2,12 +2,16 @@ import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card"
-import { TOWNS } from "../lib/utils";
+import { TOWNS, formatWhatIsOpenTime } from "../lib/utils";
 
 const AllRestaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [towns, setTowns] = useState([]);
     const [town, setTown] = useState("all")
+    const [time, setTime] = useState("");
+    const [weekday, setWeekday] = useState("");
+
+    
 
     const addTown = (townName) => {
         let town = document.getElementById(townName)
@@ -18,18 +22,36 @@ const AllRestaurants = () => {
         }
     }
 
+    const addTime = () => {
+        let date = new Date();
+        let currHour = String(date.getHours());
+        let currMinute = String(date.getMinutes());
+        let currWeekday = date.getDay();
+        let filterTime = document.getElementById("open")
+        if (filterTime.checked) {
+            setTime(formatWhatIsOpenTime(currHour, currMinute))
+            setWeekday(currWeekday)
+            console.log(formatWhatIsOpenTime(currHour, currMinute))
+        } else if (!filterTime.checked) {
+            setTime("")
+            setWeekday("")
+        }
+    }
+
     const navigate = useNavigate();
 
     const config = {
         params: {
-            towns: towns
+            towns: towns,
+            time: time,
+            weekday: weekday
         }
     }
 
     const getRestaurants = () => {
-        console.log(town)
         axios.get(`http://localhost:3000/api/getRestaurants/${town}`, config)
         .then((response) => {
+            console.log(response.data)
             setRestaurants(response.data)
         }, (error) => {
             console.log(error)
@@ -38,7 +60,7 @@ const AllRestaurants = () => {
     
     useEffect(() => {
         getRestaurants()
-    }, [towns])
+    }, [town, towns, time])
 
     return (
         <div className="container">
@@ -54,6 +76,12 @@ const AllRestaurants = () => {
                                 <label htmlFor="">{town}</label>
                             </div>
                         ))}
+
+                        <p className="font-semibold border-y mt-2 mb-2">What's open</p>
+                        <div className="flex flex-row">
+                            <input type="checkbox" name="open" id="open" className="mr-2" value="open" onClick={() => addTime()}/>
+                            <label htmlFor="">Currently Open</label>
+                        </div>
                     </div>
                 </div>
                 
@@ -61,14 +89,6 @@ const AllRestaurants = () => {
                 <div className="flex flex-col w-3/4">
                     <p className="text-center text-4xl py-4">Restaurants and Bars</p>
                     <div className="flex flex-col justify-center gap-2">
-                        <div className="flex flex-row justify-center">
-                            <label className="pr-2">Filter by town:</label>
-                            <select name="town" id="town" onChange={() => setTown(document.getElementById("town").value)}>
-                                <option value="all">All</option>
-                                <option value="Atlantic Beach">Atlantic Beach</option>
-                                <option value="Morehead City">Morehead City</option>
-                            </select>
-                        </div>
                         <div className="flex flex-wrap justify-center gap-2">
                             {restaurants.map(restaurant => (
                                 <Card className="w-72 h-72 bg-slate-400 rounded-lg" key={restaurant.id}>

@@ -321,3 +321,13 @@ export const determineIsRecurring = (x) => {
 }
 
 export const TOWNS = ["Atlantic Beach", "Beaufort", "Morehead City", "Emerald Isle", "Swansboro"];
+
+export const formatWhatIsOpenTime = (hour, minute) => {
+    if (hour.length === 1) {
+        hour = `0${hour}`
+    }
+    if (minute.length === 1) {
+        minute = `0${minute}`
+    }
+    return `${hour}${minute}`
+}

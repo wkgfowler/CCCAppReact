@@ -103,10 +103,10 @@ const SpecialsEvents = () => {
     // getting specials/events
     const config = {
         params: {
-            currentYear: currentYear,
-            currentMonth: formatDateMonth(currentMonth),
-            today: formatDateDate(today),
-            day: formatDateDay(currentYear, currentMonth, today),
+            // currentYear: currentYear,
+            // currentMonth: formatDateMonth(currentMonth),
+            // today: formatDateDate(today),
+            // day: formatDateDay(currentYear, currentMonth, today),
             towns: towns,
             eventsOrSpecials: eventsOrSpecials
         }

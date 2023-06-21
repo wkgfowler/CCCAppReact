@@ -331,3 +331,11 @@ export const formatWhatIsOpenTime = (hour, minute) => {
     }
     return `${hour}${minute}`
 }
+
+export const formatTimeDisplay = (time) => {
+    if (time[0] === "0" && time[2] === "0") {
+        return `${time[1]}am`
+    } else if (time[0] === "0" && time[2] !== "0") {
+        return `${time[1]}${time[2]}${time[3]}am`
+    } else if (time[0] === "1" && time[1] === "2") {}
+}

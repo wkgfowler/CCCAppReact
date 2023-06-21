@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa"
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Map from "./profile_components/restaurant_components/restaurant_subcomponents/Map";
-import { WEEKDAYS, determineIsRecurring, formatMenuDayAvailability, formatSpecialEventDays, months } from "../lib/utils";
+import { WEEKDAYS, determineIsRecurring, formatMenuDayAvailability, formatSpecialEventDays, formatTimeDisplay, months } from "../lib/utils";
 
 const Restaurant = () => {
     let date = new Date();
@@ -86,7 +86,7 @@ const Restaurant = () => {
             setImages(response.data.images)
             let daysHours = response.data.hours.filter(hour => hour.weekday === weekday);
             console.log(daysHours);
-            setTodaysOpenHour(daysHours[0].openHour);
+            setTodaysOpenHour(formatTimeDisplay(daysHours[0].openHour));
             setTodaysCloseHour(daysHours[0].closeHour);
         }, (error) => {
             console.log(error)

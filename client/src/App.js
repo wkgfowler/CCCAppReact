@@ -39,10 +39,10 @@ function App() {
   })
   // const userProvider = useMemo(() => ({user, setUser}), [user, setUser]);
 
-  // useEffect(() => {
-  //   localStorage.removeItem('user')
-  //   localStorage.removeItem('permission')
-  // }, [])
+  useEffect(() => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('permission')
+  }, [])
 
   return (
     <div className={permission === 0 ? "bg-white bg-bottom bg-no-repeat min-h-screen" : "bg-white min-h-screen"}>

@@ -1,4 +1,5 @@
 const db = require('../models');
+const fs = require('fs');
 
 const Restaurant = db.Restaurant;
 const User = db.User;
@@ -127,7 +128,8 @@ const getRestaurantPage = async (req, res) => {
         const hours = await Hours.findAll({
             where: {
                 RestaurantId: req.params.id
-            }
+            },
+            order:[ ["weekday", "ASC"] ]
         })
 
         const images = await RestaurantImages.findAll({
@@ -420,19 +422,36 @@ const updatingRestaurantAdditionalInfo = async (req, res) => {
                 id: req.body.id
             }
         });
-
-        let additionalInfo = {
-            profileImage: req.file.path,
-            websiteURL: req.body.websiteURL,
-            facebookURL: req.body.facebookURL,
-            instagramURL: req.body.instagramURL,
-            description: req.body.description
+        
+        if (restaurant.profileImage && req.body.noImage === true) {
+            fs.unlinkSync(`${restaurant.profileImage}`)
         }
+        console.log(req.body.noImage)
+        if (req.body.noImage === false) {
+            let additionalInfo = {
+                websiteURL: req.body.websiteURL,
+                facebookURL: req.body.facebookURL,
+                instagramURL: req.body.instagramURL,
+                description: req.body.description
+            }
+            const updatedRestuarant = await restaurant.set(additionalInfo);
+            await updatedRestuarant.save();
+            return res.json(req.user);
+        } else {
+            let additionalInfo = {
+                profileImage: req.file.path,
+                websiteURL: req.body.websiteURL,
+                facebookURL: req.body.facebookURL,
+                instagramURL: req.body.instagramURL,
+                description: req.body.description
+            }
 
-        const updatedRestuarant = await restaurant.set(additionalInfo);
 
-        await updatedRestuarant.save();
-        return res.json(req.user);
+            const updatedRestuarant = await restaurant.set(additionalInfo);
+            await updatedRestuarant.save();
+            return res.json(req.user);
+        }
+        
     } catch (err) {
         console.log("FUCK")
         console.error(err.message)

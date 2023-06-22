@@ -1,8 +1,10 @@
 import axios from "axios";
 import { Fragment, useRef } from "react";
+import { useAlert } from "react-alert";
 
-const RestaurantRegistrationEmailForm = () => {
+const RestaurantRegistrationEmailForm = ({toggleAdminTable}) => {
     const emailRef = useRef();
+    const alert = useAlert();
     
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -11,14 +13,16 @@ const RestaurantRegistrationEmailForm = () => {
         })
         .then((response) => {
             emailRef.current.value = "";
-            console.log(response.data)
+            toggleAdminTable();
+            alert.success("Registration email sent")
         }, (error) => {
+            alert.error("Error sending email")
             console.log(error)
         })
     }
     
     return (
-        <div className="flex flex-col justify-center border-t-2">
+        <div className="flex flex-col justify-center">
             <div className="flex justify-center">
                 <p className="text-2xl font-medium">Restaurant Registration Email</p>
             </div>

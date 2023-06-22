@@ -332,10 +332,39 @@ export const formatWhatIsOpenTime = (hour, minute) => {
     return `${hour}${minute}`
 }
 
-export const formatTimeDisplay = (time) => {
-    if (time[0] === "0" && time[2] === "0") {
-        return `${time[1]}am`
-    } else if (time[0] === "0" && time[2] !== "0") {
-        return `${time[1]}${time[2]}${time[3]}am`
-    } else if (time[0] === "1" && time[1] === "2") {}
+export const convertToNormalHours = (time) => {
+    if (time === "Closed") {
+        return time;
+    } else if (time === "1200") {
+        let newTime = "12pm"
+        return newTime
+    } else if (time === "1230") {
+        let newTime = "1230pm"
+        return newTime
+    } else if (time === "0000") {
+        let newTime = "12am"
+        return newTime
+    } else if (time === "0030") {
+        let newTime = "1230am"
+        return newTime
+    } else if (time[0] === '0') {
+        let newTime = time.replace(time[0], "")
+        if (newTime[1] === '0') {
+            let newerTime = newTime.replace('00', '')
+            newerTime += "am"
+            return newerTime
+        }
+        newTime += "am"
+        return newTime;
+    } else if ((time[0] === '1' && time[1] > 2) || time[0] === '2') {
+        let newTime = +time.slice(0,2)
+        newTime -= 12
+        let newerTime = newTime.toString()
+        if (time[2] === '0') {
+            newerTime += "pm"
+            return newerTime
+        }
+        newerTime += "30pm"
+        return newerTime
+    }
 }

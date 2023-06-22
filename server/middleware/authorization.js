@@ -13,6 +13,7 @@ module.exports = async (req, res, next) => {
         const jwtToken = req.header("token");
 
         const load = jwt.verify(jwtToken, process.env.ACCESS_TOKEN_SECRET, {ignoreExpiration: true})
+        console.log(load)
 
         // const refreshToken = req.header("onlyRefreshToken")
 

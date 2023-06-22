@@ -22,7 +22,7 @@ const Homepage = () => {
                     </div>
 
                     <div className="flex flex-row justify-center pt-5">
-                        <div className="flex flex-row w-full border-slate-900 border-2 rounded-md">
+                        <div className="flex flex-row w-full border-2 outline outline-white outline-1 -outline-offset-8">
                             <div className="w-1/2">
                                 <img src={require("../images/IMG_6494.jpg")} alt="" className="min-h-full"/>
                             </div>

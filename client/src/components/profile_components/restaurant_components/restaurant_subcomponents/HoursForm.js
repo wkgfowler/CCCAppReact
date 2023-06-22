@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
-import { CLOSEHOURS, OPENHOURS } from "../../../../lib/utils";
+import { CLOSEHOURS, OPENHOURS, convertToNormalHours } from "../../../../lib/utils";
 
 const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     const date = new Date();
@@ -95,43 +95,6 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
             console.log("not quite")
             console.log(error)
         })
-    }
-
-    const convertToNormalHours = (time) => {
-        if (time === "Closed") {
-            return time;
-        } else if (time === "1200") {
-            let newTime = "12pm"
-            return newTime
-        } else if (time === "1230") {
-            let newTime = "1230pm"
-            return newTime
-        } else if (time === "0000") {
-            let newTime = "12am"
-            return newTime
-        } else if (time === "0030") {
-            let newTime = "1230am"
-            return newTime
-        } else if (time[0] === '0') {
-            let newTime = time.replace(time[0], "")
-            if (newTime[1] === '0') {
-                let newerTime = newTime.replace('00', '')
-                newerTime += "am"
-                return newerTime
-            }
-            newTime += "am"
-            return newTime;
-        } else if ((time[0] === '1' && time[1] > 2) || time[0] === '2') {
-            let newTime = +time.slice(0,2)
-            newTime -= 12
-            let newerTime = newTime.toString()
-            if (time[2] === '0') {
-                newerTime += "pm"
-                return newerTime
-            }
-            newerTime += "30pm"
-            return newerTime
-        }
     }
 
     const dayClose = (day) => {

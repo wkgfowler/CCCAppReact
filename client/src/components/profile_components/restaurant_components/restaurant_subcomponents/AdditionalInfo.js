@@ -22,7 +22,13 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
         formData.append('facebookURL', facebookRef.current.value);
         formData.append('instagramURL', instagramRef.current.value);
         formData.append('description', descriptionRef.current.value);
-        formData.append('profileImage', profileImage)
+        if (profileImage !== "") {
+            formData.append('noImage', true)
+            formData.append('profileImage', profileImage)
+        } else {
+            formData.append('noImage', false)
+        }
+        
 
         axios.post('http://localhost:3000/api/additional_info',  formData, {
             headers: {

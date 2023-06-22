@@ -57,10 +57,10 @@ const Admin = () => {
                         <AdminRestaurantsTable restaurants={restaurants} getRestaurants={getRestaurants}/>
                     </div>
                     <div className={`${restaurantRegistrationVisible ? "flex" : "hidden"}`}>
-                        <RestaurantRegistrationEmailForm />
+                        <RestaurantRegistrationEmailForm toggleAdminTable={toggleAdminTable}/>
                     </div>
                     <div className={`${createRestaurantVisible ? "flex" : "hidden"}`}>
-                        <CreateRestaurant getRestaurants={getRestaurants}/>
+                        <CreateRestaurant getRestaurants={getRestaurants} toggleAdminTable={toggleAdminTable}/>
                     </div>
                 </div>
             </div>

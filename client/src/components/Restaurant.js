@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa"
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Map from "./profile_components/restaurant_components/restaurant_subcomponents/Map";
-import { WEEKDAYS, determineIsRecurring, formatMenuDayAvailability, formatSpecialEventDays, formatTimeDisplay, months } from "../lib/utils";
+import { WEEKDAYS, convertToNormalHours, determineIsRecurring, formatMenuDayAvailability, formatSpecialEventDays, months } from "../lib/utils";
 
 const Restaurant = () => {
     let date = new Date();
@@ -86,8 +86,8 @@ const Restaurant = () => {
             setImages(response.data.images)
             let daysHours = response.data.hours.filter(hour => hour.weekday === weekday);
             console.log(daysHours);
-            setTodaysOpenHour(formatTimeDisplay(daysHours[0].openHour));
-            setTodaysCloseHour(daysHours[0].closeHour);
+            setTodaysOpenHour(convertToNormalHours(daysHours[0].openHour));
+            setTodaysCloseHour(convertToNormalHours(daysHours[0].closeHour));
         }, (error) => {
             console.log(error)
         })
@@ -195,10 +195,10 @@ const Restaurant = () => {
                             <br />
                             <div className="flex flex-col w-full bg-[#B2C9CE] rounded pl-6 py-6 gap-1">
                                 <p className="text-xl font-semibold underline">HOURS</p>
-                                    {hours.map((x, i) => (
+                                    {hours.map((x) => (
                                         <div className="flex flex-row">
-                                            <p className="font-semibold">{WEEKDAYS[i]}&nbsp; | &nbsp;</p>
-                                            <p>{x.openHour === "Closed" ? x.openHour : `${x.openHour} - ${x.closeHour}`}</p>
+                                            <p className="font-semibold">{WEEKDAYS[x.weekday]}&nbsp; | &nbsp;</p>
+                                            <p>{x.openHour === "Closed" ? x.openHour : `${convertToNormalHours(x.openHour)} - ${convertToNormalHours(x.closeHour)}`}</p>
                                         </div>
                                     ))}
                             </div>
@@ -206,8 +206,10 @@ const Restaurant = () => {
                         </div>
                     
                         <div className="flex flex-col w-4/5">
-                            <div className={mainPageVisible ? "flex" : "hidden"}>  
-                                <p className="text-lg pl-6 pt-4">{restaurant.description}</p>
+                            <div className={mainPageVisible ? "flex" : "hidden"}>
+                                <div className="flex flex-row w-full">
+                                    <p className="text-lg pl-6 pt-3">{restaurant.description}</p>
+                                </div>  
                             </div>
                             <div className={`${specialsEventsVisible ? "flex" : "hidden"}`}>
                                 {specialsEvents.map(specialEvent => (

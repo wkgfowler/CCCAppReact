@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import axios from "axios";
 import { UserContext } from "../../../context/UserContext";
 
-const CreateRestaurant = ({getRestaurants}) => {
+const CreateRestaurant = ({getRestaurants, toggleAdminTable}) => {
     const {user, setUser} = useContext(UserContext)
     const restaurantNameRef = useRef();
     
@@ -16,6 +16,7 @@ const CreateRestaurant = ({getRestaurants}) => {
             console.log(response)
             restaurantNameRef.current.value = "";
             getRestaurants();
+            toggleAdminTable();
         }, (error) => {
             console.log(error)
         })

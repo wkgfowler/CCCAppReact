@@ -123,13 +123,13 @@ const SpecialsEvents = () => {
     }
 
     return (
-        <div className="container w-full mx-4 pt-2">
-            <p className="text-center text-4xl">{months[currentMonth]} {today}, {currentYear} Specials & Events</p>
-            <div className="flex flex-row w-full pt-2">
+        <div className="container w-full">
+            <div className="flex flex-row w-full bg-[#dfebf2] pt-4 h-[2500px]">
                 
                 {/* calendar section */}
-                <div className="flex flex-col w-1/4">
-                    <div className="w-full bg-white rounded-xl">
+                <div className="flex flex-col w-1/4"></div>
+                <div className="fixed flex flex-col w-1/4">
+                    <div className="w-full">
                         <header className="flex items-center justify-between pt-6 px-8 pb-3">
                             <p className="text-2xl font-medium">{months[currentMonth]} {currentYear}</p>
                             <div className="grid grid-cols-2">
@@ -154,7 +154,7 @@ const SpecialsEvents = () => {
                                     before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-4 hover:before:bg-slate-400">{day}</li>
                                 ))}
                                 {days.map(day => (
-                                    <li onClick={() => setToday(day)} className={classNames(isToday(day) ? "bg-slate-400 rounded-full" : "", "w-[calc(100%/7)] relative mt-7 cursor-pointer before:absolute before:h-6 before:w-8 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-4 hover:before:bg-slate-400")}>{day}</li>
+                                    <li onClick={() => setToday(day)} className={classNames(isToday(day) ? "bg-slate-400 rounded-full" : "", "w-[calc(100%/7)] relative mt-7 cursor-pointer before:absolute before:h-6 before:w-10 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-6 hover:before:bg-slate-400")}>{day}</li>
                                 ))}
                                 {nextMonthDays.map(day => (
                                     <li className="w-[calc(100%/7)] text-slate-400 relative mt-7 cursor-pointer before:absolute before:h-6 before:w-8 before:rounded-full before:translate-x-1/2 before:translate-y-1/2 before:-z-10 z-10 before:bottom-3 before:right-4 hover:before:bg-slate-400">{day}</li>
@@ -186,6 +186,7 @@ const SpecialsEvents = () => {
 
                 </div>
                 <div className="flex flex-col w-3/4">
+                    <p className="text-center text-4xl">{months[currentMonth]} {today}, {currentYear} Specials & Events</p>
                     {specials.map(special => (
                         special.SpecialEvents.map((x, i) => (
                         <div className="flex flex-col w-full py-2" key={x.id}>

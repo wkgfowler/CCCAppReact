@@ -59,7 +59,7 @@ const Nav = () => {
               <Link to={'/restaurants+bars'} className="text-xl hover:text-3xl hover:text-slate-50">DINING & NIGHTLIFE</Link>
               <Link to={`/specials_and_events`} className="text-xl hover:text-3xl hover:text-slate-50">SPECIALS & EVENTS</Link>
               <Link to={'/contact'} className="text-xl hover:text-3xl hover:text-slate-50">CONTACT US</Link>
-              {permission === 0 ? (<Link to="/about" className="text-xl hover:text-3xl hover:text-slate-50">ABOUT US</Link>) : (<button type="button" className="text-xl hover:text-3xl hover:text-slate-50" onClick={logout}>Log Out</button>)}
+              {permission === 0 ? (<Link to="/about" className="text-xl hover:text-3xl hover:text-slate-50">ABOUT US</Link>) : (<button type="button" className="text-xl hover:text-3xl hover:text-slate-50" onClick={logout}>LOG OUT</button>)}
             </div>
               
           </nav>

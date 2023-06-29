@@ -66,7 +66,7 @@ const Menu = () => {
 
     if (valid) {
         return (
-            <div className="container">
+            <div className="container bg-[#dfebf2] pb-3">
                 <div className="flex flex-row pt-4">
                     <div className="flex flex-col w-2/12 pr-24">
                         <p className={`test-lg cursor-pointer ${menuFormVisible ? "font-bold border-y border-l pl-2 border-slate-900" : ""}`} onClick={toggleMenuFormVisible}>Add Menu</p>
@@ -80,13 +80,14 @@ const Menu = () => {
                         <div className={`${menuFormVisible ? "flex" : "hidden"}`}>
                             <AddMenu />
                         </div>
-                        <div className={`${menuVisible ? "flex" : "hidden"}`}>
+                        <div className={`${menuVisible ? "flex flex-col" : "hidden"}`}>
                             {menus ? menus.map((x, i) => {
                                 return (
                                     <div>
-                                        <p>{i === 0 ? x.menuType : ""}</p>
+                                        <p className="text-3xl font-semibold">{i === 0 ? x.menuType : ""}</p>
                                         <br />
-                                        <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
+                                        <p className="text-lg">{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
+                                        <br />
                                         <img src={`http://localhost:3000/${x.menuImage}`} alt="error" />
                                     </div>
                                 )

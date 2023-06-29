@@ -85,7 +85,7 @@ const restaurantRegistrationEmail = async (req, res) => {
             service: "gmail",
             auth: {
                 user: "crystalcoastdining@gmail.com",
-                pass: "mfevkjqtruweikfa"
+                pass: "zsbdxqbnydtjefat"
             }
         });
 
@@ -213,7 +213,7 @@ const passwordResetEmail = async (req, res) => {
             service: "gmail",
             auth: {
                 user: "crystalcoastdining@gmail.com",
-                pass: "mfevkjqtruweikfa"
+                pass: "zsbdxqbnydtjefat"
             }
         });
 
@@ -297,7 +297,7 @@ const contactUsMessage = async (req, res) => {
             service: "gmail",
             auth: {
                 user: "crystalcoastdining@gmail.com",
-                pass: "mfevkjqtruweikfa"
+                pass: "zsbdxqbnydtjefat"
             }
         });
 

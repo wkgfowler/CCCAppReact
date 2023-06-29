@@ -33,6 +33,7 @@ const EditInfo = () => {
     const getRestaurant = () => {
         axios.get(`http://localhost:3000/api/get_restaurant/${RestaurantId}/${userId}`, config)
         .then((response) => {
+            console.log(response.data)
             setValid(response.data.valid)
             setRestaurant(response.data.restaurant)
         })
@@ -106,7 +107,7 @@ const EditInfo = () => {
                             </div>
 
                             <div className={`${restaurantImagesVisible ? "flex justify-center" : "hidden"}`}>
-                                <AddRestaurantImages restaurant={restaurant} setRestaurantImagesVisible={setRestaurantImagesVisible} restaurantImagesVisible={restaurantImagesVisible} alert={alert}/>
+                                <AddRestaurantImages restaurant={restaurant} setRestaurantImagesVisible={setRestaurantImagesVisible} restaurantImagesVisible={restaurantImagesVisible} alert={alert} getRestaurant={getRestaurant}/>
                             </div>
 
                         </div>

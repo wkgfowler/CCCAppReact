@@ -250,7 +250,7 @@ const addExistingUserToRestaurant = async (req, res) => {
                 service: "gmail",
                 auth: {
                     user: "crystalcoastdining@gmail.com",
-                    pass: "mfevkjqtruweikfa"
+                    pass: "zsbdxqbnydtjefat"
                 }
             });
 
@@ -323,32 +323,42 @@ const removeUserFromRestaurant = async (req, res) => {
                 id: req.body.id
             }
         });
-        console.log("found it")
-
+        
         await restaurant.removeUser(user);
 
-        const userRole = await User.findOne({
-            where: {
-                email: req.body.email
-            }, include: {
-                model: Roles,
+        const usersRestaurants = await user.getRestaurants()
+        if (usersRestaurants.length === 0) {
+            const userRole = await User.findOne({
                 where: {
-                    role: "restaurant"
+                    email: req.body.email
+                }, include: {
+                    model: Roles,
+                    where: {
+                        role: "restaurant"
+                    }
                 }
+            });
+
+            if (userRole) {
+                const role = await Roles.findOne({
+                    where: {
+                        role: "restaurant"
+                    }
+                })
+
+                const basicRole = await Roles.findOne({
+                    where: {
+                        role: "basic"
+                    }
+                })
+                await user.removeRoles(role)
+                await user.addRoles(basicRole)
+
+                return res.status(200).json("Success")
             }
-        });
-        
-        if (userRole) {
-            const role = await Roles.findOne({
-                where: {
-                    role: "restaurant"
-                }
-            })
-
-            await role.removeUser(user)
-
-            return res.status(200).json("Success")
         }
+
+        
 
         console.log("it worked")
         return res.status(200).json("Success")
@@ -379,6 +389,9 @@ const getUserRestaurantPage = async (req, res) => {
         const restaurant = await Restaurant.findOne({
             where: {
                 id: req.params.RestaurantId
+            },
+            include: {
+                model: RestaurantImages
             }
         })
 

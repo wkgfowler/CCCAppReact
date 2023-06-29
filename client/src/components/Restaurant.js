@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa"
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Map from "./profile_components/restaurant_components/restaurant_subcomponents/Map";
-import { WEEKDAYS, convertToNormalHours, determineIsRecurring, formatMenuDayAvailability, formatSpecialEventDays, months } from "../lib/utils";
+import { WEEKDAYS, convertToNormalHours, determineIsRecurring, formatDateDisplay, formatMenuDayAvailability, formatSpecialEventDays, months } from "../lib/utils";
 
 const Restaurant = () => {
     let date = new Date();
@@ -121,15 +121,18 @@ const Restaurant = () => {
                             <div className="flex flex-row w-full">
 
                                 <div className="flex flex-col w-1/2 text-white pt-1 rounded">                
-                                    {/* <Map className="" restaurant={restaurant}/> */}
+                                    <Map className="" restaurant={restaurant}/>
                                 </div>
 
                                 <div className="flex flex-col w-1/2 h-full">
                                     <div id="carouselExampleIndicators" className="carousel slide h-full" data-ride="carousel">
                                         <div className="carousel-indicators">
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                            {images.map((image,i) => (
+                                                i === 1 ?
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={i} className="active" aria-current="true" aria-label={i}></button>
+                                                :
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={i} aria-label={i}></button>
+                                            ))}
                                         </div>
                                         <div className="carousel-inner h-auto">
                                             <div className="carousel-item active">
@@ -218,12 +221,12 @@ const Restaurant = () => {
                                             <div>
                                                 {specialEvent.specialOrEvent === "special" ? <p className="text-xl font-medium underline">Special</p> : <p className="text-xl font-medium underline">Event</p>}
                                             </div>
-                                            <div className="flex flex-row">
+                                            <div className="flex flex-row pl-2">
                                                 <p>{specialEvent.name} - {specialEvent.description}</p>
                                             </div>
-                                            <div className="flex flex-row">
+                                            <div className="flex flex-row pl-2">
                                                 {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}
-                                                {specialEvent.specialEventDate ? <p>{specialEvent.specialEventDate}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
+                                                {specialEvent.specialEventDate ? <p>{formatDateDisplay(specialEvent.specialEventDate)}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
                                                 <p>&nbsp; from {specialEvent.startTime} - {specialEvent.endTime}</p>
                                             </div>
                                         </div>

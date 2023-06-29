@@ -63,6 +63,9 @@ router.get("/restaurants/:id", restaurantController.getRestaurantPage)
 // upload restaurant images
 router.post("/add_restaurant_image", authorization, restaurantImagesController.upload, restaurantImagesController.restaurantImagesUpload)
 
+// delete restaurant image
+router.delete("/restaurantImages/:id", authorization, restaurantImagesController.deleteRestaurantImage)
+
 // contact us message
 router.post("/contact_us_message", userController.contactUsMessage)
 

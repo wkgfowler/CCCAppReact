@@ -72,7 +72,7 @@ const Profile = () => {
             )
         } else if (user && permission === 3) {
             return (
-                <div>
+                <div className="container bg-[#dfebf2] pb-3">
                     <p className="text-4xl font-semibold text-center">Admin</p>
                     <Admin/>
                 </div>

@@ -368,3 +368,10 @@ export const convertToNormalHours = (time) => {
         return newerTime
     }
 }
+
+export const formatDateDisplay = (date) => {
+    let dateSplit = date.split("-")
+    let monthSplit = Number(dateSplit[1])
+    let month = months[monthSplit]
+    return `${month} ${dateSplit[2]}`
+}

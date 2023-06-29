@@ -73,10 +73,10 @@ const SpecialsForm = () => {
     return (
         <div className="flex justify-center">
             <form onSubmit={onSubmitForm}>
-                <p className="text-2xl pt-4 pb-2 text-center underline">Add a special/event</p>
+                <p className="text-2xl pt-2 pb-4 text-center font-semibold">Add a special/event</p>
                 <div className="grid grid-cols-2 pb-2">
                     <p className="text-xl text-left">Are you adding a special or an event?</p>
-                    <select name="specialEvent" id="specialEvent" className="w-1/3 ml-4" ref={specialOrEventRef} onChange={isDaily}>
+                    <select name="specialEvent" id="specialEvent" className="w-5/12 ml-4" ref={specialOrEventRef} onChange={isDaily}>
                         <option value="">--Select an option--</option>
                         <option value="special">Special</option>
                         <option value="event">Event</option>
@@ -84,7 +84,7 @@ const SpecialsForm = () => {
                 </div>
                 <div className="grid grid-cols-2">
                     <p className="text-xl text-left">Is this reccuring every week or only once?</p>
-                    <select name="recurring" id="recurring" className="w-1/3 ml-4" ref={recurringRef} onChange={isDaily}>
+                    <select name="recurring" id="recurring" className="w-5/12 ml-4" ref={recurringRef} onChange={isDaily}>
                         <option value="">--Select an option--</option>
                         <option value="false">Only once</option>
                         <option value="true">Reccuring every week</option>
@@ -129,19 +129,19 @@ const SpecialsForm = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1">
-                    <div className="grid grid-rows-2">
+                <div className="grid grid-cols-1 pt-3">
+                    <div className="grid grid-rows-2 gap-1">
                         <label for="specialEventName">Special or Event Name:</label>
                         <input type="text" name="specialEventName" id="specialEventName" ref={specialEventNameRef}/>
                     </div>
-                    <div className="grid grid-rows-3">
+                    <div className="grid grid-rows-3 pt-3">
                         <label for="specialEventDescription">Special or Event Description:</label>
-                        <textarea type="text" name="specialEventDescription" id="specialEventDescription" onChange={(e) => setCharCount(e.target.value.length)} rows="3" cols="75" ref={specialEventDescriptionRef}></textarea>
-                        <p>{charCount} / 400 character limit</p>
+                        <textarea className="-translate-y-11" type="text" name="specialEventDescription" id="specialEventDescription" onChange={(e) => setCharCount(e.target.value.length)} rows="3" cols="75" ref={specialEventDescriptionRef}></textarea>
+                        <p className="-translate-y-10">{charCount} / 400 character limit</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 pb-2">
+                <div className="grid grid-cols-2 -translate-y-16">
                     <div>
                         <label htmlFor="">Special/Event starting time:</label>
                         <select name="startTime" className="ml-2" id="startTime" ref={startTimeRef}>
@@ -165,7 +165,7 @@ const SpecialsForm = () => {
                         </select>
                     </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center -translate-y-10">
                         <button className="text-white bg-[#56707E] rounded px-2 py-1">Submit</button>
                 </div>
             </form>

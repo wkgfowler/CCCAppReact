@@ -3,7 +3,7 @@ import SpecialsForm from "./restaurant_subcomponents/SpecialsForm";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
-import { formatSpecialEventDays } from "../../../lib/utils";
+import { formatDateDisplay, formatSpecialEventDays } from "../../../lib/utils";
 
 const Specials = () => {
     const {RestaurantId} = useParams();
@@ -58,7 +58,7 @@ const Specials = () => {
     }, [])
 
     return (
-        <div className="container">
+        <div className="container bg-[#dfebf2] pb-3">
             <div className="flex flex-row justify-center pt-3">
                 <p className="text-3xl">Specials/Events</p>
             </div>
@@ -87,7 +87,7 @@ const Specials = () => {
                                         </div>
                                         <div className="flex flex-row">
                                             {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}
-                                            {specialEvent.specialEventDate ? <p>{specialEvent.specialEventDate}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
+                                            {specialEvent.specialEventDate ? <p>{formatDateDisplay(specialEvent.specialEventDate)}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
                                             <p>&nbsp; from {specialEvent.startTime} - {specialEvent.endTime}</p>
                                         </div>
                                     </div>

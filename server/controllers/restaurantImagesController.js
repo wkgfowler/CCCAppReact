@@ -1,4 +1,5 @@
 const db = require('../models');
+const fs = require('fs');
 
 const Restaurant = db.Restaurant;
 const User = db.User;
@@ -48,7 +49,30 @@ const restaurantImagesUpload = async (req, res) => {
     }
 }
 
+const deleteRestaurantImage = async (req, res) => {
+    try {
+        const image = await RestaurantImages.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        fs.unlinkSync(`${image.image}`)
+
+        await RestaurantImages.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+
+
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
 module.exports = {
     upload,
-    restaurantImagesUpload
+    restaurantImagesUpload,
+    deleteRestaurantImage
 }

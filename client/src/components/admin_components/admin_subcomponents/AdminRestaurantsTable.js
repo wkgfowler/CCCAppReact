@@ -11,7 +11,7 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
     // }, [])
 
     const removeUser = async (restaurant_id, user_email) => {
-        axios.post(`http://localhost:3000/auth/remove_user/${restaurant_id}/${user_email}`, {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/remove_user/${restaurant_id}/${user_email}`, {
             id: restaurant_id,
             email: user_email
         }, {
@@ -28,7 +28,7 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
     }
 
     // const getRestaurants = () => {
-    //     axios.get("http://localhost:3000/api/admin/all_restaurants")
+    //     axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/admin/all_restaurants`)
     //     .then((response) => {
     //         console.log(response.data)
     //         setRestaurants(response.data)

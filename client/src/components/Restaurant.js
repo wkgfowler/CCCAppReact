@@ -54,7 +54,7 @@ const Restaurant = () => {
     }, [])
 
     const validRestaurant = () => {
-        axios.get(`http://localhost:3000/api/restaurants/${id}`, { params: {
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/restaurants/${id}`, { params: {
             id
         }
         })
@@ -136,11 +136,11 @@ const Restaurant = () => {
                                         </div>
                                         <div className="carousel-inner h-auto">
                                             <div className="carousel-item active">
-                                                <img className="pt-1 h-[409px] w-full" src={`http://localhost:3000/${restaurant.profileImage}`} alt="not working"/>
+                                                <img className="pt-1 h-[409px] w-full" src={`${process.env.REACT_APP_API_ENDPOINT}/${restaurant.profileImage}`} alt="not working"/>
                                             </div>
                                             {images.map(image => (
                                                 <div className="carousel-item">
-                                                    <img className="pt-1 h-[409px] w-full" src={`http://localhost:3000/${image.image}`} alt="not working"/>
+                                                    <img className="pt-1 h-[409px] w-full" src={`${process.env.REACT_APP_API_ENDPOINT}/${image.image}`} alt="not working"/>
                                                 </div>
                                             ))}
                                         </div>
@@ -240,7 +240,7 @@ const Restaurant = () => {
                                     return (
                                         <div>
                                             <p className="text-center text-2xl pt-4">{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
-                                            <img src={`http://localhost:3000/${x.menuImage}`} alt="error" />
+                                            <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" />
                                         </div>
                                     )
                                 }) : ""}

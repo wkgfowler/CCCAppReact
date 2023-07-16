@@ -8,7 +8,7 @@ const ResetPasswordRequest = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/auth/reset_password", {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/reset_password`, {
             email: emailRef.current.value
         })
         .then((response) => {

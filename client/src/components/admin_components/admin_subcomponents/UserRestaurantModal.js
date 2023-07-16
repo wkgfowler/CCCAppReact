@@ -8,7 +8,7 @@ const UserRestaurantModal = ({ restaurant, getRestaurants }) => {
     const emailRef = useRef();
 
     const addUser = () => {
-      axios.post("http://localhost:3000/auth/restaurant/add_user", {
+      axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/restaurant/add_user`, {
           restaurant: restaurant.id,
           email: emailRef.current.value
       })

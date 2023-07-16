@@ -57,7 +57,7 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
             <form onSubmit={onSubmitForm}>
                 <p className="text-2xl pt-4 pb-2 text-center underline">Additional Information</p>
                 <div className="flex flex-col">
-                    <div>{restaurant.profileImage !== "null" && profileImage === "" ? <img src={`http://localhost:3000/${restaurant.profileImage}`} alt="" className="max-w-sm"/> : <div> {profileImage ? <img src={URL.createObjectURL(profileImage)} alt="" className="max-w-sm"/> : <img src={require('../../../../images/add-image-80.png')} alt=""/>} </div>}</div>
+                    <div>{restaurant.profileImage !== "null" && profileImage === "" ? <img src={`${process.env.REACT_APP_API_ENDPOINT}/${restaurant.profileImage}`} alt="" className="max-w-sm"/> : <div> {profileImage ? <img src={URL.createObjectURL(profileImage)} alt="" className="max-w-sm"/> : <img src={require('../../../../images/add-image-80.png')} alt=""/>} </div>}</div>
                     <div><label for="profileImage">Upload a profile image for your restaurant</label></div>
                     <div><input type="file" id="profileImage" name="profileImage" size="lg" onChange={handleImageChange}/></div>
                 </div>

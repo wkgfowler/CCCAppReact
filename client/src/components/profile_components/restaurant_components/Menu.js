@@ -35,7 +35,7 @@ const Menu = () => {
     }
 
     const getMenus = () => {
-        axios.get(`http://localhost:3000/api/get_menus/${RestaurantId}/${userId}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_menus/${RestaurantId}/${userId}`, config)
         .then((response) => {
             const eachMenu = response.data.menus
             const eachMenuType = []
@@ -49,7 +49,7 @@ const Menu = () => {
     };
 
     const getSpecificMenu = () => {
-        axios.get(`http://localhost:3000/api/get_menus/${RestaurantId}/${userId}/${typeOfMenu}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_menus/${RestaurantId}/${userId}/${typeOfMenu}`, config)
         .then((response) => {
             console.log(response.data)
             setMenus(response.data)
@@ -88,7 +88,7 @@ const Menu = () => {
                                         <br />
                                         <p className="text-lg">{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
                                         <br />
-                                        <img src={`http://localhost:3000/${x.menuImage}`} alt="error" />
+                                        <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" />
                                     </div>
                                 )
                             }) : ""}
@@ -122,7 +122,7 @@ const Menu = () => {
                                         <p>{i === 0 ? x.menuType : ""}</p>
                                         <br />
                                         <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
-                                        <img src={`http://localhost:3000/${x.menuImage}`} alt="error" />
+                                        <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" />
                                     </div>
                                 )
                             }) : ""}

@@ -43,7 +43,7 @@ const Specials = () => {
     };
 
     const getAllSpecialsEvents = () => {
-        axios.get(`http://localhost:3000/api/get_all_specials_events/${RestaurantId}/${userId}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_all_specials_events/${RestaurantId}/${userId}`, config)
         .then((response) => {
             // console.log(response.data)
             setAllSpecialsEvents(response.data.allSpecialsEvents)

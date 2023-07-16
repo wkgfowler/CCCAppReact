@@ -14,7 +14,7 @@ const ResetPasswordLink = () => {
     }, [])
 
     const validToken = () => {
-        axios.post("http://localhost:3000/auth/reset_password/valid_token", {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/reset_password/valid_token`, {
             token
         })
         .then((response) => {
@@ -27,7 +27,7 @@ const ResetPasswordLink = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/auth/reset_password/set_password", {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/reset_password/set_password`, {
             password: passwordRef.current.value
         }, {
             headers: {

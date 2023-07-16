@@ -31,7 +31,7 @@ const EditInfo = () => {
     }
 
     const getRestaurant = () => {
-        axios.get(`http://localhost:3000/api/get_restaurant/${RestaurantId}/${userId}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_restaurant/${RestaurantId}/${userId}`, config)
         .then((response) => {
             console.log(response.data)
             setValid(response.data.valid)

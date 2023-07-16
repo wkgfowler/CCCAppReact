@@ -43,7 +43,7 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     };
 
     const getHours = () => {
-        axios.get(`http://localhost:3000/api/get_hours/${RestaurantId}/${userId}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_hours/${RestaurantId}/${userId}`, config)
         .then((response) => {
             console.log(response.data)
             isValid(response.data.valid)

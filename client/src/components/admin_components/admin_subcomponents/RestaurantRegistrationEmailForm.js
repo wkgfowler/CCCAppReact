@@ -8,7 +8,7 @@ const RestaurantRegistrationEmailForm = ({toggleAdminTable}) => {
     
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/auth/register/restaurant_registration_email", {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/register/restaurant_registration_email`, {
             email: emailRef.current.value
         })
         .then((response) => {

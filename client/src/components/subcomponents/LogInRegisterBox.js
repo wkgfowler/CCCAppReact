@@ -17,7 +17,7 @@ const LogInRegisterBox = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/auth/login', {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/login`, {
             email: emailRef.current.value,
             password: passwordRef.current.value
         })

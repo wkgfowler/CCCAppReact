@@ -26,7 +26,7 @@ const AddRestaurantImages = ({restaurant, setRestaurantImagesVisible, restaurant
         restaurantImages.forEach((file) => {
             formData.append("restaurantImages", file)
         });
-        axios.post("http://localhost:3000/api/add_restaurant_image", formData, {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/add_restaurant_image`, formData, {
             headers: {
                 "token" : localStorage.getItem("token")
             }
@@ -57,7 +57,7 @@ const AddRestaurantImages = ({restaurant, setRestaurantImagesVisible, restaurant
                 {restaurant.RestaurantImages.map(image => (
                     <div>
                         <DeleteRestaurantImageModal image={image} getRestaurant={getRestaurant} alert={alert}/>
-                        <img src={`http://localhost:3000/${image.image}`} alt="error" className="w-1/2 h-1/2"/>
+                        <img src={`${process.env.REACT_APP_API_ENDPOINT}/${image.image}`} alt="error" className="w-1/2 h-1/2"/>
                     </div>
                 ))}
             </div>

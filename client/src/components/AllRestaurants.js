@@ -50,7 +50,7 @@ const AllRestaurants = () => {
     }
 
     const getRestaurants = () => {
-        axios.get(`http://localhost:3000/api/getRestaurants/${town}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/getRestaurants/${town}`, config)
         .then((response) => {
             console.log(response.data)
             setRestaurants(response.data)
@@ -93,7 +93,7 @@ const AllRestaurants = () => {
                         <div className="flex flex-wrap justify-center gap-2">
                             {restaurants.map(restaurant => (
                                 <Card className="relative w-[380px] h-[450px] bg-white outline outline-2 -outline-offset-8 outline-slate-300" key={restaurant.id}>
-                                    <img className="w-full h-1/2" src={`http://localhost:3000/${restaurant.profileImage}`} alt="not working"/>
+                                    <img className="w-full h-1/2" src={`${process.env.REACT_APP_API_ENDPOINT}/${restaurant.profileImage}`} alt="not working"/>
                                     <p className="text-xl pl-5 pt-2 font-semibold">{restaurant.restaurantName}</p>
                                     <p className="overflow-hidden pl-5 pr-5 pt-2 mb-20">{restaurant.description}</p>
                                     <div className="absolute bottom-5 pl-5">

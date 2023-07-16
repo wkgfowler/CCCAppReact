@@ -15,7 +15,7 @@ const Admin = () => {
     }, [])
 
     const getRestaurants = () => {
-        axios.get("http://localhost:3000/api/admin/all_restaurants")
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/admin/all_restaurants`)
         .then((response) => {
             console.log(response.data)
 

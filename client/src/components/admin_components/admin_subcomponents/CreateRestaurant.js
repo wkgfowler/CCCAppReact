@@ -8,7 +8,7 @@ const CreateRestaurant = ({getRestaurants, toggleAdminTable}) => {
     
     const onSubmitForm = async (e) => {
         e.preventDefault()
-        axios.post("http://localhost:3000/auth/admin/create_restaurant", {
+        axios.post(`${process.env.REACT_APP_API_ENDPOINT}/auth/admin/create_restaurant`, {
             restaurantName: restaurantNameRef.current.value,
             id: user.id
         })

@@ -4,7 +4,7 @@ import { FaWindowClose } from 'react-icons/fa'
 const DeleteRestaurantImageModal = ({image, getRestaurant, alert}) => {
 
     const deleteImage = () => {
-        axios.delete(`http://localhost:3000/api/restaurantImages/${image.id}`, {
+        axios.delete(`${process.env.REACT_APP_API_ENDPOINT}/api/restaurantImages/${image.id}`, {
             headers: {
                 "token" : localStorage.getItem("token")
             }
@@ -36,7 +36,7 @@ const DeleteRestaurantImageModal = ({image, getRestaurant, alert}) => {
 
 
                   <div className="modal-body">
-                    <img src={`http://localhost:3000/${image.image}`} alt="error" className="w-1/2 h-1/2"/>
+                    <img src={`${process.env.REACT_APP_API_ENDPOINT}/${image.image}`} alt="error" className="w-1/2 h-1/2"/>
                   </div>
 
 

@@ -113,7 +113,7 @@ const SpecialsEvents = () => {
     };
 
     const getSpecials = () => {
-        axios.get(`http://localhost:3000/api/get_specials/${currentYear}-${formatDateMonth(currentMonth)}-${formatDateDate(today)}/${formatDateDay(currentYear, currentMonth, today)}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_specials/${currentYear}-${formatDateMonth(currentMonth)}-${formatDateDate(today)}/${formatDateDay(currentYear, currentMonth, today)}`, config)
         .then((response) => {
             console.log(response.data)
             setSpecials(response.data)

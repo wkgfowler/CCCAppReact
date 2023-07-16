@@ -22,7 +22,7 @@ const Profile = () => {
     const loadUser = () => {
         console.log(user.id)
         console.log(permission)
-        axios.get(`http://localhost:3000/api/${user.id}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/${user.id}`, config)
         .then((response) => {
             console.log(response.data)
             setUserRestaurants(user.Restaurants)

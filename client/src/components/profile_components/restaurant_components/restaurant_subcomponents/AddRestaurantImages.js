@@ -9,11 +9,11 @@ const AddRestaurantImages = ({restaurant, setRestaurantImagesVisible, restaurant
     const [restaurantImages, setRestaurantImages] = useState([]);
     const inputRef = useRef(null);
     
-    const handleMenuClick = () => {
+    const handleImageClick = () => {
         inputRef.current.click();
     }
 
-    const handleMenuChange = (event) => {
+    const handleImageChange = (event) => {
         setRestaurantImages(Array.from(event.target.files));
     }
 
@@ -33,6 +33,7 @@ const AddRestaurantImages = ({restaurant, setRestaurantImagesVisible, restaurant
         })
         .then(() => {
             setRestaurantImagesVisible(!restaurantImagesVisible);
+            getRestaurant();
             alert.success("Images uploaded successfully.")
         }, (error) => {
             console.log(error)
@@ -41,16 +42,15 @@ const AddRestaurantImages = ({restaurant, setRestaurantImagesVisible, restaurant
     }
     
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-4">
             <form onSubmit={onSubmitForm}>
-            <p className="text-2xl pt-4 pb-2 text-center underline">Add Images</p>
-            <div className="flex flex-col justify-start pl-4 gap-4" onClick={handleMenuClick}>
+            <div className="flex flex-col justify-start pl-4 gap-4" onClick={handleImageClick}>
                     {restaurantImages.length >= 1 ? restaurantImages.map(x => {
                         return (
                             <img src={URL.createObjectURL(x)} alt="" className="w-1/2 h-1/2"/>
                         )
                     }) : <img src={require('../../../../images/add-image-80.png')} alt="" className="h-[110px] w-[110px]"/>}
-                    <input type="file" size="lg" id="restaurantImages" name="restaurantImages" multiple ref={inputRef} style={{display: "none"}} onChange={handleMenuChange}/>
+                    <input type="file" size="lg" id="restaurantImages" name="restaurantImages" multiple ref={inputRef} style={{display: "none"}} onChange={handleImageChange}/>
                 </div>
 
             <div className="flex flex-col justify-start pl-4 gap-4">

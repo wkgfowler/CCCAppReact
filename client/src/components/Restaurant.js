@@ -103,6 +103,28 @@ const Restaurant = () => {
         setSpecialsEvents(filteredSpecialsEvents)
     }
 
+    const requestFullScreen = (img) => {
+        let image = document.getElementById(img);
+        if(image.requestFullscreen) {
+            image.requestFullscreen();
+          }else if (image.mozRequestFullScreen) {
+            image.mozRequestFullScreen();     // Firefox
+          }else if (image.webkitRequestFullscreen) {
+            image.webkitRequestFullscreen();  // Safari
+          }else if(image.msRequestFullscreen) {
+            image.msRequestFullscreen();      // IE/Edge
+          }
+    }
+
+    const testFullScreen = (img) => {
+        let fullScreenElement = document.querySelector(`#${img}`)
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            fullScreenElement.requestFullscreen();
+        }
+    }
+
     if (valid) {
         return (
             <div className="container text-[#56707E]">
@@ -240,7 +262,7 @@ const Restaurant = () => {
                                     return (
                                         <div>
                                             <p className="text-center text-2xl pt-4">{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
-                                            <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" />
+                                            <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" id={`${x.id}`} onClick={() => testFullScreen(x.id)}/>
                                         </div>
                                     )
                                 }) : ""}

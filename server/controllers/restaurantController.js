@@ -435,38 +435,46 @@ const updatingRestaurantAdditionalInfo = async (req, res) => {
                 id: req.body.id
             }
         });
-        
+
+        const updatedRestuarant = await restaurant.set({
+            website_url: req.body.website_url,
+            facebook_url: req.body.facebook_url,
+            instagram_url: req.body.instagram_url,
+            description: req.body.description
+
+        });
+
+        await updatedRestuarant.save();
+        return res.json(req.user);
+    } catch (err) {
+        console.log("FUCK")
+        console.error(err.message)
+    }
+}
+
+// adding a profile image
+const addProfileImage = async (req, res) => {
+    try {
+        const restaurant = await Restaurant.findOne({
+            where: {
+                id: req.body.id
+            }
+        });
+
         if (restaurant.profileImage && req.body.noImage === true) {
             fs.unlinkSync(`${restaurant.profileImage}`)
         }
-        console.log(req.body.noImage)
+
         if (req.body.noImage === false) {
-            let additionalInfo = {
-                websiteURL: req.body.websiteURL,
-                facebookURL: req.body.facebookURL,
-                instagramURL: req.body.instagramURL,
-                description: req.body.description
-            }
-            const updatedRestuarant = await restaurant.set(additionalInfo);
-            await updatedRestuarant.save();
             return res.json(req.user);
         } else {
-            let additionalInfo = {
-                profileImage: req.file.path,
-                websiteURL: req.body.websiteURL,
-                facebookURL: req.body.facebookURL,
-                instagramURL: req.body.instagramURL,
-                description: req.body.description
-            }
-
-
-            const updatedRestuarant = await restaurant.set(additionalInfo);
+            const updatedRestuarant = await restaurant.set({
+                profileImage: req.file.path
+            });
             await updatedRestuarant.save();
             return res.json(req.user);
         }
-        
     } catch (err) {
-        console.log("FUCK")
         console.error(err.message)
     }
 }
@@ -534,5 +542,6 @@ module.exports = {
     addExistingUserToRestaurant,
     addUserToRestaurant,
     removeUserFromRestaurant,
-    upload
+    upload,
+    addProfileImage
 }

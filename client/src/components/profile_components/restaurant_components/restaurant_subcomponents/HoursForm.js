@@ -19,6 +19,8 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
     const lunch = document.getElementById("lunch");
     const dinner = document.getElementById("dinner")
 
+    const [mealsOffered, setMealsOffered] = useState([]);
+
     const mondayOpenRef = useRef();
     const mondayCloseRef = useRef();
     const tuesdayOpenRef = useRef();
@@ -56,17 +58,16 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
 
     useEffect(() => {
         console.log(restaurant)
+        setMealsOffered(mealsOffered => [...mealsOffered, ...restaurant.mealTimes])
         getHours();
     }, [])
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
+        let filteredMeals = [...new Set(mealsOffered)]
         axios.post('http://localhost:3000/api/update_hours', {
             RestaurantId: RestaurantId,
-            breakfast: breakfast.checked,
-            brunch: brunch.checked,
-            lunch: lunch.checked,
-            dinner: dinner.checked,
+            mealTimes: filteredMeals,
             sundayOpen: sundayOpenRef.current.value,
             sundayClose: sundayCloseRef.current.value,
             mondayOpen: mondayOpenRef.current.value,
@@ -112,6 +113,15 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
         }
     };
 
+    const addMealtimes = (meal) => {
+        let mealtime = document.getElementById(meal)
+        if (mealtime.checked) {
+            setMealsOffered(mealsOffered => [...mealsOffered, mealtime.value])
+        } else if (!mealtime.checked && mealsOffered.includes(mealtime.value)) { 
+            setMealsOffered(mealsOffered.filter(theMeal => theMeal !== mealtime.value))
+        }
+    }
+
     if (valid) {
         return (
             <div className="flex justify-center text-white">
@@ -119,19 +129,39 @@ const HoursForm = ({restaurant, setHoursVisible, hoursVisible, alert}) => {
                     <p className="text-2xl pt-4 pt-2 text-center underline">Mealtimes:</p>
                     <div className="grid grid-cols-4 pb-2">
                     <div>
-                        {restaurant.breakfast === "true" ? <input type="checkbox" name="breakfast" id="breakfast" checked /> : <input type="checkbox" name="breakfast" id="breakfast" />}
+                        {mealsOffered.includes("Breakfast") ? 
+                            <input type="checkbox" name="breakfast" id="breakfast" 
+                            checked value="Breakfast" onClick={() => addMealtimes("breakfast")} />
+                            :   
+                            <input type="checkbox" name="breakfast" id="breakfast" value="Breakfast" 
+                            onClick={() => addMealtimes("breakfast")} />}
                         <label htmlFor="">Breakfast</label>
                     </div>
                     <div>
-                        {restaurant.brunch === "true" ? <input type="checkbox" name="brunch" id="brunch" checked /> : <input type="checkbox" name="brunch" id="brunch" />}
+                        {mealsOffered.includes("Brunch") ?
+                            <input type="checkbox" name="brunch" id="brunch" 
+                            checked value={"Brunch"} onClick={() => addMealtimes("brunch")}/> 
+                            : 
+                            <input type="checkbox" name="brunch" id="brunch" 
+                            value={"Brunch"} onClick={() => addMealtimes("brunch")} />}
                         <label htmlFor="">Brunch</label>
                     </div>
                     <div>
-                        {restaurant.lunch === "true" ? <input type="checkbox" name="lunch" id="lunch" checked/> : <input type="checkbox" name="lunch" id="lunch" />}
+                        {mealsOffered.includes("Lunch") ? 
+                            <input type="checkbox" name="lunch" id="lunch" checked value={"Lunch"}
+                            onClick={() => addMealtimes("lunch")} /> 
+                            : 
+                            <input type="checkbox" name="lunch" id="lunch" value={"Lunch"} 
+                            onClick={() => addMealtimes("lunch")} />}
                         <label htmlFor="">Lunch</label>
                     </div>
                     <div>
-                        {restaurant.dinner === "true" ? <input type="checkbox" name="dinner" id="dinner" checked/> : <input type="checkbox" name="dinner" id="dinner" />}
+                        {mealsOffered.includes("Dinner") ? 
+                            <input type="checkbox" name="dinner" id="dinner" checked value={"Dinner"}
+                            onClick={() => addMealtimes("dinner")} /> 
+                            : 
+                            <input type="checkbox" name="dinner" id="dinner" value={"Dinner"}
+                            onClick={() => addMealtimes("dinner")} />}
                         <label htmlFor="">Dinner</label>
                     </div>
                 </div>

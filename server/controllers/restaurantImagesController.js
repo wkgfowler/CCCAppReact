@@ -65,7 +65,7 @@ const deleteRestaurantImage = async (req, res) => {
             }
         })
 
-
+        return res.json("Success")
     } catch (err) {
         console.error(err.message);
     }

@@ -27,6 +27,9 @@ router.post("/contact_info", authorization, restaurantController.updatingRestaur
 // updating restaurant additional info
 router.post("/additional_info", authorization, restaurantController.upload, restaurantController.updatingRestaurantAdditionalInfo)
 
+// add profile image
+router.post("/add_profile_image", authorization, restaurantController.upload, restaurantController.addProfileImage)
+
 // RESTAURANT HOURS
 router.get("/get_hours/:RestaurantId/:userId", authorization, hoursController.getHours)
 

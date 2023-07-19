@@ -57,7 +57,7 @@ const Contact = () => {
                             </div>
 
                             <div className="flex flex-col w-full pt-4">
-                                <textarea name="message" id="message" cols="30" rows="5" maxLength="600" className="bg-[#dfebf2]" placeholder="Type your message here..." ref={messageRef}></textarea>
+                                <textarea name="message" id="message" cols="30" rows="5" maxLength="600" className="bg-[#dfebf2] text-black" placeholder="Type your message here..." ref={messageRef}></textarea>
                                 <button className="bg-[#dfebf2] px-6 py-2 text-slate-900 text-sm font-semibold outline outline-1 -outline-offset-4 mb-4 w-1/5 place-self-end mt-4">Submit</button>
                             </div>
                         </form>

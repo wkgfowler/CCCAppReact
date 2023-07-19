@@ -23,21 +23,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        breakfast: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        lunch: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        dinner: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        brunch: {
-            type: DataTypes.STRING,
-            allowNull: true
+        mealTimes: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            defaultValue: [""]
         },
         phoneNumber: {
             type: DataTypes.STRING,

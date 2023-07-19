@@ -306,12 +306,26 @@ const contactUsMessage = async (req, res) => {
             to: "crystalcoastdining@gmail.com",
             subject: "Contact Us Message",
             text: `${req.body.name} - ${req.body.typeOfCustomer}\n${req.body.email}\n\n${req.body.message}`
-            
-                    
-            
         };
+
+        var mailOptionsToCustomer = {
+            from: "crystalcoastdining@gmail.com",
+            to: req.body.email,
+            subject: "Contact Us Message",
+            text: `This is an automated confirmation email. \nYou sent the following message to crystalcoastdining@gmail.com: 
+                    \n\n${req.body.message} \n\n We will reach out to you as soon as we are able. Thank you.`
+        };
+
         console.log("hi")
         transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error.message)
+            } else {
+                console.log(success)
+            }
+        })
+
+        transporter.sendMail(mailOptionsToCustomer, (error, info) => {
             if (error) {
                 console.error(error.message)
             } else {

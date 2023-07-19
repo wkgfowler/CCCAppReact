@@ -59,14 +59,13 @@ const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
     }
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-4">
             <form onSubmit={onSubmitForm}>
-                <p className="text-2xl pt-4 pb-2 text-center underline">Contact Info</p>
                 <div className="flex justify-center">
                     <label className="text-lg">Street Address:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="text" name="streetAddress" defaultValue={restaurant.streetAddress ? restaurant.streetAddress : ""} ref={streetAddressRef} className="my-2 outline-none rounded text-black" required/>
+                    <input type="text" name="streetAddress" defaultValue={restaurant.streetAddress ? restaurant.streetAddress : ""} ref={streetAddressRef} className="text-center my-2 rounded text-black" required/>
                 </div>
                 <div className="flex justify-center pt-2">
                     <label className="text-lg">Select your town:</label>

@@ -39,8 +39,10 @@ const SpecialsForm = () => {
         let weekday = document.getElementById(day)
         if (weekday.checked) {
             setActualWeekdays(actualWeekdays => [...actualWeekdays, weekday.value])
+            console.log(actualWeekdays)
         } else if (!weekday.checked && actualWeekdays.includes(weekday.value)) {
             setActualWeekdays(actualWeekdays.filter(dayOfWeek => dayOfWeek !== weekday.value))
+            console.log(actualWeekdays)
         }
     }
 

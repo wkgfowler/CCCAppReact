@@ -54,10 +54,7 @@ const updateHours = async (req, res) => {
             }
         });
         const restaurantMealtimes = await restaurant.set({
-            breakfast: req.body.breakfast,
-            brunch: req.body.brunch,
-            lunch: req.body.lunch,
-            dinner: req.body.dinner
+            mealTimes: req.body.mealTimes
         })
         await restaurantMealtimes.save();
         const sundayHours = await Hours.findOne({

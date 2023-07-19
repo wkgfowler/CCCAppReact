@@ -8,6 +8,7 @@ import axios from "axios";
 import { UserContext } from "../../../context/UserContext";
 import { useAlert } from "react-alert";
 import AddRestaurantImages from "./restaurant_subcomponents/AddRestaurantImages";
+import AddProfileImage from "./restaurant_subcomponents/AddProfileImage";
 
 
 const EditInfo = () => {
@@ -15,6 +16,7 @@ const EditInfo = () => {
     const [valid, setValid] = useState(false);
     const [hoursVisible, setHoursVisible] = useState(false);
     const [infoVisible, setInfoVisible] = useState(false);
+    const [profileImageVisible, setProfileImageVisible] = useState(false);
     const [additionalInfoVisible, setAdditionalInfoVisible] = useState(false);
     const [restaurantImagesVisible, setRestaurantImagesVisible] = useState(false);
     const {RestaurantId} = useParams();
@@ -46,6 +48,7 @@ const EditInfo = () => {
     const hoursVisibility = () => {
         setHoursVisible(!hoursVisible);
         setInfoVisible(false);
+        setProfileImageVisible(false);
         setAdditionalInfoVisible(false);
         setRestaurantImagesVisible(false);
     }
@@ -53,13 +56,23 @@ const EditInfo = () => {
     const infoVisibility = () => {
         setInfoVisible(!infoVisible);
         setHoursVisible(false);
+        setProfileImageVisible(false);
         setAdditionalInfoVisible(false);
         setRestaurantImagesVisible(false);
+    }
+
+    const profileImageVisibility = () => {
+        setProfileImageVisible(!profileImageVisible);
+        setInfoVisible(false);
+        setHoursVisible(false);
+        setAdditionalInfoVisible(false);
+        setRestaurantImagesVisible(false)
     }
 
     const additionalInfoVisibility = () => {
         setAdditionalInfoVisible(!additionalInfoVisible);
         setHoursVisible(false);
+        setProfileImageVisible(false);
         setInfoVisible(false);
         setRestaurantImagesVisible(false);
     }
@@ -67,6 +80,7 @@ const EditInfo = () => {
     const restaurantImagesVisiblity = () => {
         setRestaurantImagesVisible(!restaurantImagesVisible);
         setHoursVisible(false);
+        setProfileImageVisible(false);
         setInfoVisible(false);
         setAdditionalInfoVisible(false);
     }
@@ -90,8 +104,9 @@ const EditInfo = () => {
                             <div className="flex flex-row justify-center gap-4">
                                 <p className={`${hoursVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={hoursVisibility}>Hours</p>
                                 <p className={`${infoVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={infoVisibility}>Contact Info</p>
+                                <p className={`${profileImageVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={profileImageVisibility}>Add Profile Image</p>
                                 <p className={`${additionalInfoVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={additionalInfoVisibility}>Additional Info</p>
-                                <p className={`${restaurantImagesVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={restaurantImagesVisiblity}>Add Images</p>
+                                <p className={`${restaurantImagesVisible ? "font-bold underline" : ""} cursor-pointer text-lg`} onClick={restaurantImagesVisiblity}>Add Additional Images</p>
                             </div>
 
                             <div className={`${hoursVisible ? "flex justify-center" : "hidden"}`}>
@@ -100,6 +115,10 @@ const EditInfo = () => {
 
                             <div className={`${infoVisible ? "flex justify-center" : "hidden"}`}>
                                 <ContactInfo restaurant={restaurant} setInfoVisible={setInfoVisible} infoVisible={infoVisible} alert={alert}/>
+                            </div>
+
+                            <div className={`${profileImageVisible ? "flex justify-center" : "hidden"}`}>
+                                <AddProfileImage restaurant={restaurant} setProfileImageVisible={setProfileImageVisible} profileImageVisible={profileImageVisible} alert={alert}/>
                             </div>
 
                             <div className={`${additionalInfoVisible ? "flex justify-center" : "hidden"}`}>

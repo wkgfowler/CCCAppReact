@@ -139,4 +139,7 @@ router.post("/reset_password/set_password", userController.resetPassword)
 // remove user from restaurant
 router.post("/remove_user/:id/:email", authorization, restaurantController.removeUserFromRestaurant)
 
+// toggling restaurant visibility
+router.post("/toggle_visibility", authorization, restaurantController.toggleRestaurantVisibility)
+
 module.exports = router;

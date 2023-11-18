@@ -1,11 +1,18 @@
 import axios from "axios";
 import { FaFacebook, FaInstagram } from "react-icons/fa"
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Map from "./profile_components/restaurant_components/restaurant_subcomponents/Map";
 import { WEEKDAYS, convertToNormalHours, determineIsRecurring, formatDateDisplay, formatMenuDayAvailability, formatSpecialEventDays, months } from "../lib/utils";
+import { UserContext } from "../context/UserContext";
+import { PermissionContext } from "../context/PermissionContext";
+import { useAlert } from "react-alert";
+import MenuFullScreen from "./profile_components/restaurant_components/restaurant_subcomponents/MenuFullScreen";
 
 const Restaurant = () => {
+    const {user, setUser} = useContext(UserContext)
+    const {permission, setPermission} = useContext(PermissionContext)
+
     let date = new Date();
     let weekday = date.getDay();
 
@@ -27,6 +34,7 @@ const Restaurant = () => {
     const [visibleTitle, setVisibleTitle] = useState("Description");
     const [todaysOpenHour, setTodaysOpenHour] = useState();
     const [todaysCloseHour, setTodaysCloseHour] = useState();
+    const [followed, setFollowed] = useState(false);
 
     const toggleMainPageVisible = () => {
         setMainPageVisible(true);
@@ -50,6 +58,7 @@ const Restaurant = () => {
     const {id} = useParams()
 
     useEffect(() => {
+        console.log(user)
         validRestaurant()
     }, [])
 
@@ -103,26 +112,62 @@ const Restaurant = () => {
         setSpecialsEvents(filteredSpecialsEvents)
     }
 
-    const requestFullScreen = (img) => {
-        let image = document.getElementById(img);
-        if(image.requestFullscreen) {
-            image.requestFullscreen();
-          }else if (image.mozRequestFullScreen) {
-            image.mozRequestFullScreen();     // Firefox
-          }else if (image.webkitRequestFullscreen) {
-            image.webkitRequestFullscreen();  // Safari
-          }else if(image.msRequestFullscreen) {
-            image.msRequestFullscreen();      // IE/Edge
-          }
+    // const requestFullScreen = (img) => {
+    //     let image = document.getElementById(img);
+    //     if(image.requestFullscreen) {
+    //         image.requestFullscreen();
+    //       }else if (image.mozRequestFullScreen) {
+    //         image.mozRequestFullScreen();     // Firefox
+    //       }else if (image.webkitRequestFullscreen) {
+    //         image.webkitRequestFullscreen();  // Safari
+    //       }else if(image.msRequestFullscreen) {
+    //         image.msRequestFullscreen();      // IE/Edge
+    //       }
+    // }
+
+    // const testFullScreen = (img) => {
+    //     let fullScreenElement = document.querySelector(`#${img}`)
+    //     if (document.fullscreenElement) {
+    //         document.exitFullscreen();
+    //     } else {
+    //         fullScreenElement.requestFullscreen();
+    //     }
+    // }
+
+    // trying to add the ability to follow restaurant
+    const alert = useAlert();
+
+    const checkRestaurantId = obj => obj.id === restaurant.id;
+
+    const followRestaurant = () => {
+        if (user) {
+            axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/followRestaurant`, {
+                restaurantId: id,
+                userId: user.id
+            }, {
+                headers: {
+                    "token": localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                console.log("FUCKING RIGHT")
+                alert.success(`Now following ${restaurant.restaurantName}`)
+            }, (error) => {
+                console.log(error)
+            })
+        } else {
+            alert.error("You must log in to follow a restaurant")
+        }
     }
 
-    const testFullScreen = (img) => {
-        let fullScreenElement = document.querySelector(`#${img}`)
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else {
-            fullScreenElement.requestFullscreen();
-        }
+    const unfollowRestaurant = (restaurantId, userId) => {
+        axios.delete(`${process.env.REACT_APP_API_ENDPOINT}/api/unfollowRestaurant/${restaurantId}/${userId}`)
+        .then((response) => {
+            console.log("right again!!")
+            alert.success(`No longer following ${restaurant.restaurantName}`)
+        }, (error) => {
+            console.log(error)
+        })
     }
 
     if (valid) {
@@ -186,6 +231,8 @@ const Restaurant = () => {
                             <div className="flex flex-row gap-2">
                                 {restaurant.facebookURL && <a href={`https://${restaurant.facebookURL}`} className="cursor-pointer" target="_blank"><FaFacebook className="text-2xl"/></a>}
                                 {restaurant.instagramURL && <a href={`https://${restaurant.instagramURL}`} className="cursor-pointer" target="_blank"><FaInstagram className="text-2xl"/></a>}
+                                {/* {user.followedRestaurants.some(checkRestaurantId) ? <button onClick={() => unfollowRestaurant(restaurant.id, user.id)}>Unfollow</button> : <button onClick={followRestaurant}>Follow us!</button>} */}
+                                {followed ? <button onClick={() => unfollowRestaurant(restaurant.id, user.id)}>Unfollow</button> : <button onClick={followRestaurant}>Follow us!</button>}
                             </div>
                         </div>
                     </div>    
@@ -248,8 +295,8 @@ const Restaurant = () => {
                                             </div>
                                             <div className="flex flex-row pl-2">
                                                 {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}
-                                                {specialEvent.specialEventDate ? <p>{formatDateDisplay(specialEvent.specialEventDate)}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
-                                                <p>&nbsp; from {specialEvent.startTime} - {specialEvent.endTime}</p>
+                                                {specialEvent.specialEventDate ? <p>{formatDateDisplay(specialEvent.specialEventDate)}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays.sort())}</p>}
+                                                <p>&nbsp; from {convertToNormalHours(specialEvent.startTime)} - {convertToNormalHours(specialEvent.endTime)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -257,12 +304,13 @@ const Restaurant = () => {
                             </div>
                         
                         
-                            <div className={`${menuVisible ? "flex" : "hidden"}`}>
+                            <div className={`${menuVisible ? "flex flex-col pl-2" : "hidden"}`}>
                                 {menus ? menus.map((x, i) => {
                                     return (
                                         <div>
                                             <p className="text-center text-2xl pt-4">{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
-                                            <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" id={`${x.id}`} onClick={() => testFullScreen(x.id)}/>
+                                            {/* <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" id={`${x.id}`} onClick={() => testFullScreen(x.id)}/> */}
+                                            <MenuFullScreen menu={x}/>
                                         </div>
                                     )
                                 }) : ""}

@@ -150,17 +150,22 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
             }
         })
 
+        if (req.params.specialOrEvent !== undefined) {
+            
+        }
         const allSpecialsEvents = await SpecialEvent.findAll({
             where: {
                 RestaurantId: req.params.RestaurantId
-            }
+            },
+            order: ['specialOrEvent']
         })
 
         const recurringSpecialsEvents = await SpecialEvent.findAll({
             where: {
                 RestaurantId: req.params.RestaurantId,
                 recurring: true
-            }
+            },
+            order: ['specialOrEvent']
         })
 
         if(validUser || validAdmin) {
@@ -173,8 +178,50 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
     }
 }
 
+// updating specials/events
+const updateSpecialEvent = async (req, res) => {
+    try {
+        const udpatedSpecialEvent = await SpecialEvent.update({
+            specialOrEvent: req.body.specialOrEvent,
+            name: req.body.name,
+            description: req.body.description,
+            recurring: req.body.recurring,
+            weekdays: req.body.weekdays,
+            specialEventDate: req.body.specialEventDate,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+
+        return res.json("nailed it")
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
+// delete special/event
+const deleteSpecialEvent = async (req, res) => {
+    try {
+        const specialEvent = await SpecialEvent.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        return res.json("almost there")
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
 module.exports = {
     getSpecialsEventsCalendar,
     getSpecialsEventsRestaurantAdmin,
     addSpecialEvent,
+    updateSpecialEvent,
+    deleteSpecialEvent
 }

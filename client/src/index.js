@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom/client';
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
+// TailWind Elements
+import "tw-elements-react/dist/css/tw-elements-react.min.css"
 
 import './index.css';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'

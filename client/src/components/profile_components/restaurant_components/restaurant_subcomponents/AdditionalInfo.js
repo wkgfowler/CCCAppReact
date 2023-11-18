@@ -16,9 +16,9 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
 
         axios.post('http://localhost:3000/api/additional_info',  {
             id: RestaurantId,
-            website_url: websiteRef.current.value,
-            facebook_url: facebookRef.current.value,
-            instagram_url: instagramRef.current.value,
+            websiteURL: websiteRef.current.value,
+            facebookURL: facebookRef.current.value,
+            instagramURL: instagramRef.current.value,
             description: descriptionRef.current.value
         }, {
             headers: {

@@ -1,4 +1,6 @@
 const db = require('../models');
+const fs = require('fs');
+const crypto = require('crypto');
 
 const Restaurant = db.Restaurant;
 const User = db.User;
@@ -15,7 +17,9 @@ const storage = multer.diskStorage({
         cb(null, 'Images/Menus')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
+        // necessary to avoid images sharing the same filename if uploaded too quickly
+        const randomString = crypto.randomBytes(16).toString('hex')
+        cb(null, randomString + path.extname(file.originalname))
     }
 })
 
@@ -39,6 +43,7 @@ const menuUpload = async (req, res) => {
     try {
         console.log(req.body)
         const files = req.files
+        console.log(files)
         for (let i = 0; i < files.length; i++) {
             const menu = await Menu.create({
                 RestaurantId: req.body.RestaurantId,
@@ -53,8 +58,10 @@ const menuUpload = async (req, res) => {
                 thursday: req.body.thursday,
                 friday: req.body.friday,
                 saturday: req.body.saturday,
-                menuImage: files[i].path
+                menuImage: files[i].path,
+                pageNumber: req.body.pageNumber[i]
             })
+            console.log(menu)
         }
 
         return res.json("great success")
@@ -85,7 +92,8 @@ const getMenusForEdit = async (req, res) => {
         const menus = await Menu.findAll({
             where: {
                 RestaurantId: req.params.RestaurantId
-            }
+            },
+            order: [ ['pageNumber', 'ASC'] ]
         })
 
         if (validUser || validAdmin) {
@@ -121,7 +129,8 @@ const getSpecificMenuForEdit = async (req, res) => {
             where: {
                 RestaurantId: req.params.RestaurantId,
                 menuType: req.params.typeOfMenu
-            }
+            },
+            order: [ ['pageNumber', 'ASC'] ]
         })
 
         if (validUser || validAdmin) {
@@ -134,9 +143,33 @@ const getSpecificMenuForEdit = async (req, res) => {
     }
 }
 
+// deleting menu image
+const deleteMenuImage = async (req, res) => {
+    try {
+        const menu = await Menu.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        fs.unlinkSync(`${menu.menuImage}`)
+
+        await Menu.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        
+        return res.json("Success")
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
 module.exports = {
     upload,
     menuUpload,
     getMenusForEdit,
     getSpecificMenuForEdit,
+    deleteMenuImage
 }

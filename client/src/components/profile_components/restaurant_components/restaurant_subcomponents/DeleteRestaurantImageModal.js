@@ -21,7 +21,7 @@ const DeleteRestaurantImageModal = ({image, getRestaurant, alert}) => {
     return (  
         <div>
             <button type="button" className="absolute cursor-pointer text-3xl" data-toggle="modal" data-target={`#id${image.id}`}>
-              <FaWindowClose />
+              <FaWindowClose className="text-red-700"/>
             </button>
 
             <div className="modal" id={`id${image.id}`}>

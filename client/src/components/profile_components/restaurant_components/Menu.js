@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../../../context/UserContext";
 import { MENUTYPES, WEEKDAYS, formatMenuDayAvailability } from "../../../lib/utils";
+import DeleteRestaurantMenuModal from "./restaurant_subcomponents/DeleteRestaurantMenuModal";
 
 const Menu = () => {
     const [menus, setMenus] = useState([]);
@@ -88,6 +89,7 @@ const Menu = () => {
                                         <br />
                                         <p className="text-lg">{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
                                         <br />
+                                        <DeleteRestaurantMenuModal menu={x} getSpecificMenu={getSpecificMenu}/>
                                         <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" />
                                     </div>
                                 )
@@ -96,39 +98,6 @@ const Menu = () => {
                     </div>
                 </div>
 
-
-
-                {/* <div className="flex flex-col">
-
-                    <div className="flex justify-center">
-                        <button><Link to={`/add_menus/${RestaurantId}`}>Add Menu</Link></button>
-                    </div>
-
-                    <div className="flex justify-center">
-                        <div className="flex justify-evenly">
-                            {menuTypes.map((x) => {
-                                return (
-                                    <p onClick={() => setTypeOfMenu(x)}>{x}</p>
-                                )
-                            })}
-                        </div>
-                    </div>
-                        
-                    <div className="flex justify-center">
-                        <div>
-                            {menus ? menus.map((x, i) => {
-                                return (
-                                    <div>
-                                        <p>{i === 0 ? x.menuType : ""}</p>
-                                        <br />
-                                        <p>{i === 0 ? `Available ${x.everyday ? "everyday" : formatMenuDayAvailability(WEEKDAYS.map(day => x[day.toLowerCase()] ? day : null))} from ${x.startTime} - ${x.endTime}` : ""}</p>
-                                        <img src={`${process.env.REACT_APP_API_ENDPOINT}/${x.menuImage}`} alt="error" />
-                                    </div>
-                                )
-                            }) : ""}
-                        </div>
-                    </div>
-                </div> */}
             </div>
         );
     } else {

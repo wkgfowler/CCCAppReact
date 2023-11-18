@@ -46,6 +46,7 @@ const upload = multer({
 const getRestaurants = async (req, res) => {
     try {
         console.log(req.query.weekday)
+
         if (req.query.towns !== undefined && req.query.time !== "") {
             const potentialRestaurants = await Hours.findAll({
                 where: {
@@ -64,21 +65,29 @@ const getRestaurants = async (req, res) => {
             const restaurants = await Restaurant.findAll({
                 where: {
                     id: ids,
-                    town: req.query.towns
+                    town: req.query.towns,
+                    isVisible: true,
+                    isActive: true
                 },
                 order: [ ['restaurantName', 'ASC'] ]
             })
             return res.json(restaurants)
-        } else if (req.query.towns !== undefined) {
+        } 
+        
+        else if (req.query.towns !== undefined) {
             console.log("test2")
             const restaurants = await Restaurant.findAll({
                 where: {
-                    town: req.query.towns
+                    town: req.query.towns,
+                    isVisible: true,
+                    isActive: true
                 },
                 order: [ ['restaurantName', 'ASC'] ]
             });
             return res.json(restaurants)
-        } else if (req.query.time !== "") {
+        } 
+        
+        else if (req.query.time !== "") {
             const potentialRestaurants = await Hours.findAll({
                 where: {
                     weekday: req.query.weekday
@@ -95,15 +104,23 @@ const getRestaurants = async (req, res) => {
             }
             const restaurants = await Restaurant.findAll({
                 where: {
-                    id: ids
+                    id: ids,
+                    isVisible: true,
+                    isActive: true
                 },
                 order: [ ['restaurantName', 'ASC'] ]
             })
             return res.json(restaurants)
-        } else {
+        } 
+        
+        else {
             const restaurants = await Restaurant.findAll({
+                where: {
+                    isVisible: true,
+                    isActive: true
+                },
                 order: [ ['restaurantName', 'ASC'] ]
-            });
+            })
             return res.json(restaurants)
         }
         
@@ -120,7 +137,8 @@ const getRestaurantPage = async (req, res) => {
                 id: req.params.id
             },
             include: [{
-                model: Menu}, {
+                model: Menu, 
+                    order: [ ['pageNumber', 'ASC'] ]}, {
                 model: SpecialEvent
             }]
         });
@@ -138,6 +156,7 @@ const getRestaurantPage = async (req, res) => {
             }
         })
 
+        
         console.log('hi')
         if (restaurant) {
             return res.json({valid: true, restaurant, hours, images});
@@ -436,7 +455,7 @@ const updatingRestaurantAdditionalInfo = async (req, res) => {
             }
         });
 
-        const updatedRestuarant = await restaurant.set({
+        const updatedRestaurant = await restaurant.set({
             website_url: req.body.website_url,
             facebook_url: req.body.facebook_url,
             instagram_url: req.body.instagram_url,
@@ -444,7 +463,7 @@ const updatingRestaurantAdditionalInfo = async (req, res) => {
 
         });
 
-        await updatedRestuarant.save();
+        await updatedRestaurant.save();
         return res.json(req.user);
     } catch (err) {
         console.log("FUCK")
@@ -455,6 +474,7 @@ const updatingRestaurantAdditionalInfo = async (req, res) => {
 // adding a profile image
 const addProfileImage = async (req, res) => {
     try {
+        console.log(req.body)
         const restaurant = await Restaurant.findOne({
             where: {
                 id: req.body.id
@@ -521,13 +541,171 @@ const adminAllRestaurantsAndUsers = async (req, res) => {
             },
             order: [ ['restaurantName', 'ASC'] ]
         })
+
+        if (req.query.role !== undefined) {
+            const users = await User.findAll({
+                include: {
+                    model: Roles,
+                    attributes: ['role'],
+                    where: {
+                        role: req.query.role
+                    }
+                },
+                order: [ ['email', 'ASC'] ]
+            })
+
+            return res.json({restaurants, users})
+        }
+
+        const users = await User.findAll({
+            include: {
+                model: Roles,
+                attributes: ['role']
+            },
+            order: [ ['email', 'ASC'] ]
+        })
         console.log(1);
-        return res.json(restaurants);
+        return res.json({restaurants, users});
     } catch (err) {
         console.error(err.message);
     }
 }
 
+// initial information form for restaurant
+// NEED TO COMPLETE THIS 9/12/2023
+const initialInformationForm = async (req, res) => {
+    try {
+
+        const restaurant = await Restaurant.findOne({
+            where: {
+                id: req.body.id
+            }
+        });
+
+        let initialInfo = {
+            streetAddress: req.body.streetAddress,
+            town: req.body.town,
+            phoneNumber: req.body.phoneNumber,
+            mealTimes: req.body.mealTimes,
+            websiteURL: req.body.websiteURL,
+            facebookURL: req.body.facebookURL,
+            instagramURL: req.body.instagramURL,
+            description: req.body.description,
+            profileImage: req.file.path,
+            isActive: true,
+            isVisible: true
+        }
+        console.log(req.body)
+        
+        const updatedRestaurant = await restaurant.set(initialInfo);
+        
+        console.log(restaurant)
+        
+
+        const sundayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 0
+            }
+        });
+        const mondayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 1
+            }
+        });
+        const tuesdayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 2
+            }
+        });
+        const wednesdayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 3
+            }
+        });
+        const thursdayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 4
+            }
+        });
+        const fridayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 5
+            }
+        });
+        const saturdayHours = await Hours.findOne({
+            where: {
+                RestaurantId: req.body.id,
+                weekday: 6
+            }
+        });
+
+        const setSundayHours = await sundayHours.set({
+            openHour: req.body.sundayOpen,
+            closeHour: req.body.sundayClose
+        });
+        await setSundayHours.save();
+        const setMondayHours = await mondayHours.set({
+            openHour: req.body.mondayOpen,
+            closeHour: req.body.mondayClose
+        });
+        await setMondayHours.save();
+        const setTuesdayHours = await tuesdayHours.set({
+            openHour: req.body.tuesdayOpen,
+            closeHour: req.body.tuesdayClose
+        });
+        await setTuesdayHours.save();
+        const setWednesdayHours = await wednesdayHours.set({
+            openHour: req.body.wednesdayOpen,
+            closeHour: req.body.wednesdayClose
+        });
+        await setWednesdayHours.save();
+        const setThursdayHours = await thursdayHours.set({
+            openHour: req.body.thursdayOpen,
+            closeHour: req.body.thursdayClose
+        });
+        await setThursdayHours.save();
+        const setFridayHours = await fridayHours.set({
+            openHour: req.body.fridayOpen,
+            closeHour: req.body.fridayClose
+        });
+        await setFridayHours.save();
+        const setSaturdayHours = await saturdayHours.set({
+            openHour: req.body.saturdayOpen,
+            closeHour: req.body.saturdayClose
+        });
+        await setSaturdayHours.save();
+        await updatedRestaurant.save();
+        return res.json("did this work?")
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
+// toggling restaurant visiblity
+const toggleRestaurantVisibility = async (req, res) => {
+    try {
+        const restaurant = await Restaurant.findOne({
+            where: {
+                id: req.body.id
+            }
+        })
+
+        const updatedRestaurant = await restaurant.set({
+            isVisible: !req.body.isVisible
+        })
+        await updatedRestaurant.save();
+
+        return res.json("this would be cool")
+    } catch (err) {
+        console.error(err.message)
+    }
+}
 
 
 module.exports = {
@@ -543,5 +721,8 @@ module.exports = {
     addUserToRestaurant,
     removeUserFromRestaurant,
     upload,
-    addProfileImage
+    addProfileImage,
+    initialInformationForm,
+    toggleRestaurantVisibility,
+    // followRestaurant
 }

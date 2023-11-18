@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         menuType: {
             type: DataTypes.STRING,
         },
+        pageNumber: {
+            type: DataTypes.INTEGER
+        },
         startTime: {
             type: DataTypes.STRING,
             allowNull: false

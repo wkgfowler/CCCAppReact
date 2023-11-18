@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaWindowClose } from 'react-icons/fa'
 import DeleteRestaurantImageModal from './DeleteRestaurantImageModal';
 
 const AddRestaurantImages = ({restaurant, setRestaurantImagesVisible, restaurantImagesVisible, alert, getRestaurant}) => {

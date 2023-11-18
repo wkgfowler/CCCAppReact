@@ -111,6 +111,12 @@ export const STARTHOURS = [
     { value: "2100", display: "9pm" }
 ];
 
+export const formatStartHoursValue = (val) => {
+    let startHours = STARTHOURS;
+    let obj = startHours.find(hour => hour.display === val)
+    return obj
+}
+
 export const ENDHOURS = [
     { value: "Close", display: "Close"},
     { value: '0900', display: '9am' },
@@ -149,6 +155,12 @@ export const ENDHOURS = [
     { value: '0130', display: '130am' },
     { value: '0200', display: '2am' }
 ];
+
+export const formatEndHoursValue = (val) => {
+    let endHours = ENDHOURS;
+    let obj = endHours.find(hour => hour.display === val)
+    return obj
+}
 
 export const formatSpecialEventDays = (arr) => {
     let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -284,6 +296,16 @@ export const MENUMINUTES = [
 
 export const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
+export const WEEKDAYSVALUES = [
+    {day: "sunday", value: 0},
+    {day: "monday", value: 1},
+    {day: "tuesday", value: 2},
+    {day: "wednesday", value: 3},
+    {day: "thursday", value: 4},
+    {day: "friday", value: 5},
+    {day: "saturday", value: 6}
+]
+
 export const formatMenuTime = (startTime, endTime, AMPM) => {
     if (endTime === "" && AMPM === "") {
         return startTime
@@ -333,20 +355,27 @@ export const formatWhatIsOpenTime = (hour, minute) => {
 }
 
 export const convertToNormalHours = (time) => {
-    if (time === "Closed") {
+    if (time === "Closed" || time === "Close" || time === "Open") {
         return time;
-    } else if (time === "1200") {
+    } else if (time === "1200" || time === "1000" || time === "1100") {
         let newTime = "12pm"
         return newTime
     } else if (time === "1230") {
-        let newTime = "1230pm"
-        return newTime
+        time  += "pm"
+        return time
     } else if (time === "0000") {
         let newTime = "12am"
         return newTime
     } else if (time === "0030") {
         let newTime = "1230am"
         return newTime
+    } else if (time === "1000" || time === "1100") {
+        let newTime = time.slice(0,2)
+        newTime += "am"
+        return newTime
+    } else if (time === "1030" || time === "1130") {
+        time += "am"
+        return time
     } else if (time[0] === '0') {
         let newTime = time.replace(time[0], "")
         if (newTime[1] === '0') {
@@ -357,7 +386,7 @@ export const convertToNormalHours = (time) => {
         newTime += "am"
         return newTime;
     } else if ((time[0] === '1' && time[1] > 2) || time[0] === '2') {
-        let newTime = +time.slice(0,2)
+        let newTime = time.slice(0,2)
         newTime -= 12
         let newerTime = newTime.toString()
         if (time[2] === '0') {
@@ -372,6 +401,22 @@ export const convertToNormalHours = (time) => {
 export const formatDateDisplay = (date) => {
     let dateSplit = date.split("-")
     let monthSplit = Number(dateSplit[1])
-    let month = months[monthSplit]
+    let month = months[monthSplit-1]
     return `${month} ${dateSplit[2]}`
+}
+
+export const capitalizeFirstLetter = (string) => {
+    return string.replace(string[0], string[0].toUpperCase())
+}
+
+export const formatRecurringOrNot = (string) => {
+    if (string === false) {
+        return "Only once"
+    } else {
+        return "Recurring every week"
+    }
+}
+
+export const determineWeekdays = (str, value) => {
+    return str.includes(value)
 }

@@ -3,24 +3,33 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import AdminRestaurantsTable from "./admin_subcomponents/AdminRestaurantsTable";
 import RestaurantRegistrationEmailForm from "./admin_subcomponents/RestaurantRegistrationEmailForm";
 import CreateRestaurant from "./admin_subcomponents/CreateRestaurant";
+import AdminUsersTable from "./admin_subcomponents/AdminUsersTablej";
 
 const Admin = () => {
+    const [userRoles, setUserRoles] = useState([])
     const [restaurants, setRestaurants] = useState([]);
+    const [allUsers, setAllUsers] = useState([])
     const [adminTableVisible, setAdminTableVisible] = useState(true);
     const [restaurantRegistrationVisible, setRestaurantRegistrationVisible] = useState(false);
     const [createRestaurantVisible, setCreateRestaurantVisible] = useState(false);
 
     useEffect(() => {
         getRestaurants();
-    }, [])
+    }, [userRoles])
+
+    const config = {
+        params: {
+            role: userRoles
+        }
+    }
 
     const getRestaurants = () => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/admin/all_restaurants`)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/admin/all_restaurants`, config)
         .then((response) => {
             console.log(response.data)
 
-            setRestaurants(response.data)
-            
+            setRestaurants(response.data.restaurants)
+            setAllUsers(response.data.users)
         }, (error) => {
             console.log(error)
         })
@@ -53,8 +62,9 @@ const Admin = () => {
                     <p className={`text-lg cursor-pointer ${createRestaurantVisible ? "font-bold border-y border-l pl-2 border-slate-900" : ""}`} onClick={toggleCreateRestaurant}>Create Restaurant</p>
                 </div>
                 <div className="flex flex-col w-10/12 justify-start">
-                    <div className={`${adminTableVisible ? "flex" : "hidden"}`}>
+                    <div className={`${adminTableVisible ? "flex flex-col" : "hidden"}`}>
                         <AdminRestaurantsTable restaurants={restaurants} getRestaurants={getRestaurants}/>
+                        <AdminUsersTable allUsers={allUsers} userRoles={userRoles} setUserRoles={setUserRoles}/>
                     </div>
                     <div className={`${restaurantRegistrationVisible ? "flex" : "hidden"}`}>
                         <RestaurantRegistrationEmailForm toggleAdminTable={toggleAdminTable}/>

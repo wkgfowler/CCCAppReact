@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
                     const token = jwtGenerator(storedToken.id);
                 
                     req.user = {"token" : token};
-
+                    
                     next();
                 
                 } catch (err) {
@@ -44,7 +44,7 @@ module.exports = async (req, res, next) => {
                 }
             } else {
                 const payload = {"token" : jwtToken};
-        
+
                 req.user = payload;
 
                 next();

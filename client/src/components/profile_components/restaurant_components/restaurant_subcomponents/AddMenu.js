@@ -69,6 +69,17 @@ const AddMenu = () => {
         setMenu(Array.from(event.target.files));
     }
 
+    const dragMenu = useRef(0);
+    const draggedOverMenu = useRef(0);
+
+    const handleSort = () => {
+        const menuClone = [...menu]
+        const temp = menuClone[dragMenu.current]
+        menuClone[dragMenu.current] = menuClone[draggedOverMenu.current]
+        menuClone[draggedOverMenu.current] = temp
+        setMenu(menuClone)
+    }
+
     const areDaysVisible = () => {
         const days = document.getElementById("dayAvailability")
         if (days.value === "selectDays") {
@@ -97,8 +108,9 @@ const AddMenu = () => {
         formData.append('thursday', thursday.checked);
         formData.append('friday', friday.checked);
         formData.append('saturday', saturday.checked);
-        menu.forEach((file) => {
+        menu.forEach((file, index) => {
             formData.append('menuImage', file)
+            formData.append('pageNumber', index)
         });
         axios.post('http://localhost:3000/api/add_menu', formData, {
             headers: {
@@ -203,19 +215,30 @@ const AddMenu = () => {
                     })}
                 </div>
 
-                <div className="flex justify-start" onClick={handleMenuClick}>
-                    {menu.length >= 1 ? menu.map(x => {
-                        return (
-                            <img src={URL.createObjectURL(x)} alt="" className="w-1/2 h-1/2"/>
+                <div className="flex flex-col items-center pt-2">
+                    {menu.length >= 1 ? menu.map((x, index) => 
+                        (
+                            <div className="flex pt-2" 
+                                draggable
+                                onDragStart={() => (dragMenu.current = index)}
+                                onDragEnter={() => (draggedOverMenu.current = index)}
+                                onDragEnd={handleSort}
+                                onDragOver={(e) => e.preventDefault()}
+                            >
+                                <img src={URL.createObjectURL(x)} alt="" className="w-1/2 h-1/2" id={index}/>
+                            </div>
                         )
-                    }) : <img src={require('../../../../images/add-image-80.png')} alt=""/>}
-                    <input type="file" size="lg" id="menuImage" name="menuImage" multiple ref={inputRef} style={{display: "none"}} onChange={handleMenuChange}/>
+                    ) : ""}
+                    <input type="file" size="lg" id="menuImage" name="menuImage" multiple ref={inputRef} onChange={handleMenuChange}/>
                 </div>
 
                 <div className="flex justify-start">
                     <button className="outline outline-2 bg-[#56707E] text-white rounded px-2 py-1 mt-2">Submit</button>
                 </div>
+
             </form>
+
+            
         </div>
     );
 }

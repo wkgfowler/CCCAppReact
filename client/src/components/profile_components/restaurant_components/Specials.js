@@ -3,7 +3,8 @@ import SpecialsForm from "./restaurant_subcomponents/SpecialsForm";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
-import { formatDateDisplay, formatSpecialEventDays } from "../../../lib/utils";
+import { convertToNormalHours, formatDateDisplay, formatSpecialEventDays } from "../../../lib/utils";
+import EditSpecialsForm from "./restaurant_subcomponents/EditSpecialsForm";
 
 const Specials = () => {
     const {RestaurantId} = useParams();
@@ -15,6 +16,7 @@ const Specials = () => {
     const [specialsFormVisible, setSpecialsFormVisible] = useState(false);
     const [allSpecialsEvents, setAllSpecialsEvents] = useState([]);
     const [recurringSpecialsEvents, setRecurringSpecialsEvents] = useState([]);
+    const [specialOrEvent, setSpecialOrEvent] = useState([]);
     
     const toggleAllSpecialsEventsVisible = () => {
         setAllSpecialsEventsVisible(!allSpecialsEventsVisible)
@@ -34,16 +36,26 @@ const Specials = () => {
         setRecurringSpecialsEventsVisible(false)
     }
 
+    const addType = (typeName) => {
+        let type = document.getElementById(typeName)
+        if (type.checked) {
+            setSpecialOrEvent(specialOrEvent => [...specialOrEvent, type.value])
+        } else if (!type.checked && specialOrEvent.includes(type.value)) {
+            setSpecialOrEvent(specialOrEvent.filter(x => x !== type.value))
+        }
+    }
+
     const config = {
         headers: {"token": localStorage.getItem("token")},
         params: {
             RestaurantId: RestaurantId,
-            userId: user.id
+            userId: user.id,
+            specialOrEvent: specialOrEvent
         }
     };
 
     const getAllSpecialsEvents = () => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_all_specials_events/${RestaurantId}/${userId}`, config)
+        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_all_specials_events/${RestaurantId}/${userId}/${specialOrEvent}`, config)
         .then((response) => {
             // console.log(response.data)
             setAllSpecialsEvents(response.data.allSpecialsEvents)
@@ -60,8 +72,29 @@ const Specials = () => {
     return (
         <div className="container bg-[#dfebf2] pb-3">
             <div className="flex flex-row justify-center pt-3">
-                <p className="text-3xl">Specials/Events</p>
+                <p className="text-3xl">Specials & Events</p>
             </div>
+
+            <div className="flex flex-row justify-center gap-6 pt-3">
+                <p className="text-xl">Filter by:</p>
+                <div>
+                    <input type="checkbox" name="special" id="special" value="special" />
+                    <label for="special" className="text-xl">Specials</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="event" id="event" value="event"/>
+                    <label for="event" className="text-xl">Events</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="nonrecurring" id="nonrecurring" value="false"/>
+                    <label for="nonrecurring" className="text-xl">Nonrecurring</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="recurring" id="recurring" value="true"/>
+                    <label for="recurring" className="text-xl">Recurring</label>
+                </div>
+            </div>
+
             <div className="flex flex-row pt-4">
 
                 <div className="flex flex-col w-2/12 pr-16">
@@ -71,47 +104,29 @@ const Specials = () => {
                 </div>
 
                 <div className="flex flex-col w-10/12 justify-start">
+
+                    
                     <div className={`${specialsFormVisible ? "flex" : "hidden"}`}>
                         <SpecialsForm />
                     </div>
-                    <div className={`${allSpecialsEventsVisible ? "flex" : "hidden"}`}>
+
+
+                    <div className={`${allSpecialsEventsVisible ? "flex flex-col" : "hidden"}`}>
                         {allSpecialsEventsVisible && <div>
                             {allSpecialsEvents.map(specialEvent => (
                                 <div key={specialEvent.id} className="flex flex-col w-full py-2">
-                                    <div className="flex flex-col pl-10">
-                                        <div>
-                                            {specialEvent.specialOrEvent === "special" ? <p className="text-lg font-medium underline">Special:</p> : <p className="text-lg font-medium underline">Event:</p>}
-                                        </div>
-                                        <div className="flex flex-row">
-                                            <p>{specialEvent.name} - {specialEvent.description}</p>
-                                        </div>
-                                        <div className="flex flex-row">
-                                            {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}
-                                            {specialEvent.specialEventDate ? <p>{formatDateDisplay(specialEvent.specialEventDate)}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
-                                            <p>&nbsp; from {specialEvent.startTime} - {specialEvent.endTime}</p>
-                                        </div>
-                                    </div>
+                                    <EditSpecialsForm specialEvent={specialEvent} getAllSpecialsEvents={getAllSpecialsEvents}/>
                                 </div>
                             ))}
                         </div>}
                     </div>
-                    <div className={`${recurringSpecialsEventsVisible ? "flex" : "hidden"}`}>
+
+
+                    <div className={`${recurringSpecialsEventsVisible ? "flex flex-col" : "hidden"}`}>
                         {recurringSpecialsEventsVisible && <div>
                             {recurringSpecialsEvents.map(specialEvent => (
                                 <div key={specialEvent.id} className="flex flex-col w-full py-2">
-                                    <div className="flex flex-col pl-10">
-                                        <div>
-                                            {specialEvent.specialOrEvent === "special" ? <p className="text-lg font-medium underline">Special:</p> : <p className="text-lg font-medium underline">Event:</p>}
-                                        </div>
-                                        <div className="flex flex-row">
-                                            <p>{specialEvent.name} - {specialEvent.description}</p>
-                                        </div>
-                                        <div className="flex flex-row">
-                                            <p>Available &nbsp;</p>
-                                            {specialEvent.specialEventDate ? <p>{specialEvent.specialEventDate}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays)}</p>}
-                                            <p>&nbsp; from {specialEvent.startTime} - {specialEvent.endTime}</p>
-                                        </div>
-                                    </div>
+                                    <EditSpecialsForm specialEvent={specialEvent} getAllSpecialsEvents={getAllSpecialsEvents}/>
                                 </div>
                             ))}
                         </div>}
@@ -120,27 +135,8 @@ const Specials = () => {
                 </div>
                 
             </div>
+
         </div>
-        // <div className="justify-center">
-        //     <div className="grid grid-cols-1 justify-center justify-items-center">
-        //         <p className="text-4xl text-center">Specials/Events</p>
-                
-        //     </div>
-        //     <div className="grid grid-cols-3 justify-center pt-2">
-        //         <div className="flex justify-center">
-        //             <button className="border border-white p-2 rounded-lg w-1/2" onClick={toggleAllSpecialsEventsVisible}>All Specials</button>
-        //         </div>
-        //         <div className="flex justify-center">
-        //             <button className="border border-white p-2 rounded-lg w-1/2" onClick={toggleRecurringSpecialsEventsVisible}>Recurring Specials</button>
-        //         </div>
-        //         <div className="flex justify-center">
-        //             <button className="border border-white p-2 rounded-lg w-1/2"><Link to={`/add_specials/${RestaurantId}`}>Add Specials/Events</Link></button>
-        //         </div>
-        //     </div>
-
-            // </div>
-
-
         
     );
 }

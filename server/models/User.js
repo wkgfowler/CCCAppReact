@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = function (models) {
         User.belongsToMany(models.Restaurant, {through: 'Users_Restaurants'});
         User.belongsToMany(models.Roles, {through: 'Users_Roles'});
+
+        // attemtp to make follower table
+        // User.belongsToMany(models.Restaurant, {through: 'Followers_Restaurants', foriegnKey: 'UserId', otherKey: 'followedRestaurantId'})
+        User.belongsToMany(models.Restaurant, {through: 'Follower', as: 'follower'})
     };
 
     return User;

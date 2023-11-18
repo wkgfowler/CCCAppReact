@@ -1,8 +1,12 @@
 const db = require('../models');
+const {Op} = require('sequelize')
 
 const User = db.User;
 const Restaurant = db.Restaurant;
 const Roles = db.Roles;
+const Follower = db.Follower;
+const Menu = db.Menu;
+const SpecialEvent = db.SpecialEvent;
 
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
@@ -16,11 +20,14 @@ const loadProfile = async (req, res) => {
         const user = await User.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [{
+                model: Restaurant
+            }]
         })
 
         if (user) {
-            return res.json({valid: true})
+            return res.json({valid: true, user})
         }
     } catch (err) {
         console.error(err.message)
@@ -63,7 +70,7 @@ const createBasicUser = async (req, res) => {
     }
 }
 
-// email for registering restaurant account
+// email for new user registering restaurant account
 const restaurantRegistrationEmail = async (req, res) => {
     try {
         
@@ -188,7 +195,7 @@ const login = async (req, res) => {
             }]
         });
 
-        return res.json({token, userInfo});
+        return res.json({token, userInfo, followedRestaurants});
 
     } catch (err) {
         console.error(err.message);
@@ -338,6 +345,42 @@ const contactUsMessage = async (req, res) => {
     }
 }
 
+// load users followed restaurants
+const followedRestaurants = async (req, res) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        const restaurants = await user.getFollower()
+
+        let listOfRestaurants = []
+
+        restaurants.forEach(restaurant => {
+            listOfRestaurants.push(Number(restaurant.id))
+        })
+        
+        const allRestaurants = await Restaurant.findAll({
+            where: {
+                id: listOfRestaurants
+            },
+            include: [{
+                model: Menu}, {
+                model: SpecialEvent
+            }]
+        })
+
+        
+        
+        return res.json(allRestaurants)
+    } catch (err) {
+        console.error(err.message)
+    }
+    
+}
+
 module.exports = {
     loadProfile,
     createBasicUser,
@@ -347,5 +390,6 @@ module.exports = {
     passwordResetEmail,
     validPasswordResetToken,
     resetPassword,
-    contactUsMessage
+    contactUsMessage,
+    followedRestaurants
 }

@@ -27,6 +27,7 @@ import { LoadScript } from "@react-google-maps/api";
 import Menu from "./components/profile_components/restaurant_components/Menu";
 import AddMenu from "./components/profile_components/restaurant_components/restaurant_subcomponents/AddMenu";
 import Contact from "./components/Contact";
+import InformationForm from "./components/profile_components/restaurant_components/restaurant_subcomponents/initial_login_form/InformationForm"
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -62,12 +63,14 @@ function App() {
             <Route path='/reset_password/:token' element={<ResetPasswordLink/>} />
             <Route path='/register_restaurant/:token' element={<RegisterRestaurant/>} />
             <Route path='/register/:restaurant/:token' element={<RegisterUserToRestaurant />} />
+            <Route path='/information_form/:RestaurantId' element={<InformationForm />} />
             {/* <Route path='/profile/:id' element={<Profile/>} /> */}
             <Route path='/edit_information/:RestaurantId' element={<EditInfo />}/>
             <Route path='/edit_specials/:RestaurantId' element={<Specials />} />
             <Route path='/add_specials/:RestaurantId' element={<SpecialsForm />} />
             <Route path='/edit_menus/:RestaurantId' element={<Menu />} />
             <Route path='/add_menus/:RestaurantId' element={<AddMenu />} />
+            <Route path='/information_form/:RestaurantId' element={<InformationForm />} />
             
             <Route path='/restaurants+bars' element={<AllRestaurants/>} />
             <Route path='/restaurants/:id' element={<Restaurant/>} />

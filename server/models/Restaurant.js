@@ -51,6 +51,18 @@ module.exports = (sequelize, DataTypes) => {
         profileImage: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+
+        // 9/14 adding in the option to make a restaurant not visible and mandatory to fill out initial form
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        isVisible: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     });
 
@@ -60,6 +72,10 @@ module.exports = (sequelize, DataTypes) => {
         Restaurant.hasMany(models.SpecialEvent, { foreignKey: "RestaurantId"});
         Restaurant.hasMany(models.Menu, { foreignKey: "RestaurantId"});
         Restaurant.hasMany(models.RestaurantImages, { foreignKey: "RestaurantId"});
+
+        // attempting to add follower table
+        // Restaurant.belongsToMany(models.User, {through: 'Followers_Restaurants', foreignKey: 'followedRestaurantId', otherKey: 'UserId'})
+        Restaurant.belongsToMany(models.User, {through: 'Follower', as: 'followed'})
     };
 
     return Restaurant;

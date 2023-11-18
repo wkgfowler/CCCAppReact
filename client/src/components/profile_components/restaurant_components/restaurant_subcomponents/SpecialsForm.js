@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { ENDHOURS, STARTHOURS } from "../../../../lib/utils";
+import { ENDHOURS, STARTHOURS, WEEKDAYSVALUES, capitalizeFirstLetter } from "../../../../lib/utils";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
@@ -94,34 +94,12 @@ const SpecialsForm = () => {
                 </div>
 
                 <div id="recurringSpecial" className={`grid grid-cols-4 ${recurringVisibility ? "" : "hidden"}`}>
-                    <div>
-                        <input type="checkbox" name="sunday" id="sunday" value={0} onClick={() => addWeekdays("sunday")}/>
-                        <label>Sunday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="monday" id="monday" value={1} onClick={() => addWeekdays("monday")}/>
-                        <label>Monday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="tuesday" id="tuesday" value={2} onClick={() => addWeekdays("tuesday")}/>
-                        <label>Tuesday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="wednesday" id="wednesday" value={3} onClick={() => addWeekdays("wednesday")}/>
-                        <label>Wednesday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="thursday" id="thursday" value={4} onClick={() => addWeekdays("thursday")}/>
-                        <label>Thursday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="friday" id="friday" value={5} onClick={() => addWeekdays("friday")}/>
-                        <label>Friday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="saturday" id="saturday" value={6} onClick={() => addWeekdays("saturday")}/>
-                        <label>Saturday</label>
-                    </div>
+                    {WEEKDAYSVALUES.map(weekday => (
+                            <div>
+                                <input type="checkbox" name={weekday.day} id={weekday.day} value={weekday.value} onClick={() => addWeekdays(weekday.day)}/>
+                                <label>{capitalizeFirstLetter(weekday.day)}</label>
+                            </div>
+                        ))}
                 </div>
 
                 <div id="dateSpecial" className={`grid grid-cols-1 ${dateVisibility ? "" : "hidden"}`}>

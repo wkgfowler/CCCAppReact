@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { TOWNS } from '../../../../../lib/utils';
 
 function BasicInformationForm({next, number, setNumber, streetAddressRef, townRef, websiteRef, facebookRef, instagramRef, descriptionRef}) {
+
+    const [text, setText] = useState('');
+
+    const handleChange = (event) => {
+        setText(event.target.value)
+    }
 
     const handleInput = e => {
             const formattedNumber = formatPhoneNumber(e.target.value);
@@ -30,10 +37,11 @@ function BasicInformationForm({next, number, setNumber, streetAddressRef, townRe
                 <label htmlFor="" className="transform transition-all absolute left-0 -top-3.5 peer-focus:text-xs peer-focus:left-0 peer-focus:-top-1.5 peer-placeholder-shown:left-1 peer-placeholder-shown:top-5">Street Address</label>
             </div>
             <div className="mt-1 w-1/3">
-                <select name="town" ref={townRef} className="text-center my-2 bg-transparent border-2 p-1 rounded w-full" required>
+                <select name="town" ref={townRef} className="text-center my-2 bg-[#56707E] border-2 p-1 rounded w-full" required>
                 <option value="default">--Select Your Town--</option>
-                <option value="Atlantic Beach">Atlantic Beach</option>
-                <option value="Morehead City">Morehead City</option>
+                {TOWNS.map(town => (
+                    <option value={town}>{town}</option>
+                ))}
             </select>
             </div>
         </div>
@@ -58,8 +66,8 @@ function BasicInformationForm({next, number, setNumber, streetAddressRef, townRe
             </div>
             <div className="flex flex-col py-5">
                 <label for="description">Enter a brief description of your restaurant:</label>
-                <textarea id="description" name="description" ref={descriptionRef} rows="5" cols="75" className="rounded-lg bg-white text-black" maxLength="600" ></textarea>
-                <p> / 600 character limit</p>
+                <textarea id="description" name="description" ref={descriptionRef} rows="5" cols="75" className="rounded-lg bg-white text-black" maxLength="600" onChange={handleChange}></textarea>
+                <p> {text.length} / 600 character limit</p>
             </div>
             <div className="flex justify-center pt-2 mt-2">
                 <button className="outline outline-2 bg-[#56707E] rounded px-2 py-1" onClick={(e) => next(e)}>Next</button>

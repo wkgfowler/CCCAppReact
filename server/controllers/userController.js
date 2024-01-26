@@ -168,6 +168,7 @@ const login = async (req, res) => {
             }]
         });
         
+        // edit to only make 1 call to user table
         
         if (!user) {
             return res.status(401).json("Password or Email is incorrect");

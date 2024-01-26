@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
 
-const SpecialsForm = () => {
+const SpecialsForm = ({getAllSpecialsEvents}) => {
     const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
     const {RestaurantId} = useParams();
@@ -22,13 +22,15 @@ const SpecialsForm = () => {
     const recurringRef = useRef();
 
     const isDaily = () => {
-        const option = document.getElementById("recurring");
+        const option = document.getElementById("isRecurring");
         if (option.value === "true") {
             setRecurringVisibility(true)
             setDateVisibility(false)
+            console.log(option)
         } else if (option.value === "false") {
             setDateVisibility(true)
             setRecurringVisibility(false)
+            console.log(option)
         } else if (option.value === "") {
             setDateVisibility(false)
             setRecurringVisibility(false)
@@ -65,7 +67,7 @@ const SpecialsForm = () => {
         })
         .then((response) => {
             console.log(response)
-            navigate("/")
+            navigate(0)
         }, (error) => {
             console.log("not quite")
             console.log(error)
@@ -78,7 +80,7 @@ const SpecialsForm = () => {
                 <p className="text-2xl pt-2 pb-4 text-center font-semibold">Add a special/event</p>
                 <div className="grid grid-cols-2 pb-2">
                     <p className="text-xl text-left">Are you adding a special or an event?</p>
-                    <select name="specialEvent" id="specialEvent" className="w-5/12 ml-4" ref={specialOrEventRef} onChange={isDaily}>
+                    <select name="specialEvent" id="specialEvent" className="w-5/12 ml-4" ref={specialOrEventRef}>
                         <option value="">--Select an option--</option>
                         <option value="special">Special</option>
                         <option value="event">Event</option>
@@ -86,7 +88,7 @@ const SpecialsForm = () => {
                 </div>
                 <div className="grid grid-cols-2">
                     <p className="text-xl text-left">Is this reccuring every week or only once?</p>
-                    <select name="recurring" id="recurring" className="w-5/12 ml-4" ref={recurringRef} onChange={isDaily}>
+                    <select name="isRecurring" id="isRecurring" className="w-5/12 ml-4" ref={recurringRef} onChange={isDaily}>
                         <option value="">--Select an option--</option>
                         <option value="false">Only once</option>
                         <option value="true">Reccuring every week</option>

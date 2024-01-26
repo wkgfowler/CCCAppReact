@@ -5,6 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import { PermissionContext } from "../../context/PermissionContext";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiLockAlt } from "react-icons/bi";
+import { useAlert } from 'react-alert';
 
 const Login = () => {
     const {user, setUser} = useContext(UserContext);
@@ -14,6 +15,8 @@ const Login = () => {
     
     const emailRef = useRef();
     const passwordRef = useRef();
+
+    const alert = useAlert();
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -32,6 +35,7 @@ const Login = () => {
             navigate("/")
             // navigate(`/profile/${response.data.userInfo.id}`)
         }, (error) => {
+            alert.error("Invalid email or password.")
             console.log(error)
         })
     };

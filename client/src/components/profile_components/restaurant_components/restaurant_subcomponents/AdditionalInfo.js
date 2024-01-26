@@ -3,9 +3,9 @@ import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVisible, alert}) => {
-    const [charCount, setCharCount] = useState(0);
+    const [charCount, setCharCount] = useState(restaurant.description.length);
     const {RestaurantId} = useParams();
-    
+
     const websiteRef = useRef();
     const facebookRef = useRef();
     const instagramRef = useRef();
@@ -58,7 +58,7 @@ const AdditionalInfo = ({restaurant, setAdditionalInfoVisible, additionalInfoVis
                 <div className="flex flex-col py-2">
                     <label for="description">Enter a brief description of your restaurant:</label>
                     <textarea id="description" name="description" ref={descriptionRef} onChange={(e) => setCharCount(e.target.value.length)} rows="5" cols="75" className="rounded-lg bg-white text-black" maxLength="600" defaultValue={restaurant.description ? restaurant.description : ""}></textarea>
-                    <p>{restaurant.description ? restaurant.description.length : charCount} / 600 character limit</p>
+                    <p>{charCount} / 600 character limit</p>
                 </div>
                 <button className="outline outline-2 bg-[#56707E] rounded px-2 py-1 mb-4">Submit</button>
             </form>

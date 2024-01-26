@@ -186,10 +186,10 @@ const EditSpecialsForm = ({specialEvent, getAllSpecialsEvents}) => {
                 <div key={specialEvent.id} className="flex flex-row w-full py-3">
                     <div className="flex flex-col pl-10">
                         <div>
-                            {specialEvent.specialOrEvent === "special" ? <p className="text-lg font-medium underline">Special:</p> : <p className="text-lg font-medium underline">Event:</p>}
+                            <p className="font-bold">{specialEvent.name}</p>
                         </div>
                         <div className="flex flex-row">
-                            <p>{specialEvent.name} - {specialEvent.description}</p>
+                            <p>{specialEvent.description}</p>
                         </div>
                         <div className="flex flex-row">
                             {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}

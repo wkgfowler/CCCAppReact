@@ -5,6 +5,7 @@ import { AiOutlineMail } from "react-icons/ai"
 import { UserContext } from "../../context/UserContext";
 import { PermissionContext } from "../../context/PermissionContext";
 import axios from "axios";
+import { useAlert } from "react-alert";
 
 const LogInRegisterBox = () => {
     const {user, setUser} = useContext(UserContext);
@@ -14,6 +15,8 @@ const LogInRegisterBox = () => {
     
     const emailRef = useRef();
     const passwordRef = useRef();
+
+    const alert = useAlert()
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -32,12 +35,13 @@ const LogInRegisterBox = () => {
             navigate("/")
             // navigate(`/profile/${response.data.userInfo.id}`)
         }, (error) => {
+            alert.error("Invalid email or password.")
             console.log(error)
         })
     };
 
     return (
-        <div className="mx-28 mt-24 text-white">
+        <div className="md:mx-28 md:mt-24 mx-10 my-10 text-white">
             <form onSubmit={onSubmitForm}>
                 <p className="text-4xl text-center pb-3">Login</p>
                 <div className="flex relative my-7 border-b-2 group border-white">
@@ -54,7 +58,7 @@ const LogInRegisterBox = () => {
                     <Link to="/reset_password_request" className="underline">Forgot Password</Link>
                 </div>
                 <div className="flex flex-row justify-center py-3">
-                    <button className="border rounded w-1/2 py-1 my-1 bg-[#56707E] text-white">Log in</button>
+                    <button className="border rounded md:w-1/2 w-full py-1 my-1 bg-[#56707E] text-white text-nowrap">Log in</button>
                 </div>
                 
                 <div className="text-center">

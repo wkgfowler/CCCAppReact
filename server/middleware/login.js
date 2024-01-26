@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 module.exports = async (req, res, next) => {
     try {
 
+        // consolidate with userController.login
+
         const {email, password} = req.body;
 
         const user = await User.findOne({

@@ -78,7 +78,7 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
                         // display for if restaurant has users
                         restaurant.Users.length ? restaurant.Users.map((x, i) => (
                             <tr className="border-y border-slate-500" key={restaurant.id + i}>
-                                <td className="pt-2 py-2 font-medium">{i === 0 ? <Link to={`/restaurants/${restaurant.restaurantName}`}>{restaurant.restaurantName}</Link> : ""}</td>
+                                <td className="pt-2 py-2 font-medium">{i === 0 ? <Link to={`/restaurants/${restaurant.id}`}>{restaurant.restaurantName}</Link> : ""}</td>
                                 <td className="pl-8 py-2 flex flex-row">
                                     <p>{x.email}</p>
                                     <p><button className="bg-red-900 rounded px-2 py-1 text-white ml-5" onClick={() => removeUser(restaurant.id, x.email)}>Remove User</button></p>
@@ -100,7 +100,7 @@ const AdminRestaurantsTable = ({restaurants, getRestaurants}) => {
                         )) : 
                         // display for if restaurant has no users
                             <tr className="border-y border-slate-500" key={restaurant.id}>
-                                <td className="pt-2 py-2 font-medium"><Link to={`/restaurants/${restaurant.restaurantName}`}>{restaurant.restaurantName}</Link></td>
+                                <td className="pt-2 py-2 font-medium"><Link to={`/restaurants/${restaurant.id}`}>{restaurant.restaurantName}</Link></td>
                                 <td className="pl-8 py-2"></td>
                                 <td className="pl-8 py-2"><UserRestaurantModal restaurant={restaurant} getRestaurants={getRestaurants}/></td>
                                 <td className="pl-8 py-2 flex flex-row">

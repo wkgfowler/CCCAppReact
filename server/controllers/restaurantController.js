@@ -6,6 +6,7 @@ const User = db.User;
 const Roles = db.Roles;
 const Hours = db.Hours;
 const SpecialEvent = db.SpecialEvent;
+const Follower = db.Follower;
 const Menu = db.Menu;
 const RestaurantImages = db.RestaurantImages;
 
@@ -132,6 +133,7 @@ const getRestaurants = async (req, res) => {
 // getting specific restaurant page
 const getRestaurantPage = async (req, res) => {
     try {
+        
         const restaurant = await Restaurant.findOne({
             where: {
                 id: req.params.id
@@ -156,14 +158,23 @@ const getRestaurantPage = async (req, res) => {
             }
         })
 
-        
-        console.log('hi')
-        if (restaurant) {
-            return res.json({valid: true, restaurant, hours, images});
-        };
-        if (!restaurant) {
-            console.log('almost')
+        if (req.query.user !== undefined) {
+            const followed = await Follower.findOne({
+                where: {
+                    RestaurantId: req.params.id,
+                    UserId: req.query.user
+                }
+            })
+            
+            if (followed) {
+                return res.json({valid: true, restaurant, hours, images});
+            }
         }
+        
+        
+        if (restaurant) {
+            return res.json({valid: false, restaurant, hours, images});
+        };
     
     } catch (err) {
         console.log('try again')

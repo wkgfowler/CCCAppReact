@@ -49,17 +49,52 @@ const Nav = () => {
     
     return ( 
         <div>
-          <nav className="flex flex-row justify-between">
+          {/* <nav className="md:flex md:flex-row md:justify-between">
             <div className="flex justify-start w-1/6 bg-[#56707E]" onClick={() => navigate("/")}>
               <img src={require("../images/TCCE_Logo.jpg")} alt="" className="w-40 h-32 cursor-pointer rounded-r-full border-y-2 border-[#56707E]"/>
             </div>
             
-            <div className="flex justify-end justify-around items-center w-5/6 bg-[#56707E] text-white">
-              {permission === 0 ? (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">HOME</Link>) : (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">PROFILE</Link>)}
-              <Link to={'/restaurants+bars'} className="text-xl hover:text-3xl hover:text-slate-50">DINING & NIGHTLIFE</Link>
-              <Link to={`/specials_and_events`} className="text-xl hover:text-3xl hover:text-slate-50">SPECIALS & EVENTS</Link>
-              <Link to={'/contact'} className="text-xl hover:text-3xl hover:text-slate-50">CONTACT US</Link>
-              {permission === 0 ? (<Link to="/about" className="text-xl hover:text-3xl hover:text-slate-50">ABOUT US</Link>) : (<button type="button" className="text-xl hover:text-3xl hover:text-slate-50" onClick={logout}>LOG OUT</button>)}
+            <div className="flex justify-around items-center w-5/6 bg-[#56707E] text-white">
+              {permission === 0 ? (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">Home</Link>) : (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">Profile</Link>)}
+              <Link to={'/restaurants+bars'} className="text-xl hover:text-3xl hover:text-slate-50">Dining & Nightlife</Link>
+              <Link to={`/specials_and_events`} className="text-xl hover:text-3xl hover:text-slate-50">Specials & Events</Link>
+              <Link to={'/contact'} className="text-xl hover:text-3xl hover:text-slate-50">Contact Us</Link>
+              <Link to="/about" className="text-xl hover:text-3xl hover:text-slate-50">About Us</Link>
+              {permission === 0 ? (<button className="text-xl bg-white text-[#56707E] rounded-full px-2 py-1"><Link to={'/login'}>Sign In</Link></button>) : (<button type="button" className="text-xl bg-white text-[#56707E] rounded-full px-2 py-1" onClick={logout}>Log Out</button>)}
+            </div>
+              
+          </nav> */}
+
+          <nav className="flex justify-between items-center bg-[#56707E]">
+            <div className="flex justify-start md:w-1/6 bg-[#56707E]" onClick={() => navigate("/")}>
+              <img src={require("../images/TCCE_Logo.jpg")} alt="" className="w-40 h-32 cursor-pointer rounded-r-full border-y-2 border-[#56707E]"/>
+            </div>
+            
+            <div className={`md:static md:justify-around absolute flex items-center w-full md:w-2/3 text-white md:min-h-fit min-h-[35vh] left-0 ${menu ? "top-[-100%]" : "top-[14%] pl-2 border-x-2 border-b-2 z-10"} bg-[#56707E]`}>
+              <ul className="flex md:flex-row flex-col md:items-center gap-6">
+                <li onClick={() => setMenu(true)}>
+                  {permission === 0 ? (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">Home</Link>) : (<Link to="/" className="text-xl hover:text-3xl hover:text-slate-50">Profile</Link>)}
+                </li>
+                <li onClick={() => setMenu(true)}>
+                  <Link to={'/restaurants+bars'} className="text-xl hover:text-3xl hover:text-slate-50">Dining & Nightlife</Link>
+                </li>
+                <li onClick={() => setMenu(true)}>
+                  <Link to={`/specials_and_events`} className="text-xl hover:text-3xl hover:text-slate-50">Specials & Events</Link>
+                </li>
+                <li onClick={() => setMenu(true)}>
+                  <Link to={'/contact'} className="text-xl hover:text-3xl hover:text-slate-50">Contact Us</Link>
+                </li>
+                <li onClick={() => setMenu(true)}>
+                  <Link to="/about" className="text-xl hover:text-3xl hover:text-slate-50">About Us</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex justify-end w-1/6 pr-10">
+              {permission === 0 ? (<button className="text-xl bg-white text-[#56707E] rounded-full px-2 py-1 text-nowrap"><Link to={'/login'}>Sign In</Link></button>) : (<button type="button" className="text-xl bg-white text-[#56707E] rounded-full px-2 py-1" onClick={logout}>Log Out</button>)}
+              <button className="md:hidden cursor-pointer pl-5" onClick={toggleMenu}>{menu ? (<GiHamburgerMenu className="text-3xl cursor-pointer"/>) : 
+                (<GrClose className="text-3xl cursor-pointer"/>)}
+              </button>
             </div>
               
           </nav>
@@ -74,7 +109,7 @@ const Nav = () => {
                   
           </nav> */}
 
-          <nav className="flex md:hidden items-start">
+          {/* <nav className="flex md:hidden items-start">
             <div className="flex justify-between">
               <button className="pl-4" onClick={toggleMenu}>{menu ? (<GiHamburgerMenu className="text-3xl cursor-pointer"/>) : 
                 (<GrClose className="text-3xl cursor-pointer"/>)}
@@ -88,7 +123,7 @@ const Nav = () => {
               <Link to={'/contact'} className="hover:text-2xl hover:text-slate-50">Contact Us</Link>
               {permission === 0 ? (<Link className="hover:text-2xl hover:text-slate-50">About Us</Link>) : (<button type="button" onClick={logout}>Log Out</button>)}
             </div>
-          </nav>
+          </nav> */}
 
           
 

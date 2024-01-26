@@ -208,12 +208,11 @@ export const formatNextMonth = (day) => {
 }
 
 export const formatDateDay = (year, month, date) => {
-    let day = new Date(year, month, date).getDay();
+    let day = new Date(year, month + 1, date).getDay();
     return day
 }
 
 export const formatDateMonth = (month) => {
-    month += 1
     if (month < 10) {
         month = `0${month}`
         return month
@@ -342,7 +341,7 @@ export const determineIsRecurring = (x) => {
     }
 }
 
-export const TOWNS = ["Atlantic Beach", "Beaufort", "Morehead City", "Emerald Isle", "Swansboro"];
+export const TOWNS = ["Atlantic Beach", "Beaufort", "Emerald Isle", "Morehead City", "Swansboro"];
 
 export const formatWhatIsOpenTime = (hour, minute) => {
     if (hour.length === 1) {

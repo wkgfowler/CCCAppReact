@@ -51,7 +51,7 @@ router.delete("/delete_specialEvent/:id", authorization, specialEventController.
 router.get("/get_specials/:currentYear-:currentMonth-:today/:day", specialEventController.getSpecialsEventsCalendar)
 
 // getting all specials/events for a restaurant admins page
-router.get("/get_all_specials_events/:RestaurantId/:userId/:specialOrEvent", authorization, specialEventController.getSpecialsEventsRestaurantAdmin)
+router.get("/get_all_specials_events/:RestaurantId/:userId", authorization, specialEventController.getSpecialsEventsRestaurantAdmin)
 
 // adding menus
 router.post("/add_menu", authorization, menuController.upload, menuController.menuUpload)

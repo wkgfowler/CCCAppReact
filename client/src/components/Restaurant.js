@@ -64,7 +64,8 @@ const Restaurant = () => {
 
     const validRestaurant = () => {
         axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/restaurants/${id}`, { params: {
-            id
+            id: id,
+            user: user.id
         }
         })
         .then((response) => {
@@ -93,6 +94,7 @@ const Restaurant = () => {
             setRestaurant(response.data.restaurant)
             setHours(response.data.hours)
             setImages(response.data.images)
+            setFollowed(response.data.valid)
             let daysHours = response.data.hours.filter(hour => hour.weekday === weekday);
             console.log(daysHours);
             setTodaysOpenHour(convertToNormalHours(daysHours[0].openHour));
@@ -112,32 +114,9 @@ const Restaurant = () => {
         setSpecialsEvents(filteredSpecialsEvents)
     }
 
-    // const requestFullScreen = (img) => {
-    //     let image = document.getElementById(img);
-    //     if(image.requestFullscreen) {
-    //         image.requestFullscreen();
-    //       }else if (image.mozRequestFullScreen) {
-    //         image.mozRequestFullScreen();     // Firefox
-    //       }else if (image.webkitRequestFullscreen) {
-    //         image.webkitRequestFullscreen();  // Safari
-    //       }else if(image.msRequestFullscreen) {
-    //         image.msRequestFullscreen();      // IE/Edge
-    //       }
-    // }
-
-    // const testFullScreen = (img) => {
-    //     let fullScreenElement = document.querySelector(`#${img}`)
-    //     if (document.fullscreenElement) {
-    //         document.exitFullscreen();
-    //     } else {
-    //         fullScreenElement.requestFullscreen();
-    //     }
-    // }
 
     // trying to add the ability to follow restaurant
     const alert = useAlert();
-
-    const checkRestaurantId = obj => obj.id === restaurant.id;
 
     const followRestaurant = () => {
         if (user) {
@@ -152,6 +131,7 @@ const Restaurant = () => {
             .then((response) => {
                 console.log("FUCKING RIGHT")
                 alert.success(`Now following ${restaurant.restaurantName}`)
+                setFollowed(true)
             }, (error) => {
                 console.log(error)
             })
@@ -164,6 +144,7 @@ const Restaurant = () => {
         axios.delete(`${process.env.REACT_APP_API_ENDPOINT}/api/unfollowRestaurant/${restaurantId}/${userId}`)
         .then((response) => {
             console.log("right again!!")
+            setFollowed(false)
             alert.success(`No longer following ${restaurant.restaurantName}`)
         }, (error) => {
             console.log(error)

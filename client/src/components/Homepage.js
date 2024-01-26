@@ -18,15 +18,15 @@ const Homepage = () => {
             <div className="container">
                 <div className="flex-wrap md:flex-row h-5/6 justify-content-center pt-4">
                     <div className="justify-center">
-                        <p className="text-6xl text-center">The Crystal Coast Experience</p>
+                        <p className="md:text-6xl text-3xl text-center">The Crystal Coast Experience</p>
                     </div>
 
                     <div className="flex flex-row justify-center pt-5">
                         <div className="flex flex-row w-full border-2 outline outline-white outline-1 -outline-offset-8">
-                            <div className="w-1/2">
+                            <div className="md:w-1/2 w-0">
                                 <img src={require("../images/IMG_6494.jpg")} alt="" className="min-h-full"/>
                             </div>
-                            <div className="w-1/2 bg-[#56707E]">
+                            <div className="md:w-1/2 w-full bg-[#56707E]">
                                 <LogInRegisterBox />
                             </div>
                         </div>

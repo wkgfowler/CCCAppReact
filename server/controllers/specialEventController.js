@@ -150,27 +150,63 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
             }
         })
 
-        if (req.params.specialOrEvent !== undefined) {
-            
-        }
-        const allSpecialsEvents = await SpecialEvent.findAll({
-            where: {
-                RestaurantId: req.params.RestaurantId
-            },
-            order: ['specialOrEvent']
-        })
+        if (req.query.specialOrEvent !== undefined && req.query.recurring === undefined) {
+            const allSpecialsEvents = await SpecialEvent.findAll({
+                where: {
+                    RestaurantId: req.params.RestaurantId,
+                    specialOrEvent: req.query.specialOrEvent,
+                },
+                order: ['specialOrEvent']
+            })
 
-        const recurringSpecialsEvents = await SpecialEvent.findAll({
-            where: {
-                RestaurantId: req.params.RestaurantId,
-                recurring: true
-            },
-            order: ['specialOrEvent']
-        })
-
-        if(validUser || validAdmin) {
-            return res.json({allSpecialsEvents, recurringSpecialsEvents})
+            if(validUser || validAdmin) {
+                return res.json(allSpecialsEvents)
+            } 
         }
+
+        if (req.query.specialOrEvent === undefined && req.query.recurring !== undefined) {
+            const allSpecialsEvents = await SpecialEvent.findAll({
+                where: {
+                    RestaurantId: req.params.RestaurantId,
+                    recurring: req.query.recurring
+                },
+                order: ['specialOrEvent']
+            })
+
+            if(validUser || validAdmin) {
+                return res.json(allSpecialsEvents)
+            } 
+        }
+
+        if (req.query.specialOrEvent !== undefined && req.query.recurring !== undefined) {
+            const allSpecialsEvents = await SpecialEvent.findAll({
+                where: {
+                    RestaurantId: req.params.RestaurantId,
+                    specialOrEvent: req.query.specialOrEvent,
+                    recurring: req.query.recurring
+                },
+                order: ['specialOrEvent']
+            })
+
+            if(validUser || validAdmin) {
+                return res.json(allSpecialsEvents)
+            } 
+        }
+
+        if (req.query.specialOrEvent === undefined && req.query.recurring === undefined) {
+           const allSpecialsEvents = await SpecialEvent.findAll({
+                where: {
+                    RestaurantId: req.params.RestaurantId,
+                },
+                order: ['specialOrEvent']
+            })
+
+            if(validUser || validAdmin) {
+                return res.json(allSpecialsEvents)
+            } 
+        }
+
+        
 
         return res.json("not authorized")
     } catch (err) {

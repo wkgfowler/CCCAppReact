@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
+import { TOWNS } from "../../../../lib/utils";
 
 const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
     const {user, setUser} = useContext(UserContext)
@@ -71,17 +72,18 @@ const ContactInfo = ({restaurant, setInfoVisible, infoVisible, alert}) => {
                     <label className="text-lg">Select your town:</label>
                 </div>
                 <div className="flex justify-center">
-                    <select name="town" ref={townRef} className="text-center my-2 bg-transparent border-1">
-                        {restaurant.town ? <option value={restaurant.town}>{restaurant.town}</option> : <option value="default">--Your Town--</option>}
-                        <option value="Atlantic Beach">Atlantic Beach</option>
-                        <option value="Morehead City">Morehead City</option>
+                    <select name="town" ref={townRef} className="text-center my-2 bg-[#56707E] border-1">
+                        {restaurant.town ? <option defaultValue={restaurant.town}>{restaurant.town}</option> : <option value="default">--Your Town--</option>}
+                        {TOWNS.map(town => (
+                            <option value={town}>{town}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="flex justify-center pt-2">
                     <label className="text-lg">Phone Number:</label>
                 </div>
                 <div className="flex justify-center">
-                    <input type="tel" name="phoneNumber" value={number} onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 rounded text-black" required/>
+                    <input type="tel" name="phoneNumber" onChange={e => handleInput(e)} defaultValue={restaurant.phoneNumber} className="text-center my-2 rounded text-black" required/>
                 </div>
                 <div className="flex justify-center pt-2">
                     <button className="outline outline-2 bg-[#56707E] rounded px-2 py-1">Submit</button>

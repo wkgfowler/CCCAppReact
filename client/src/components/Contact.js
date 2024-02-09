@@ -29,12 +29,13 @@ const Contact = () => {
     }
 
     return (
-        <div className="container">
+        <div className="flex justify-center">
+            <div className="w-[90%]">
             <div className="flex flex-row">
-                <div className="flex flex-col w-1/4"></div>
-                <div className="flex flex-col w-1/2 bg-[#56707E] mt-4 pt-2 px-8 text-white">
-                    <p className="text-center text-4xl font-semibold pt-4 pb-4">Get in touch!</p>
-                    <p className="text-center text-md px-24 pb-10">Do you have any questions or comments regarding The Crystal Coast Experience? If so, just fill out the form below.</p>
+                <div className="flex flex-col md:w-1/4 w-1/12"></div>
+                <div className="flex flex-col md:w-1/2 w-10/12 bg-[#56707E] mt-4 pt-2 px-8 text-white">
+                    <p className="text-center md:text-4xl text-2xl font-semibold pt-4 pb-4">Get in touch!</p>
+                    <p className="text-center md:px-24 pb-10">Do you have any questions or comments regarding The Crystal Coast Experience? If so, just fill out the form below.</p>
                         <form onSubmit={onSubmitForm}>
                             <div className="flex flex-col">
                                 <label className="text-sm" htmlFor="typeOfUser">I am a</label>
@@ -45,12 +46,12 @@ const Contact = () => {
                                 </select>
                             </div>
 
-                            <div className="flex flex-row w-full gap-8 pt-4">
-                                <div className="flex flex-col w-1/2">
+                            <div className="flex md:flex-row flex-col w-full gap-8 pt-4">
+                                <div className="flex flex-col w-full md:w-1/2">
                                     <label className="text-sm" htmlFor="name">Name</label>
                                     <input type="text" className="border-b-2 border-white bg-[#56707E]" ref={nameRef}/>
                                 </div>
-                                <div className="flex flex-col w-1/2">
+                                <div className="flex flex-col w-full md:w-1/2">
                                     <label className="text-sm" htmlFor="email">Email Address</label>
                                     <input type="text" className="border-b-2 border-white bg-[#56707E]" ref={emailRef}/>
                                 </div>
@@ -58,12 +59,13 @@ const Contact = () => {
 
                             <div className="flex flex-col w-full pt-4">
                                 <textarea name="message" id="message" cols="30" rows="5" maxLength="600" className="bg-[#dfebf2] text-black" placeholder="Type your message here..." ref={messageRef}></textarea>
-                                <button className="bg-[#dfebf2] px-6 py-2 text-slate-900 text-sm font-semibold outline outline-1 -outline-offset-4 mb-4 w-1/5 place-self-end mt-4">Submit</button>
+                                <button className="bg-[#dfebf2] px-6 py-2 text-slate-900 text-sm font-semibold outline outline-1 -outline-offset-4 mb-4 md:w-1/5 md:place-self-end place-self-center mt-4">Submit</button>
                             </div>
                         </form>
 
                 </div>
-                <div className="flex flex-col w-1/4"></div>
+                <div className="flex flex-col md:w-1/4 w-1/12"></div>
+            </div>
             </div>
         </div>
     );

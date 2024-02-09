@@ -32,7 +32,10 @@ const addSpecialEvent = async (req, res) => {
 const getSpecialsEventsCalendar = async (req, res) => {
     try {
         console.log(req.query.towns)
+        console.log(req.params.currentYear)
         console.log(req.params.currentMonth)
+        console.log(req.params.today)
+        console.log(req.params.day)
         console.log(req.query.eventsOrSpecials)
 
         if (req.query.towns !== undefined && req.query.eventsOrSpecials !== undefined) {

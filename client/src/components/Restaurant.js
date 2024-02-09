@@ -58,7 +58,6 @@ const Restaurant = () => {
     const {id} = useParams()
 
     useEffect(() => {
-        console.log(user)
         validRestaurant()
     }, [])
 

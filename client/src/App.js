@@ -48,7 +48,10 @@ function App() {
   return (
     <div className={permission === 0 ? "bg-white bg-bottom bg-no-repeat min-h-screen" : "bg-white min-h-screen"}>
       <Router>
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+        <LoadScript 
+          googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+          async
+        >
         <UserContext.Provider value={{user, setUser}}>
         <PermissionContext.Provider value={{permission, setPermission}}>
         <Nav/>

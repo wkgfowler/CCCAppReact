@@ -43,8 +43,6 @@ const AllRestaurants = () => {
         }
     }
 
-    const navigate = useNavigate();
-
     const config = {
         params: {
             towns: towns,
@@ -105,7 +103,7 @@ const AllRestaurants = () => {
                             {restaurants.map(restaurant => (
                                 <Card className="relative md:w-[380px] md:h-[450px] w-[190px] h-[225px] bg-white outline outline-2 -outline-offset-8 outline-slate-300" key={restaurant.id}>
                                     <img className="w-full h-1/2" src={`${process.env.REACT_APP_API_ENDPOINT}/${restaurant.profileImage}`} alt="not working"/>
-                                    <p className="md:text-xl text-base md:pl-5 pt-2 font-semibold text-center text-balance">{restaurant.restaurantName}</p>
+                                    <p className="md:text-xl text-base md:pl-5 pt-2 font-semibold text-center text-balance cursor-pointer"><Link to={`/restaurants/${restaurant.id}`}>{restaurant.restaurantName}</Link></p>
                                     <p className="md:overflow-hidden pl-5 pr-5 pt-2 mb-20 hidden md:inline">{restaurant.description}</p>
                                     <div className="md:pt-3 md:pl-[38%] pl-[25%] pt-4">
                                         <button type="button" className="bg-[#56707E] px-6 py-2 text-white text-sm font-semibold outline outline-1 -outline-offset-4"><Link to={`/restaurants/${restaurant.id}`}>Details</Link></button>

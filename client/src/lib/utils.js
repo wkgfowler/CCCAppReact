@@ -209,11 +209,11 @@ export const formatNextMonth = (day) => {
 
 export const formatDateDay = (year, month, date) => {
     let day = new Date(year, month + 1, date).getDay();
-    return day
+    return day + 1
 }
 
 export const formatDateMonth = (month) => {
-    if (month < 10) {
+    if (month < 10 && month.length !== 2) {
         month = `0${month}`
         return month
     } else {
@@ -222,7 +222,7 @@ export const formatDateMonth = (month) => {
 }
 
 export const formatDateDate = (date) => {
-    if (date < 10) {
+    if (date < 10 && date.length !== 2) {
         date = `0${date}`
         return date;
     } else {
@@ -418,4 +418,8 @@ export const formatRecurringOrNot = (string) => {
 
 export const determineWeekdays = (str, value) => {
     return str.includes(value)
+}
+
+export const gmNoop = () => {
+    console.log("GMap Callback")
 }

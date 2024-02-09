@@ -1,6 +1,7 @@
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api"
+import { GoogleMap, MarkerF } from "@react-google-maps/api"
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
+import { gmNoop } from "../../../../lib/utils";
 
 const Map = ({restaurant}) => {
 
@@ -218,9 +219,9 @@ const Map = ({restaurant}) => {
     const [longitude, setLongitude] = useState(0)
 
     const getCoordinates = () => {
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${restaurant.streetAddress},+${restaurant.town},+NC&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`)
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${restaurant.streetAddress},+${restaurant.town},+NC&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&callback=${gmNoop}`)
         .then((response) => {
-            // console.log(response.data)
+            console.log(response.data)
             // console.log(response.data.results[0].geometry.location)
             setLatitude(response.data.results[0].geometry.location.lat)
             setLongitude(response.data.results[0].geometry.location.lng)

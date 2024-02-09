@@ -373,14 +373,35 @@ const followedRestaurants = async (req, res) => {
             }]
         })
 
+        console.log(req.query.day)
+
+        const usersSpecialsEvents = await SpecialEvent.findAll({
+            where: {
+                [Op.or] : [
+                    {specialEventDate: `${req.query.currentYear}-${req.query.currentMonth}-${req.query.today}`},
+                    {weekdays: { [Op.contains]: [`${req.query.day}`]} }
+                ]
+            },
+            include: {
+                model: Restaurant,
+                where: {
+                    id: listOfRestaurants
+                },
+                attributes: {
+                    exclude: ["streetAddress", "zip", "mealTimes", "phoneNumber", "description", "websiteURL", "facebookURL", "instagramURL", "profileImage", "isActive", "isVisible"]
+                }
+            }
+        })
+
         
         
-        return res.json(allRestaurants)
+        return res.json({allRestaurants, usersSpecialsEvents})
     } catch (err) {
         console.error(err.message)
     }
     
 }
+
 
 module.exports = {
     loadProfile,

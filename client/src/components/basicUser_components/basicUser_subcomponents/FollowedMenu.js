@@ -86,9 +86,9 @@ const FollowedMenu = ({restaurant}) => {
                                     <p>{specialEvent.name} - {specialEvent.description}</p>
                                 </div>
                                 <div className="flex flex-row pl-2">
-                                    {specialEvent.specialOrEvent === "special" ? <p>Available &nbsp;</p> : <p>Happening &nbsp;</p>}
+                                    {specialEvent.specialOrEvent === "special" ? <p>Available&nbsp;</p> : <p>Happening&nbsp;</p>}
                                     {specialEvent.specialEventDate ? <p>{formatDateDisplay(specialEvent.specialEventDate)}</p> : <p>every {formatSpecialEventDays(specialEvent.weekdays.sort())}</p>}
-                                    <p>&nbsp; from {convertToNormalHours(specialEvent.startTime)} - {convertToNormalHours(specialEvent.endTime)}</p>
+                                    <p>&nbsp;from {convertToNormalHours(specialEvent.startTime)} - {convertToNormalHours(specialEvent.endTime)}</p>
                                 </div>
                             </div>
                         )

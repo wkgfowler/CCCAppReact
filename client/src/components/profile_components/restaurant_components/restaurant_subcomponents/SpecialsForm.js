@@ -26,11 +26,9 @@ const SpecialsForm = ({getAllSpecialsEvents}) => {
         if (option.value === "true") {
             setRecurringVisibility(true)
             setDateVisibility(false)
-            console.log(option)
         } else if (option.value === "false") {
             setDateVisibility(true)
             setRecurringVisibility(false)
-            console.log(option)
         } else if (option.value === "") {
             setDateVisibility(false)
             setRecurringVisibility(false)
@@ -39,6 +37,7 @@ const SpecialsForm = ({getAllSpecialsEvents}) => {
 
     const addWeekdays = (day) => {
         let weekday = document.getElementById(day)
+        console.log(weekday)
         if (weekday.checked) {
             setActualWeekdays(actualWeekdays => [...actualWeekdays, weekday.value])
             console.log(actualWeekdays)

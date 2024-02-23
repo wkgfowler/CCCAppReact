@@ -2,7 +2,7 @@ import { FaChevronDown, FaChevronLeft } from "react-icons/fa";
 import { TOWNS, classNames, formatDateDate, formatDateDay, formatDateMonth, formatLastMonth, formatMonth, formatNextMonth, formatSpecialEventDays, months } from '../lib/utils';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios"
+import { specialEventCalls } from "../api/specialEvent";
 
 const SpecialsEvents = () => {
     let [specials, setSpecials] = useState([]);
@@ -43,33 +43,16 @@ const SpecialsEvents = () => {
     let [currentYear, setCurrentYear] = useState(currYear);
     
     useEffect(() => {
-        getSpecials();
+        specialEventCalls.getAllSpecialsEvents(currentYear, currentMonth, today, towns, eventsOrSpecials)
+        .then((response) => {
+            setSpecials(response.data)
+        })
         console.log(currentYear)
         console.log(currentMonth)
         console.log(today)
         console.log(formatDateDay(currentYear, currentMonth, today))
     }, [today ,towns, eventsOrSpecials])
 
-
-
-
-    // getting specials/events
-    const config = {
-        params: {
-            towns: towns,
-            eventsOrSpecials: eventsOrSpecials
-        }
-    };
-
-    const getSpecials = () => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/get_specials/${currentYear}-${formatDateMonth(currentMonth)}-${formatDateDate(today)}/${formatDateDay(currentYear, formatDateMonth(currentMonth), formatDateDate(today))}`, config)
-        .then((response) => {
-            console.log(response.data)
-            setSpecials(response.data)
-        }, (error) => {
-            console.log(error)
-        })
-    }
 
     const inputDate = (id) => {
         let input = document.getElementById(id)

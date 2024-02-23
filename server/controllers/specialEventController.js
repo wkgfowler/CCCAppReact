@@ -220,7 +220,13 @@ const getSpecialsEventsRestaurantAdmin = async (req, res) => {
 // updating specials/events
 const updateSpecialEvent = async (req, res) => {
     try {
-        const udpatedSpecialEvent = await SpecialEvent.update({
+        const updatedSpecialEvent = await SpecialEvent.findOne({
+            where:{
+                id: req.params.id
+            }
+        });
+        
+        updatedSpecialEvent.set({
             specialOrEvent: req.body.specialOrEvent,
             name: req.body.name,
             description: req.body.description,
@@ -229,14 +235,11 @@ const updateSpecialEvent = async (req, res) => {
             specialEventDate: req.body.specialEventDate,
             startTime: req.body.startTime,
             endTime: req.body.endTime
-        },
-        {
-            where: {
-                id: req.params.id
-            }
-        })
+        });
 
-        return res.json("nailed it")
+        await updatedSpecialEvent.save();
+
+        return res.json("nailed it");
     } catch (err) {
         console.error(err.message)
     }

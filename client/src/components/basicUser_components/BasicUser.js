@@ -50,7 +50,20 @@ const BasicUser = ({user}) => {
         <div className="flex justify-center">
             <div className="w-[90%]">
                 <div className="flex flex-col border-2 border-black w-full h-1/5">
-                    <TodaysSpecials restaurants={followedRestaurants}/>
+                    <div className="flex flex-row w-full justify-center">
+                        <TodaysSpecials restaurants={followedRestaurants}/>
+                        
+                    </div>
+                    <div className="flex flex-row w-full">
+                        <div className="flex flex-col border-2 border-black w-1/2 h-[50px]">
+
+                        </div>
+                        <div className="flex flex-col border-2 border-black w-1/2 h-[50px]">
+
+                        </div>
+                    </div>
+                    
+                    
                 </div>
                 <div className="flex flex-row">
                     <div className="flex flex-col w-3/4">

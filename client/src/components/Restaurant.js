@@ -8,6 +8,7 @@ import { UserContext } from "../context/UserContext";
 import { PermissionContext } from "../context/PermissionContext";
 import { useAlert } from "react-alert";
 import MenuFullScreen from "./profile_components/restaurant_components/restaurant_subcomponents/MenuFullScreen";
+import { restaurantCalls } from "../api/restaurant";
 
 const Restaurant = () => {
     const {user, setUser} = useContext(UserContext)
@@ -62,11 +63,7 @@ const Restaurant = () => {
     }, [])
 
     const validRestaurant = () => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/restaurants/${id}`, { params: {
-            id: id,
-            user: user.id
-        }
-        })
+        restaurantCalls.getRestaurant(id, user.id)
         .then((response) => {
             console.log(response.data)
             const eachMenu = response.data.restaurant.Menus

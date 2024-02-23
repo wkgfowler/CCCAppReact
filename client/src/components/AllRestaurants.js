@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card"
 import { TOWNS, formatWhatIsOpenTime } from "../lib/utils";
 import {BiRightArrow} from "react-icons/bi"
 import { FaChevronDown, FaChevronLeft } from "react-icons/fa";
+import {restaurantCalls} from "../api/restaurant.js"
 
 const AllRestaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -42,27 +43,12 @@ const AllRestaurants = () => {
             setWeekday("")
         }
     }
-
-    const config = {
-        params: {
-            towns: towns,
-            time: time,
-            weekday: weekday
-        }
-    }
-
-    const getRestaurants = () => {
-        axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/getRestaurants/${town}`, config)
-        .then((response) => {
-            console.log(response.data)
-            setRestaurants(response.data)
-        }, (error) => {
-            console.log(error)
-        })
-    }
     
     useEffect(() => {
-        getRestaurants()
+        restaurantCalls.getAllRestaurants(town, towns, time, weekday)
+        .then((response) => {
+            setRestaurants(response.data)
+        })
     }, [town, towns, time])
 
     return (

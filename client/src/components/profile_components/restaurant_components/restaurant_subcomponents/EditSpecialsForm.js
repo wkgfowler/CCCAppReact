@@ -41,7 +41,9 @@ const EditSpecialsForm = ({specialEvent, getAllSpecialsEvents}) => {
 
     const addWeekdays = (day) => {
         let weekday = document.getElementById(day)
+        console.log(weekday.checked)
         if (weekday.checked) {
+            console.log(3)
             setActualWeekdays(actualWeekdays => [...actualWeekdays, weekday.value])
             console.log(actualWeekdays)
         } else if (!weekday.checked && actualWeekdays.includes(weekday.value)) {
@@ -121,7 +123,7 @@ const EditSpecialsForm = ({specialEvent, getAllSpecialsEvents}) => {
                             {WEEKDAYSVALUES.map(weekday => (
                                 <div>
                                     {actualWeekdays.includes(weekday.value) ? 
-                                        <input type="checkbox" name={weekday.day} id={weekday.day} value={weekday.value} onChange={() => addWeekdays(weekday.day)} defaultChecked/> 
+                                        <input type="checkbox" name={weekday.day} id={weekday.day} value={weekday.value} onChange={() => addWeekdays(weekday.day)}/> 
                                         : 
                                         <input type="checkbox" name={weekday.day} id={weekday.day} value={weekday.value} onChange={() => addWeekdays(weekday.day)}/>}
                                     <label>{capitalizeFirstLetter(weekday.day)}</label>
